@@ -7,6 +7,7 @@ const userSchema = new Schema({
     hashedPassword: { type: String, required: true },
     imageUrl: { type: String, required: true, default: 'default-profile.png' },
     myPets: { type: [Types.ObjectId], ref: 'Pet', default: [] },
+    likedPets: { type: [Types.ObjectId], ref: 'Pet', default: [] },
     roles: { type: [{ type: String, enum: ['user', 'admin'] }], default: ['user'] },
     createdAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) },
     updatedAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) }

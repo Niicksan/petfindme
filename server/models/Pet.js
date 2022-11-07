@@ -10,7 +10,7 @@ const petSchema = new Schema({
     imageUrl: { type: String, required: true, default: 'default-profile.png' },
     description: { type: String, required: true, default: function () { return this.email } },
     owner: { type: Types.ObjectId, ref: 'User' },
-    users: { type: [Types.ObjectId], ref: 'User', default: [] },
+    likedByUsers: { type: [Types.ObjectId], ref: 'User', default: [] },
     createdAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) },
     updatedAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) },
 });

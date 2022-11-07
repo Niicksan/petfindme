@@ -2,7 +2,7 @@ const authController = require('express').Router();
 
 const { body, validationResult } = require('express-validator');
 const { isGuest } = require('../middlewares/guards');
-const { register, login } = require('../services/authService');
+const { register, login, logout } = require('../services/authService');
 const { parseError } = require('../utils/errorParser');
 
 
@@ -16,7 +16,7 @@ authController.post('/register',
 
         return true;
     }),
-    isGuest(),
+
     async (req, res) => {
         try {
             const { errors } = validationResult(req);
@@ -35,7 +35,7 @@ authController.post('/register',
     }
 );
 
-authController.post('/login', isGuest(), async (req, res) => {
+authController.post('/login', async (req, res) => {
     try {
         const token = await login(req.body.email, req.body.password);
         res.json(token);
@@ -46,9 +46,10 @@ authController.post('/login', isGuest(), async (req, res) => {
     }
 });
 
-authController.get('/logout', (req, res) => {
-    res.clearCookie('token');
-    res.redirect('/');
+authController.get('/logout', async (req, res) => {
+    const token = req.token;
+    await logout(token);
+    res.status(204).end();
 });
 
 module.exports = authController;
