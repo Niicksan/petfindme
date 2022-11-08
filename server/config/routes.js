@@ -13,5 +13,5 @@ module.exports = (app) => {
 
     app.use('/', homeController);
     app.use('/api/auth', authController);
-    app.use('/api/pet', hasUser(), petController);
+    app.use('/api/pet', petController);
 };

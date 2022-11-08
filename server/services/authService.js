@@ -20,7 +20,7 @@ async function register(email, password) {
         hashedPassword
     });
 
-    return createToke(user);
+    return createToken(user);
 }
 
 async function login(email, password) {
@@ -36,14 +36,14 @@ async function login(email, password) {
         throw new Error('Невалиден имейл или парола');
     }
 
-    return createToke(user);
+    return createToken(user);
 }
 
 async function logout(token) {
     tokenBlacklist.add(token);
 }
 
-function createToke({ _id, email }) {
+function createToken({ _id, email }) {
     const payload = {
         _id,
         email
@@ -58,7 +58,7 @@ function createToke({ _id, email }) {
     };
 }
 
-function parseToke(token) {
+function parseToken(token) {
     if (tokenBlacklist.has(token)) {
         throw new Error('Token is blacklisted');
     }
@@ -70,5 +70,5 @@ module.exports = {
     register,
     login,
     logout,
-    parseToke
+    parseToken
 };

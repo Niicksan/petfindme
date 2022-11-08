@@ -3,7 +3,8 @@ const { parseToken } = require("../services/authService");
 
 module.exports = () => (req, res, next) => {
     const token = req.headers['x-authorization'];
-
+    //let token = req.headers['authorization'];
+    //token = token.slice(7);
     if (token) {
         try {
             const payload = parseToken(token);

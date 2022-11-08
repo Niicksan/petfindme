@@ -3,7 +3,7 @@ const { Schema, model, Types } = require("mongoose");
 
 const petSchema = new Schema({
     title: { type: String, required: true, },
-    status: { type: [{ type: String, enum: ['found', 'lost', 'adoption'] }], required: true },
+    status: { type: String, required: true },
     location: { type: String, required: true },
     contactName: { type: String, required: true },
     phone: { type: String, required: true },

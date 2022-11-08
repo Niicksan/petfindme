@@ -10,6 +10,6 @@ module.exports = (app) => {
     app.use(express.urlencoded({ extended: true }));
 
     app.use(cors());
-    app.use(session());
     app.use(trimBody('password'));
+    app.use(session());
 };
