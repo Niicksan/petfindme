@@ -1,6 +1,7 @@
 const homeController = require('../controllers/homeController');
 const authController = require('../controllers/authController');
 const petController = require('../controllers/petController');
+const profileController = require('../controllers/profileController');
 
 const { hasUser } = require('../middlewares/guards');
 
@@ -11,7 +12,8 @@ module.exports = (app) => {
         res.json({ message: 'REST Service is running' });
     });
 
-    app.use('/', homeController);
+    app.use('/api/catalog', homeController);
     app.use('/api/auth', authController);
     app.use('/api/pet', petController);
+    app.use('/api/user', hasUser(), profileController);
 };

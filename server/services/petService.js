@@ -2,15 +2,15 @@ const Pet = require("../models/Pet");
 
 
 async function getLatestPets() {
-    return Pet.find({}).sort({ _id: -1 }).limit(12);
+    return Pet.find({}, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getAllPetsCreatedByUser(userId) {
-    return Pet.find({ owner: userId }).lean();
+    return Pet.find({ owner: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 });
 }
 
 async function getAllPetsLikedByUser(userId) {
-    return Pet.find({ likedByUsers: userId }).lean();
+    return Pet.find({ likedByUsers: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 });
 }
 
 async function getPetById(id) {
@@ -27,9 +27,12 @@ async function updatePetById(pet, data) {
     pet.location = data.location;
     pet.contactName = data.contactName;
     pet.phone = data.phone;
-    pet.imageUrl = data.imageUrl;
     pet.description = data.description;
     pet.updatedAt = new Date().toLocaleString('eu-Eu');
+
+    if (data.imageUrl) {
+        pet.imageUrl = data.imageUrl;
+    }
 
     return pet.save();
 }
