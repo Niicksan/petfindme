@@ -1,13 +1,19 @@
-// const { getBookById, getBookByIdRaw } = require("../services/bookService");
+const { getPetById } = require("../services/petService");
+const { parseError } = require("../utils/errorParser");
 
 
-// module.exports = (lean) => async (req, res, next) => {
-//     if (lean) {
-//         res.locals.book = await getBookById(req.params.id);
+module.exports = () => async (req, res, next) => {
+    try {
+        res.locals.pet = await getPetById(req.params.id);
 
-//     } else {
-//         res.locals.book = await getBookByIdRaw(req.params.id);
-//     }
+        if (res.locals.pet == null) {
+            throw new Error("Item doesn't exist");
+        }
+    } catch (error) {
+        const message = parseError(error);
+        console.log(message);
+        res.status(404).json({ message: "Item doesn't exist" });
+    }
 
-//     next();
-// };
+    next();
+};

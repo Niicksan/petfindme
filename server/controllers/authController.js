@@ -1,15 +1,19 @@
 const authController = require('express').Router();
 
-const { body, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const { isGuest } = require('../middlewares/guards');
 const { register, login, logout } = require('../services/authService');
 const { parseError } = require('../utils/errorParser');
 
 
 authController.post('/register',
-    body('email').isEmail().withMessage('Невалиден имейл!'),
-    body('password').isLength({ min: 3 }).withMessage('Паролата трябва да е поне 8 символа!'),
-    body('repass').custom((value, { req }) => {
+    check('email').isEmail().withMessage('Невалиден имейл!'),
+    check('password').isLength({ min: 8 })
+        .withMessage('Password Must Be at Least 8 Characters')
+        .matches('[0-9]').withMessage('Password Must Contain a Number')
+        .matches('[A-Z]').withMessage('Password Must Contain an Uppercase Letter')
+        .escape(),
+    check('repass').custom((value, { req }) => {
         if (value !== req.body.password) {
             throw new Error('Въведените пароли не съвпадат!');
         }

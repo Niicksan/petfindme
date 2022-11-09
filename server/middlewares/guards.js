@@ -18,18 +18,19 @@ function isGuest() {
     };
 }
 
-// function isOwner() {
-//     return (req, res, next) => {
-//         if (req.user && res.locals.book.owner.toString() == req.user._id.toString()) {
-//             res.locals.isOwner = true;
-//             next();
-//         } else {
-//             res.redirect('/auth/login');
-//         }
-//     };
-// }
+function isOwner() {
+    return (req, res, next) => {
+        if (req.user && res.locals.pet.owner == req.user._id) {
+            res.locals.isOwner = true;
+            next();
+        } else {
+            return res.status(403).json({ message: "Access denied! You don't have rights to access this page!" });
+        }
+    };
+}
 
 module.exports = {
     hasUser,
-    isGuest
+    isGuest,
+    isOwner
 };
