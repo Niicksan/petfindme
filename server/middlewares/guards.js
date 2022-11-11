@@ -3,7 +3,10 @@ function hasUser() {
         if (req.user) {
             next();
         } else {
-            res.status(401).json({ message: 'Please log in' });
+            res.status(401).json({
+                messageEn: 'Please log in',
+                messageBg: 'Влезте в профила си'
+            });
         }
     };
 }
@@ -11,7 +14,10 @@ function hasUser() {
 function isGuest() {
     return (req, res, next) => {
         if (req.user) {
-            res.status(400).json({ message: 'You are already logged in' });
+            res.status(400).json({
+                messageEn: 'You are already logged in',
+                messageBg: 'Вече сте влезли в профила си'
+            });
         } else {
             next();
         }
