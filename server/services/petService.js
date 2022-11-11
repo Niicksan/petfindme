@@ -5,6 +5,18 @@ async function getLatestPets() {
     return Pet.find({}, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
 }
 
+async function getLostPets() {
+    return Pet.find({ status: 'lost' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+}
+
+async function getFoundPets() {
+    return Pet.find({ status: 'found' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+}
+
+async function getAdoptionPets() {
+    return Pet.find({ status: 'adoption' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+}
+
 async function getAllPetsCreatedByUser(userId) {
     return Pet.find({ owner: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 });
 }
@@ -50,6 +62,9 @@ async function addPetToLikedList(petId, userId) {
 
 module.exports = {
     getLatestPets,
+    getLostPets,
+    getFoundPets,
+    getAdoptionPets,
     getAllPetsCreatedByUser,
     getAllPetsLikedByUser,
     getPetById,
