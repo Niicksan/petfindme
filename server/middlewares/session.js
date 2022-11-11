@@ -14,7 +14,10 @@ module.exports = () => (req, res, next) => {
             req.token = token;
         } catch (error) {
             res.clearCookie(authCookieName);
-            return res.status(401).json({ message: 'Invalid authorization token' });
+            return res.status(401).json({
+                messageEn: 'Invalid authorization token',
+                messageBg: 'Невалиден тоукън за аутентикация'
+            });
         }
     }
 

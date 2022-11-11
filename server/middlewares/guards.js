@@ -24,7 +24,10 @@ function isOwner() {
             res.locals.isOwner = true;
             next();
         } else {
-            return res.status(403).json({ message: "Access denied! You don't have rights to access this page!" });
+            return res.status(403).json({
+                messageEn: "Access denied! You don't have rights to access this page!",
+                messageBg: "Нямате права да достъпите тази страница!",
+            });
         }
     };
 }

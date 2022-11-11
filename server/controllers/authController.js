@@ -72,7 +72,10 @@ authController.get('/logout', async (req, res) => {
         await logout(token);
         res.clearCookie(authCookieName)
             .status(204)
-            .send({ message: 'Logged out!' });
+            .send({
+                messageEn: 'Logged out!',
+                messageBg: 'Успешно отписване'
+            });
     } catch (error) {
         const message = parseError(error);
         console.error(message);
