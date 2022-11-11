@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-
-
-const CONNECTION_STRING = 'mongodb://localhost:27017/petfindme';
+const config = require('./config');
 
 module.exports = async (app) => {
     try {
-        await mongoose.connect(CONNECTION_STRING, {
+        await mongoose.connect(config.dbURL, {
             useUnifiedTopology: true,
             useNewUrlParser: true
         });

@@ -1,6 +1,8 @@
 const User = require('../models/User');
+const TokenBlacklist = require('../models/tokenBlacklistModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { authCookieName } = require('../config/auth-config');
 
 
 const JWT_SECRET = 'aGf23FgTahf232HafaGj45hjh435adsfgadFjaD';
@@ -40,7 +42,7 @@ async function login(email, password) {
 }
 
 async function logout(token) {
-    tokenBlacklist.add(token);
+    await TokenBlacklist.create({ token });
 }
 
 function createToken({ _id, email }) {
@@ -52,7 +54,7 @@ function createToken({ _id, email }) {
     return {
         _id,
         email,
-        accessToken: jwt.sign(payload, JWT_SECRET, {
+        authToken: jwt.sign(payload, JWT_SECRET, {
             expiresIn: '1h'
         })
     };

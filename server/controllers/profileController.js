@@ -16,7 +16,7 @@ profileController.get('/', async (req, res) => {
         }
         res.json(user);
     } catch (error) {
-        const message = parseErroreError(error);
+        const message = parseError(error);
         console.log(message);
         res.status(400).json({ message });
     }

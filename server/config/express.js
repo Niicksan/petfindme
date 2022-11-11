@@ -1,9 +1,10 @@
 const express = require('express');
 const { parseError } = require('../utils/errorParser');
 const cors = require('../middlewares/cors');
-const trimBody = require('../middlewares/trimBody');
+const cookieParser = require('cookie-parser');
 const session = require('../middlewares/session');
-
+const trimBody = require('../middlewares/trimBody');
+const cookieSecret = process.env.COOKIESECRET || 'petfindme';
 
 module.exports = (app) => {
     // Setup the body parser
@@ -13,14 +14,18 @@ module.exports = (app) => {
                 JSON.parse(buf);
             } catch (error) {
                 const message = parseError(error);
-                console.log(message);
+                console.error(message);
                 res.status(400).json({ message: "Invalid data format" });
             }
         }
     }));
     app.use(express.urlencoded({ extended: true }));
 
+    // Setup the static files
+    app.use('/static', express.static('static'));
+
     app.use(cors());
-    app.use(trimBody('password'));
+    app.use(cookieParser(cookieSecret));
     app.use(session());
+    app.use(trimBody('password'));
 };
