@@ -71,9 +71,13 @@ petController.put('/:id',
 petController.delete('/:id', preloader(), isOwner(), async (req, res) => {
     try {
         await deletePetById(req.params.id);
-        res.status(204).json({ message: "Item deleted successfully" });
-    } catch (err) {
-        const message = parseError(err);
+        res.status(204).json({
+            messageEn: "Item deleted successfully",
+            messageBg: "Успешно изтриване"
+        });
+    } catch (error) {
+        const message = parseError(error);
+        console.error(message);
         res.status(400).json({ message });
     }
 });
