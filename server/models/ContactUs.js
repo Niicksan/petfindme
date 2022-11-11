@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 
-const contactSchema = new Schema({
+const contactUsSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     subject: { type: String, required: true },
@@ -9,27 +9,27 @@ const contactSchema = new Schema({
     createdAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) }
 });
 
-contactSchema.index({ name: 1 }, {
+contactUsSchema.index({ name: 1 }, {
     collation: {
         locale: 'en',
         strength: 2
     }
 });
 
-contactSchema.index({ email: 1 }, {
+contactUsSchema.index({ email: 1 }, {
     collation: {
         locale: 'en',
         strength: 2
     }
 });
 
-contactSchema.index({ subject: 1 }, {
+contactUsSchema.index({ subject: 1 }, {
     collation: {
         locale: 'en',
         strength: 2
     }
 });
 
-const ContactSchema = model('ContactsSchema', contactSchema);
+const ContactUs = model('ContactUs', contactUsSchema);
 
-module.exports = ContactSchema;
+module.exports = ContactUs;
