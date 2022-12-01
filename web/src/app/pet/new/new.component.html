@@ -1,0 +1,35 @@
+<main class="main main-add">
+    <div class="form-holder">
+        <div class="contact-title add-title">
+            <h1>Подай сигнал</h1>
+            <!-- <h2>Изпратете вашето запистване като попълните формата по-долу!</h2> -->
+        </div>
+
+        <div class="contact-form add">
+            <form id="contact-form" action="../index.html">
+                <input type="text" name="title" class="form-control bgcl" placeholder=" Заглавие" required><br>
+
+                <select name="lost-found" class="form-control lost-found bgcl" required>
+                    <option value="" selected disabled hidden> Изгубено / Намерено</option>
+                    <option value=" Изгубено" class="opt-bgc"> Изгубено</option>
+                    <option value=" Намерено" class="opt-bgc"> Намерено</option>
+                </select>
+
+                <input type="text" name="location" class="form-control bgcl" placeholder=" Местоположение" required><br>
+
+                <input type="text" name="name" class="form-control bgcl" placeholder=" Име за връзка" required><br>
+
+                <input type="tel" name="phone" class="form-control bgcl" placeholder=" Телефон за връзка" required><br>
+
+                <input type="file" name="add" class="form-control add-file bgcl" title="Изберете снимка"
+                    value="Изберете снимка" required><br>
+
+                <textarea name="description" class="form-control bgcl" rows="6" placeholder=" Описание"
+                    required></textarea><br>
+
+                <input type="submit" class="form-control submit" value="Подай сигнал">
+            </form>
+        </div>
+    </div>
+
+</main>

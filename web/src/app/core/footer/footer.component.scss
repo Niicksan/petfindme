@@ -39,6 +39,13 @@ $navbar-blue: #1C6375;
                 color: $white;
             }
 
+            li,
+            a {
+                i.fa {
+                    margin-right: 0.5em;
+                }
+            }
+
             .instagram {
                 &:hover {
                     color: #D3154C;

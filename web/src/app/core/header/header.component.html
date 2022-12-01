@@ -1,8 +1,8 @@
 <header>
     <div class="header-holder">
         <div class="logo">
-            <a class="brand" href="index.html">
-                <img src="assets/images/logo.png" alt="PetFind.Me">
+            <a routerLink="/" class="brand">
+                <img src="/assets/images/logo.png" alt="PetFind.Me">
             </a>
         </div>
 
@@ -11,18 +11,39 @@
             <label for="menuToggle" class="menu-icon"><i class="fa fa-bars"></i></label>
 
             <ul id="menu">
-                <a href="index.html">
-                    <li><i class="fa fa-home"></i> Начало</li>
+                <!-- <a routerLink="/">
+                    <li><i class="fa fa-home"></i>Начало</li>
+                </a> -->
+                <a routerLink="/pets/lost">
+                    <li><i class="fa fa-solid fa-magnifying-glass-location"></i>Изгубени</li>
                 </a>
-                <a href="pages/lost.html">
-                    <li><i class="fa fa-search-location"></i> Изгубени</li>
+                <a routerLink="/pets/found">
+                    <li><i class="fa fa-regular fa-circle-check"></i>Намерени</li>
                 </a>
-                <a href="pages/found.html">
-                    <li><i class="far fa-check-circle"></i> Намерени</li>
-                </a>
-                <a href="pages/add.html">
-                    <li><i class="fa fa-plus-circle"></i> Подай сигнал</li>
-                </a>
+
+                <ng-template #loggedOutTemplate>
+                    <a routerLink="/auth/login">
+                        <li><i class="fa fa-solid fa-right-to-bracket"></i>Вход</li>
+                    </a>
+                    <a routerLink="/auth/register">
+                        <li><i class="fa fa-solid fa-user-plus"></i>Регистрирай се</li>
+                    </a>
+                </ng-template>
+
+                <ng-template #loggedInTemplate>
+                    <a routerLink="/pets/new">
+                        <li><i class="fa fa-plus-circle"></i>Подай сигнал</li>
+                    </a>
+                    <a routerLink="/auth/profile">
+                        <li><i class="fa fa-solid fa-user"></i>Профил</li>
+                    </a>
+                    <a routerLink="/auth/logout">
+                        <li><i class="fa fa-solid fa-right-from-bracket"></i>Изллез</li>
+                    </a>
+                </ng-template>
+
+                <!-- <ng-container *ngTemplateOutlet="isLoggedIn ? loggedInTemplate : loggedOutTemplate"></ng-container> -->
+                <ng-container *ngTemplateOutlet="loggedInTemplate"></ng-container>
             </ul>
         </nav>
     </div>
