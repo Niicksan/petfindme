@@ -1,133 +1,117 @@
+$white: #fff;
+$navbar-blue: #1C6375;
+
 .contacts {
-    background: linear-gradient(rgba(255, 255, 255, 0), black), url('/assets/images/pets-contact.jpg');
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url('/assets/images/pets-contact.jpg');
+}
+
+.main-form {
     background-size: cover;
-    background-position: center;
     background-position: center;
     background-repeat: no-repeat;
     text-align: center;
-    height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
-}
 
-.form-holder {
-    width: 58%;
-    margin: 3em auto;
-}
+    .form-holder {
+        width: 50%;
+        margin: 3em auto;
 
-.form-holder .contact-title {
-    color: #fff;
-    text-transform: uppercase;
-    margin-bottom: 2.5em;
-    transition: all 2.5s ease-in;
+        .form-title {
+            color: $white;
+            text-transform: uppercase;
+            margin-bottom: 2.5em;
+            transition: all 2.5s ease-in;
 
-    h1 {
-        font-size: 1.8em;
+            h2 {
+                font-size: 1.8em;
+                color: $navbar-blue;
+            }
+
+            /*/h2 {
+            font-size: 1.2em;
+        }*/
+        }
+
+        .content-form {
+            background-color: transparent;
+            width: 100%;
+            transition: all 2.5s ease-in;
+
+            .form {
+                .form-control {
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    color: $white;
+                    font-size: 1.2em;
+                    padding-left: 10px;
+                    box-sizing: border-box;
+
+                    &::-webkit-input-placeholder {
+                        color: #ffffff;
+                    }
+                }
+
+                .bgcl {
+                    background: rgba(0, 0, 0, 0.8);
+                    -webkit-background: rgba(0, 0, 0, 0.80);
+                    -moz-background: rgba(0, 0, 0, 0.80);
+                    opacity: 0.5;
+                    margin-bottom: 0.5em;
+                }
+
+                input {
+                    height: 3em;
+                }
+
+                textarea {
+                    resize: none;
+                    font-size: 1.2em;
+                    margin-bottom: 0px !important;
+                    padding-top: 10px;
+                    padding-bottom: 0px !important;
+                }
+
+                textarea::placeholder {
+                    font-size: 1.2em;
+                }
+
+                .submit {
+                    background: $navbar-blue;
+                    border-color: transparent;
+                    color: $white;
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    letter-spacing: 2px;
+                    margin-top: 1em;
+                    width: 100%;
+                    -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
+                    -moz-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
+                    box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
+
+                    &:hover {
+                        background: #f44336;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
-}
-
-.form-holder .contact-form {
-    background-color: transparent;
-    width: 100%;
-    transition: all 2.5s ease-in;
-
-    .bgcl {
-        background: rgba(0, 0, 0, 0.8);
-        opacity: 0.5;
-        margin-bottom: 0.5em;
-    }
-
-    input {
-        height: 3em;
-    }
-
-    textarea {
-        box-sizing: border-box;
-        margin-bottom: 0px !important;
-        padding-bottom: 0px !important;
-        font-size: 1.4em !important;
-    }
-
-    .submit {
-        background: #1C6375;
-        border-color: transparent;
-        color: #fff;
-        font-size: 1.2em;
-        font-weight: bold;
-        letter-spacing: 2px;
-        margin-top: 1em;
-        width: 100%;
-        -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-        -moz-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-        box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-    }
-
-    .submit:hover {
-        background: #f44336;
-        cursor: pointer;
-    }
-}
-
-.form-holder .contact-form .submit {
-    -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-    -moz-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-    box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-}
-
-.form-holder .contact-form .form-control {
-    width: 100%;
-    border: none;
-    outline: none;
-    color: #fff;
-    font-size: 1.2em !important;
-}
-
-.form-holder .contact-form .form-control::-webkit-input-placeholder {
-    color: #fafafa;
-}
-
-.form-holder .contact-form .bgcl {
-    background: rgba(0, 0, 0, 0.8);
-    opacity: 0.5;
-    margin-bottom: 0.5em;
-}
-
-.form-holder .contact-form input {
-    height: 3em;
-}
-
-.form-holder .contact-form textarea {
-    box-sizing: border-box;
-    margin-bottom: 0px !important;
-    padding-bottom: 0px !important;
-}
-
-.form-holder .contact-form .submit {
-    background: #1C6375;
-    border-color: transparent;
-    color: #fff;
-    font-size: 1.2em;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-top: 1em;
-    width: 100%;
-}
-
-.form-holder .contact-form .submit:hover {
-    background: #f44336;
-    cursor: pointer;
 }
 
 @media screen and (max-width: 480px) {
-    .form-holder h1 {
-        font-size: 1.5em;
+    .form-holder {
+        h2 {
+            font-size: 1.5em
+        }
     }
 }
 
 @media screen and (max-width: 990px) {
     .form-holder {
-        width: 80%;
+        width: 80% !important;
 
         .submit {
             white-space: normal;

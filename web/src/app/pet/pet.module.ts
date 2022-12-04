@@ -9,6 +9,8 @@ import { NewComponent } from './new/new.component';
 import { DetailsComponent } from './details/details.component';
 import { PetItemComponent } from './shared/pet-item/pet-item.component';
 import { PetsListComponent } from './shared/pets-list/pets-list.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { PetsNotFoundComponent } from './shared/pets-not-found/pets-not-found.component';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { PetsListComponent } from './shared/pets-list/pets-list.component';
     DetailsComponent,
     PetItemComponent,
     PetsListComponent,
+    LoaderComponent,
+    PetsNotFoundComponent
   ],
   imports: [
     CommonModule,

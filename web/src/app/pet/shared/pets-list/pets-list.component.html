@@ -1,28 +1,38 @@
-<div class="grid-container">
-    <section class="ad-container">
-        <img src="/assets/images/default-pet-image.png" alt="">
+<div *ngIf="errorFetchingData">Error loading themes</div>
+<app-loader *ngIf="!petsList"></app-loader>
 
-        <div class="ad-section-container">
-            <div class="ad-head-container">
-                <h3 class="title">Изгубено е коте Британка</h3>
-                <p class=""><span class="bold">Статус: </span>Изгубено</p>
+<ng-template #petsItems>
+    <div class="grid-container">
+        <section *ngFor="let pet of petsList" class="ad-container">
+            <img src="/assets/images/default-pet-image.png" alt="">
+
+            <div class="ad-section-container">
+                <div class="ad-head-container">
+                    <h3 class="title">{{pet.title}}</h3>
+                    <p class=""><span class="bold">Статус: </span>{{pet.status}}</p>
+                </div>
+
+                <div class="ad-main-container">
+                    <p class="">{{pet.description}}
+                </div>
+
+                <div class="ad-footer-container">
+                    <p class=""><span class="bold">Град: </span>{{pet.location}}</p>
+                    <p class=""><span class="bold">За връзка: </span>{{pet.contactName}}</p>
+                    <p class=""><span class="bold">Телефон: </span>{{pet.phone}}</p>
+                </div>
             </div>
+        </section>
+    </div>
+</ng-template>
 
-            <div class="ad-main-container">
-                <p class="">Изгубено е коте на около годинка, порода Британска
-                    късокосместа. Казва се Бела и сме я изтървали, живея в центъра до кулата.
-                    Ако някой я намери, моля ви свържете се с мен, ще съм ви много благодарна!</p>
-            </div>
+<ng-template #petsNotFound>
+    <app-pets-not-found></app-pets-not-found>
+</ng-template>
 
-            <div class="ad-footer-container">
-                <p class=""><span class="bold">Град: </span>Варна</p>
-                <p class=""><span class="bold">За връзка: </span>Еми</p>
-                <p class=""><span class="bold">Телефон: </span>0988888888</p>
-            </div>
-        </div>
-    </section>
+<ng-container *ngTemplateOutlet="!isPetsFound ? petsItems : petsNotFound"></ng-container>
 
-    <section class="ad-container">
+<!-- <section class="ad-container">
         <img src="/assets/images/default-pet-image.png" alt="">
 
         <div class="ad-section-container">
@@ -89,4 +99,4 @@
             </div>
         </div>
     </section>
-</div>
+</div> -->

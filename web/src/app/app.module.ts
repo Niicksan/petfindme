@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PetModule } from './pet/pet.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { PetModule } from './pet/pet.module';
     AuthModule,
     BrowserModule,
     CoreModule,
+    HttpClientModule,
     PetModule,
     AppRoutingModule
   ],

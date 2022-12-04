@@ -1,0 +1,89 @@
+$main-blue-color: #1C6375;
+$main-white-color: #fff;
+$main-bg-color: #fff;
+
+.main {
+    margin: 0 auto;
+
+    .flex-column {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .header-holder {
+            width: 80%;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .spinner-holder {
+            margin: 3% auto;
+
+            .spinner {
+                position: relative;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
+
+            .spinner::before,
+            .spinner:after {
+                content: '';
+                border-radius: inherit;
+                position: absolute;
+            }
+
+            .spinner:before {
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(0deg, $main-blue-color 0%,
+                        $main-white-color 100%);
+                animation: spin .5s infinite linear;
+                -webkit-animation: spin .5s infinite linear;
+                -moz-animation: spin .5s infinite linear;
+            }
+
+            .spinner:after {
+                width: 85%;
+                height: 85%;
+                background-color: $main-bg-color;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-holder {
+        font-size: 1em;
+    }
+
+    .spinner {
+        width: 80px;
+        height: 80px;
+    }
+}

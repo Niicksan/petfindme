@@ -1,0 +1,33 @@
+$navbar-blue: #1C6375;
+
+.not-found-container {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    min-height: none !important;
+
+    .image {
+        width: 60%;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .not-found {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        h1 {
+            font-size: 4em;
+            color: $navbar-blue;
+            margin-bottom: 0.5em;
+        }
+    }
+}
