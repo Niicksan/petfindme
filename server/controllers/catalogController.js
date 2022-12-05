@@ -1,10 +1,10 @@
-const homeController = require('express').Router();
+const catalogController = require('express').Router();
 
 const { getLatestPets, getLostPets, getFoundPets, getAdoptionPets } = require('../services/petService');
 const { parseError } = require('../utils/errorParser');
 
 
-homeController.get('/latest', async (req, res) => {
+catalogController.get('/latest', async (req, res) => {
     try {
         const latestPets = await getLatestPets();
 
@@ -16,7 +16,7 @@ homeController.get('/latest', async (req, res) => {
     }
 });
 
-homeController.get('/lost', async (req, res) => {
+catalogController.get('/lost', async (req, res) => {
     try {
         const latestPets = await getLostPets();
 
@@ -28,7 +28,7 @@ homeController.get('/lost', async (req, res) => {
     }
 });
 
-homeController.get('/found', async (req, res) => {
+catalogController.get('/found', async (req, res) => {
     try {
         const latestPets = await getFoundPets();
 
@@ -40,7 +40,7 @@ homeController.get('/found', async (req, res) => {
     }
 });
 
-homeController.get('/adoption', async (req, res) => {
+catalogController.get('/adoption', async (req, res) => {
     try {
         const latestPets = await getAdoptionPets();
 
@@ -52,4 +52,4 @@ homeController.get('/adoption', async (req, res) => {
     }
 });
 
-module.exports = homeController;
+module.exports = catalogController;

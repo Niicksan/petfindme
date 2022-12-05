@@ -5,7 +5,6 @@ const databaseConfig = require('./config/database');
 const expressConfig = require('./config/express');
 const routesConfig = require('./config/routes');
 
-const port = 3030;
 
 async function start() {
     const app = express();
@@ -14,7 +13,7 @@ async function start() {
     expressConfig(app);
     routesConfig(app);
 
-    app.listen(config.port, console.log(`REST Service is listening on port ${config.port}! Now it\'s up to you...`));
+    app.listen(config.port, console.log(`REST Service is listening on port ${config.port}! Now it\'s up to you! Open your browser on http://localhost:${config.port}/`));
 }
 
 start();
