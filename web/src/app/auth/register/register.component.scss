@@ -1,0 +1,26 @@
+$navbar-blue: #1C6375;
+
+.login {
+    background: url('/assets/images/pets-login.jpg');
+    background-size: 70% !important;
+
+    .form-footer {
+        margin-top: 2em;
+        color: white;
+
+        a {
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a,
+        :active,
+        a:visited {
+            color: $navbar-blue;
+        }
+
+        a:hover {
+            color: #f44336;
+        }
+    }
+}

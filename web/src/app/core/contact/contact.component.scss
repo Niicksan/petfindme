@@ -18,7 +18,7 @@ $navbar-blue: #1C6375;
         width: 50%;
         margin: 3em auto;
 
-        .form-title {
+        .form-header {
             color: $white;
             text-transform: uppercase;
             margin-bottom: 2.5em;
@@ -34,7 +34,7 @@ $navbar-blue: #1C6375;
         }*/
         }
 
-        .content-form {
+        .form-content {
             background-color: transparent;
             width: 100%;
             transition: all 2.5s ease-in;
