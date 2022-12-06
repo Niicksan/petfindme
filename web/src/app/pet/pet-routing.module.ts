@@ -4,6 +4,7 @@ import { DetailsComponent } from "./details/details.component";
 import { FoundComponent } from "./found/found.component";
 import { LostComponent } from "./lost/lost.component";
 import { NewComponent } from "./new/new.component";
+import { PetResolver } from "./resolvers/pet.resolver";
 
 
 const routes: Routes = [
@@ -34,12 +35,12 @@ const routes: Routes = [
             },
             {
                 path: 'details/:id',
-                // resolve: {
-                //     pet: 
-                // },
+                resolve: {
+                    pet: PetResolver
+                },
                 component: DetailsComponent,
                 data: {
-                    title: 'Login',
+                    title: 'Детайли за сигнала',
                 }
             }
         ]
