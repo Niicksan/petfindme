@@ -13,7 +13,7 @@ async function start() {
     expressConfig(app);
     routesConfig(app);
 
-    app.listen(config.port, console.log(`REST Service is listening on port ${config.port}! Now it\'s up to you! Open your browser on http://localhost:${config.port}/`));
+    app.listen(config.port, console.log(`REST Service is listening on port ${config.port}! Now it\'s up to you! Open your browser on http://${config.HOST}`));
 }
 
 start();
