@@ -18,7 +18,6 @@ async function start() {
     }
 
     app.listen(config.port, console.log(`REST Service is listening on port ${config.port}! Now it\'s up to you! Open your browser on ${config.host}`));
-    console.log(config);
 }
 
 start();
