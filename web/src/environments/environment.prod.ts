@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: 'http://localhost:3030/api'
+  apiURL: 'https://api-petfindme.onrender.com/api'
 };
