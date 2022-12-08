@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IPet } from 'src/app/core/interfaces/pet';
 
 @Component({
   selector: 'app-details',
@@ -7,9 +8,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
+  pet: IPet;
 
   constructor(private activatedRoute: ActivatedRoute) {
-    console.log(this.activatedRoute.snapshot.data?.['pet'])
+    this.pet = this.activatedRoute.snapshot.data?.['pet'];
   }
 
   ngOnInit(): void {

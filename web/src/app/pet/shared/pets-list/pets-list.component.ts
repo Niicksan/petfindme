@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { IPet } from 'src/app/core/interfaces/pet';
 
 @Component({
@@ -11,7 +12,7 @@ export class PetsListComponent implements OnInit {
   @Input() errorFetchingData = false;
   @Input() isPetsFound = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // console.log(this.errorFetchingData);

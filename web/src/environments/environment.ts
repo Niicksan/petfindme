@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiURL: 'http://localhost:3030/api'
+  // apiURL: 'http://localhost:3030/api'
+  apiURL: 'https://api-petfindme.onrender.com/api'
 };
 
 /*

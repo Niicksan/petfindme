@@ -4,26 +4,27 @@
 <ng-template #petsItems>
     <div class="grid-container">
         <section *ngFor="let pet of petsList" class="ad-container">
-            <img src="/assets/images/default-pet-image.png" alt="">
+            <a routerLink="/pets/details/{{ pet._id }}">
+                <img src="/assets/images/default-pet-image.png" alt="">
 
-            <div class="ad-section-container">
-                <div class="ad-head-container">
-                    <h3 class="title">{{pet.title}}</h3>
-                    <p class=""><span class="bold">Статус: </span>{{pet.status}}</p>
-                </div>
+                <div class="ad-section-container">
+                    <div class="ad-head-container">
+                        <h3 class="title">{{pet.title}}</h3>
+                        <p class=""><span class="bold">Статус: </span>{{pet.status}}</p>
+                    </div>
 
-                <div class="ad-main-container">
-                    <p class="">{{pet.description}}
-                </div>
+                    <div class="ad-main-container">
+                        <p class="">{{pet.description}}
+                    </div>
 
-                <div class="ad-footer-container">
-                    <p class=""><span class="bold">Град: </span>{{pet.location}}</p>
-                    <p class=""><span class="bold">За връзка: </span>{{pet.contactName}}</p>
-                    <p class=""><span class="bold">Телефон: </span>{{pet.phone}}</p>
+                    <div class="ad-footer-container">
+                        <p class=""><span class="bold">Град: </span>{{pet.location}}</p>
+                        <p class=""><span class="bold">За връзка: </span>{{pet.contactName}}</p>
+                        <p class=""><span class="bold">Телефон: </span>{{pet.phone}}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </section>
-
     </div>
 </ng-template>
 
