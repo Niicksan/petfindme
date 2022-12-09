@@ -5,14 +5,56 @@
         </div>
 
         <div class="form-content">
-            <form id="form" class="form">
-                <input type="email" name="email" class="form-control bgcl" placeholder="Вашето email" required>
+            <form [formGroup]="registerForm" id="form" class="form" (ngSubmit)="registerHandler()">
+                <!-- email -->
+                <input type="email" formControlName="email" class="form-control bgcl" placeholder="Вашето email"
+                    required>
+                <ng-container *ngIf="registerForm.get('email')?.touched">
+                    <p class="error" *ngIf="registerForm.get('email')?.errors?.['required']">
+                        Email is required!
+                    </p>
+                    <p class="error" *ngIf="registerForm.get('email')?.errors?.['email']">
+                        Email is not valid!
+                    </p>
+                </ng-container>
 
-                <input type="text" name="name" class="form-control bgcl" placeholder="Вашeтo име" required>
+                <!-- name -->
+                <input type="text" formControlName="name" class="form-control bgcl" placeholder="Вашeтo име" required>
+                <ng-container *ngIf="registerForm.get('name')?.touched">
+                    <p *ngIf="registerForm.get('name')?.errors?.['required']" class="error">
+                        Username is required!
+                    </p>
+                    <p *ngIf="registerForm.get('name')?.errors?.['minlength']" class="error">
+                        Username should be longer than 5 chars
+                    </p>
+                </ng-container>
 
-                <input type="password" name="password" class="form-control bgcl" placeholder="Вашaта парола" required>
+                <!-- passwords -->
+                <ng-container formGroupName="pass">
+                    <!-- password -->
+                    <input type="password" formControlName="password" class="form-control bgcl"
+                        placeholder="Вашaта парола" required>
+                    <ng-container *ngIf="registerForm.get('pass')?.get('password')?.touched">
+                        <p class="error" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['required']">
+                            Password is required!
+                        </p>
+                        <p class="error" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['minlength']">
+                            Password must be at least 5 characters!
+                        </p>
+                    </ng-container>
 
-                <input type="submit" class="form-control submit" value="Регистрирай се">
+                    <!-- repass -->
+                    <input type="password" formControlName="repass" class="form-control bgcl"
+                        placeholder="Подвърдете вашaта парола" required>
+                    <ng-container
+                        *ngIf="registerForm.get('pass')?.errors?.['comparePasswordsValidator'] && registerForm.get('pass')?.get('repass')?.touched"
+                        class="error">Repeat Password does not match
+                        password!
+                    </ng-container>
+                </ng-container>
+
+                <input [disabled]="registerForm.invalid" type="submit" class="form-control submit"
+                    value="Регистрирай се">
             </form>
             <div class="form-footer">
                 <p>Имате регистрация? <a routerLink="/auth/login">Вход</a>.</p>

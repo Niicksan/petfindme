@@ -1,7 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, filter, of, Subscription, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, filter, Subscription, tap, throwError } from 'rxjs';
 import { IUser } from '../interfaces/user';
+import { environment } from 'src/environments/environment'
 
 @Injectable({
     providedIn: 'root'
@@ -27,7 +28,7 @@ export class AuthService implements OnDestroy {
     }
 
     register(email: string, name: string, password: string, repass: string) {
-        return this.http.post<IUser>('/auth/register', { email, name, password, repass })
+        return this.http.post<IUser>(environment.apiURL + '/auth/register', { email, name, password, repass })
             .pipe(tap(user => this.user$$.next(user)));
     }
 
