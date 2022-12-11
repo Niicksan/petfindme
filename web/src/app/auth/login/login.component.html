@@ -5,7 +5,7 @@
         </div>
 
         <div class="form-content">
-            <form [formGroup]="loginForm" id="form" class="form">
+            <form [formGroup]="loginForm" id="form" class="form" (ngSubmit)="loginHandler()">
                 <!-- email -->
                 <input type="email" formControlName="email" class="form-control bgcl" placeholder="Вашето email"
                     required>
