@@ -31,9 +31,9 @@ Run `npm start`to run the API service on port 3030
 
 ## REST-API Endpoint
 Base Url: https://localhost:3030/api
---------------------------------------------------------------------
+
 | HTTP Method |  Description  |      Endpoint     | Login Required |
-| :---------- | :-----------: | :---------------- | :------------: |
+| :---------- | :------------ | :---------------- | :------------: |
 |     POST    | Signing up    | /auth/register    |       No       |
 |     POST    | Signing in    | /auth/login       |       No       |
 |     POST    | Logging out   | /auth/logout      |       Yes      |
@@ -47,4 +47,3 @@ Base Url: https://localhost:3030/api
 |    DELETE   | Delete pet    | /pet/:id          |       Yes      |
 |     GET     | My Profile    | /user/profile     |       Yes      |
 |     POST    | Sent message  | /api/contact-us   |       No       |
---------------------------------------------------------------------
