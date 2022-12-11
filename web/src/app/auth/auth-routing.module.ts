@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from "@angular/router";
 
-//import { AuthActivate } from "../core/guards/auth.guard";
+import { AuthGuard } from "../core/guards/auth.guard";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { LogoutComponent } from "./logout/logout.component";
@@ -11,37 +11,37 @@ const routes: Routes = [
     {
         path: 'auth/login',
         component: LoginComponent,
-        // canActivate: [AuthActivate],
+        //canActivate: [AuthGuard],
         data: {
             title: 'Login',
-            //loginRequired: false
+            loginRequired: false
         }
     },
     {
         path: 'auth/register',
         component: RegisterComponent,
-        //canActivate: [AuthActivate],
+        //canActivate: [AuthGuard],
         data: {
             title: 'Register',
-            //loginRequired: false
+            loginRequired: false
         }
     },
     {
         path: 'auth/logout',
         component: LogoutComponent,
-        // canActivate: [AuthActivate],
+        canActivate: [AuthGuard],
         data: {
             title: 'Logout',
-            //loginRequired: false
+            loginRequired: true
         }
     },
     {
-        path: 'auth/profile',
+        path: 'user/profile',
         component: ProfileComponent,
-        //canActivate: [AuthActivate],
+        //canActivate: [AuthGuard],
         data: {
             title: 'Profile',
-            //loginRequired: false
+            loginRequired: true
         }
     }
 ];

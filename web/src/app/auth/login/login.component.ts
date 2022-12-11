@@ -13,6 +13,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
 
+    errors: string | undefined = undefined
+
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(5)]]
@@ -21,11 +23,16 @@ export class LoginComponent {
     constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
     loginHandler() {
-        if (this.loginForm.invalid) { return; }
         const { email, password } = this.loginForm.value;
-        this.authService.login(email!, password!)
-            .subscribe(user => {
-                this.router.navigate(['/']);
-            });
+
+        this.authService.login(email!, password!).subscribe({
+            next: () => {
+                this.router.navigate(['/'])
+            },
+            error: (err) => {
+                this.errors = err.error.error;
+                console.log(err.error.error);
+            }
+        })
     }
 }

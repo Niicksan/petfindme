@@ -13,6 +13,7 @@ import { comparePasswordsValidator } from '../shared/validators/compare-password
     ]
 })
 export class RegisterComponent {
+    errors: string | undefined = undefined;
 
     registerForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -30,9 +31,14 @@ export class RegisterComponent {
     registerHandler() {
         if (this.registerForm.invalid) { return; }
         const { email, name, pass: { password, repass } = {} } = this.registerForm.value;
-        this.authService.register(email!, name!, password!, repass!)
-            .subscribe(user => {
-                this.router.navigate(['/']);
-            });
+        this.authService.register(email!, name!, password!, repass!).subscribe({
+            next: () => {
+                this.router.navigate(['/'])
+            },
+            error: (err) => {
+                this.errors = err.error.error;
+                console.log(err.error.error);
+            }
+        });
     }
 }

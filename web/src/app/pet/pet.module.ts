@@ -11,6 +11,7 @@ import { PetItemComponent } from './shared/pet-item/pet-item.component';
 import { PetsListComponent } from './shared/pets-list/pets-list.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { PetsNotFoundComponent } from './shared/pets-not-found/pets-not-found.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import { PetsNotFoundComponent } from './shared/pets-not-found/pets-not-found.co
     PetRoutingModule
   ],
   exports: [
-    LatestComponent
+    SharedModule,
+    LoaderComponent,
+    LatestComponent,
   ]
 })
 export class PetModule { }
