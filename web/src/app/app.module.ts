@@ -9,6 +9,9 @@ import { CoreModule } from './core/core.module';
 import { PetModule } from './pet/pet.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { appInterceptorProvider } from './app.interceptor';
+import { API_ERROR } from './app-constants';
+import { BehaviorSubject } from 'rxjs';
 
 
 @NgModule({
@@ -25,7 +28,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MaterialExampleModule,
     MatFormFieldModule
   ],
-  providers: [],
+  providers: [
+    appInterceptorProvider,
+    {
+      provide: API_ERROR,
+      useValue: new BehaviorSubject(null)
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

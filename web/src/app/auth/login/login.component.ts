@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -10,23 +12,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     ]
 })
 export class LoginComponent {
-    emailForm: FormGroup;
-    emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
-    constructor() {
-        this.emailForm = new FormGroup({
-            email: new FormControl('', {
-                validators: [Validators.required, Validators.pattern(this.emailRegex)],
-                updateOn: 'blur',
-            }),
-        });
-    }
+    loginForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(5)]]
+    });
 
-    get validator() {
-        return true;
-    }
+    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
-    submit() {
-        console.log(this.emailForm.value);
+    loginHandler() {
+        if (this.loginForm.invalid) { return; }
+        const { email, password } = this.loginForm.value;
+        this.authService.login(email!, password!)
+            .subscribe(user => {
+                this.router.navigate(['/']);
+            });
     }
 }

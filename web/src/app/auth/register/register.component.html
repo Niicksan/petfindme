@@ -11,10 +11,10 @@
                     required>
                 <ng-container *ngIf="registerForm.get('email')?.touched">
                     <p class="error" *ngIf="registerForm.get('email')?.errors?.['required']">
-                        Email is required!
+                        Моля въведете имейл!
                     </p>
                     <p class="error" *ngIf="registerForm.get('email')?.errors?.['email']">
-                        Email is not valid!
+                        Моля въведете валиден имейл!
                     </p>
                 </ng-container>
 
@@ -22,10 +22,10 @@
                 <input type="text" formControlName="name" class="form-control bgcl" placeholder="Вашeтo име" required>
                 <ng-container *ngIf="registerForm.get('name')?.touched">
                     <p *ngIf="registerForm.get('name')?.errors?.['required']" class="error">
-                        Username is required!
+                        Моля въведете вашето име!
                     </p>
                     <p *ngIf="registerForm.get('name')?.errors?.['minlength']" class="error">
-                        Username should be longer than 5 chars
+                        Името трябва да е поне 3 символа!
                     </p>
                 </ng-container>
 
@@ -36,10 +36,10 @@
                         placeholder="Вашaта парола" required>
                     <ng-container *ngIf="registerForm.get('pass')?.get('password')?.touched">
                         <p class="error" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['required']">
-                            Password is required!
+                            Моля въведете вашата парола!
                         </p>
                         <p class="error" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['minlength']">
-                            Password must be at least 5 characters!
+                            Паролата трябва да е поне 5 символа!
                         </p>
                     </ng-container>
 
@@ -48,11 +48,11 @@
                         placeholder="Подвърдете вашaта парола" required>
                     <ng-container
                         *ngIf="registerForm.get('pass')?.errors?.['comparePasswordsValidator'] && registerForm.get('pass')?.get('repass')?.touched"
-                        class="error">Repeat Password does not match
-                        password!
+                        class="error">Въведените пароли не съвпадат!
                     </ng-container>
                 </ng-container>
 
+                <!-- submit -->
                 <input [disabled]="registerForm.invalid" type="submit" class="form-control submit"
                     value="Регистрирай се">
             </form>
