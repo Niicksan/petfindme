@@ -38,7 +38,7 @@ authController.post('/register',
                 res.cookie(authCookieName, token.authToken, { httpOnly: true });
             }
 
-            res.json(token);
+            res.status(200).json(token);
         } catch (error) {
             const message = parseError(error);
             console.error(message);
@@ -57,7 +57,7 @@ authController.post('/login', async (req, res) => {
             res.cookie(authCookieName, token.authToken, { httpOnly: true });
         }
 
-        res.json(token);
+        res.status(200).json(token);
     } catch (error) {
         const message = parseError(error);
         console.error(message);
