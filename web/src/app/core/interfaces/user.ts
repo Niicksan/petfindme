@@ -7,4 +7,6 @@ export interface IUser {
     roles: string[];
     likedPets: string[];
     created_at: string;
+    authToken: string;
+    expiresAt: string;
 };

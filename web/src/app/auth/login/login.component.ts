@@ -14,7 +14,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent {
 
     errors: string | undefined = undefined
-
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(5)]]
@@ -23,11 +22,17 @@ export class LoginComponent {
     constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
     loginHandler() {
+
         const { email, password } = this.loginForm.value;
 
         this.authService.login(email!, password!).subscribe({
             next: () => {
-                this.router.navigate(['/'])
+                if (this.authService.redirectUrl) {
+                    this.router.navigate([this.authService.redirectUrl]);
+                    this.authService.redirectUrl = null;
+                } else {
+                    this.router.navigate(['/']);
+                }
             },
             error: (err) => {
                 this.errors = err.error.error;

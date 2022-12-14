@@ -1,23 +1,20 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { IUser } from '../interfaces/user';
 import { AuthService } from '../services/auth.service';
 
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+	selector: 'app-header',
+	templateUrl: './header.component.html',
+	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+	user: IUser | null = null;
 
-  get isLoggedIn() {
-    return this.authService.isLoggedIn;
-  }
+	constructor(private authService: AuthService, private router: Router) { }
 
-  get user() {
-    return this.authService.user;
-  }
-
-  constructor(private authService: AuthService, private router: Router) { }
-
+	get isLoggedIn() {
+		return this.authService.isLoggedIn;
+	}
 }

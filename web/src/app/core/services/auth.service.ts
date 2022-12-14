@@ -1,59 +1,81 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, filter, Subscription, tap, throwError } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, catchError, filter, Subscription, tap, throwError } from 'rxjs';
 import { IUser } from '../interfaces/user';
 import { environment } from 'src/environments/environment'
+
+const apiURL = environment.apiURL;
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService implements OnDestroy {
 
-    subscription: Subscription;
     user: IUser | null = null;
+    private logged = new ReplaySubject<boolean>(1);
+    isLogged = this.logged.asObservable();
+    public redirectUrl: string | null = null;
 
-    private user$$ = new BehaviorSubject<undefined | null | IUser>(undefined);
-    user$ = this.user$$.asObservable().pipe(
-        filter((val): val is IUser | null => val !== undefined)
-    );
+    // private user$$ = new BehaviorSubject<undefined | null | IUser>(undefined);
+    // user$ = this.user$$.asObservable().pipe(
+    //     filter((val): val is IUser | null => val !== undefined)
+    // );
 
     constructor(private http: HttpClient) {
-        this.subscription = this.user$.subscribe(user => {
-            this.user = user;
-        });
+        // this.subscription = this.user$.subscribe(user => {
+        //     this.user = user;
+        // });
+    }
+
+    private setLocalStorage(user: IUser) {
+        this.user = user;
+        localStorage.setItem('user', user._id,);
+        localStorage.setItem('authToken', user.authToken);
+        localStorage.setItem('expiresAt', user.expiresAt);
+    }
+
+    private getExpiration() {
+        const expiresAt = new Date(localStorage.getItem('expiresAt') as string);
+        const dateNow = new Date()
+        return dateNow < expiresAt ? true : false;
     }
 
     get isLoggedIn() {
-        return this.user !== null;
+        return localStorage.getItem('authToken') && this.getExpiration() ? true : false;
+    }
+
+    get userData() {
+        return this.user;
     }
 
     register(email: string, name: string, password: string, repass: string) {
-        return this.http.post<IUser>('/api/auth/register', { email, name, password, repass })
-            .pipe(tap(user => this.user$$.next(user)));
+        return this.http.post<IUser>(`/api/auth/register`, { email, name, password, repass }).pipe(tap((user) => {
+            this.setLocalStorage(user);
+        }));
     }
 
     login(email: string, password: string) {
-        return this.http.post<any>('/api/auth/login', { email, password })
-            .pipe(tap(user => this.user$$.next(user)));
+        return this.http.post<IUser>(`/api/auth/login`, { email, password }).pipe(tap((user) => {
+            this.setLocalStorage(user);
+        }));
     }
 
     logout() {
-        return this.http.post<void>('/api/auth/logout', {})
-            .pipe(tap(() => this.user$$.next(null)));
+        return this.http.get<IUser>(`/api/auth/logout`).pipe(tap(() => {
+            this.user = null;
+            localStorage.removeItem('user');
+            localStorage.removeItem("expiresAt");
+            localStorage.removeItem('authToken');
+        }));
     }
 
     getProfile() {
-        return this.http.get<IUser>('/api/user/profile')
-            .pipe(
-                tap(user => this.user$$.next(user)),
-                catchError((err) => {
-                    this.user$$.next(null);
-                    return throwError(() => err);
-                })
-            );
+        return this.http.get<IUser>(`/api/user/profile`).pipe(tap((user) => {
+            this.user = user;
+        }));
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        // this.subscription.unsubscribe();
     }
 }

@@ -12,13 +12,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { appInterceptorProvider } from './app.interceptor';
 import { API_ERROR } from './app-constants';
 import { BehaviorSubject } from 'rxjs';
-import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AuthenticateComponent
+    AppComponent
   ],
   imports: [
     AuthModule,

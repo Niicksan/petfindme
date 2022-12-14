@@ -5,43 +5,40 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { LogoutComponent } from "./logout/logout.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { HasUserGuard } from "../core/guards/has-user.guard";
 
 
 const routes: Routes = [
     {
         path: 'auth/login',
         component: LoginComponent,
-        //canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         data: {
-            title: 'Login',
-            loginRequired: false
+            title: 'Вход'
         }
     },
     {
         path: 'auth/register',
         component: RegisterComponent,
-        //canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         data: {
-            title: 'Register',
-            loginRequired: false
+            title: 'Регистрация'
         }
     },
     {
         path: 'auth/logout',
         component: LogoutComponent,
-        canActivate: [AuthGuard],
+        canActivate: [HasUserGuard],
         data: {
-            title: 'Logout',
-            loginRequired: true
+            title: 'Изход'
         }
     },
     {
         path: 'user/profile',
         component: ProfileComponent,
-        //canActivate: [AuthGuard],
+        canActivate: [HasUserGuard],
         data: {
-            title: 'Profile',
-            loginRequired: true
+            title: 'Моят профил'
         }
     }
 ];

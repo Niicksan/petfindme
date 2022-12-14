@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from "@angular/router";
+import { HasUserGuard } from "../core/guards/has-user.guard";
 
 import { DetailsComponent } from "./details/details.component";
 import { FoundComponent } from "./found/found.component";
@@ -26,14 +27,6 @@ const routes: Routes = [
                 }
             },
             {
-                path: 'new',
-                component: NewComponent,
-                data: {
-                    title: 'Подай Сигнал',
-                    //loginRequired: false
-                }
-            },
-            {
                 path: 'details/:id',
                 resolve: {
                     pet: PetResolver
@@ -44,7 +37,15 @@ const routes: Routes = [
                 }
             }
         ]
-    }
+    },
+    {
+        path: 'pets/new',
+        component: NewComponent,
+        canActivate: [HasUserGuard],
+        data: {
+            title: 'Подай Сигнал',
+        }
+    },
 ];
 
 export const PetRoutingModule = RouterModule.forChild(routes);
