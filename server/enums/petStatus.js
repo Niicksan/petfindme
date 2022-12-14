@@ -1,7 +1,7 @@
 const status = {
-    'lost': 'lost',
-    'found': 'found',
-    'adoption': 'adoption'
+    'lost': 'Намерен',
+    'found': 'Изгубен',
+    'adoption': 'За осиновяване'
 };
 
 module.exports = status;
