@@ -8,15 +8,15 @@ const { parseError } = require('../utils/errorParser');
 
 
 authController.post('/register',
-    check('email').isEmail().withMessage('Невалиден имейл!'),
-    check('password').isLength({ min: 4 })
-        .withMessage('Паролата трябва да съдържа поне 8 символа')
+    check('email').isEmail().withMessage('Invalid email'),
+    check('password').isLength({ min: 5 })
+        .withMessage('Passwords must be at least 5 characters long')
         //.matches('[0-9]').withMessage('Паролата трябва да съдържа цифра')
         //.matches('[A-Z]').withMessage('Password Must Contain an Uppercase Letter')
         .escape(),
     check('repass').custom((value, { req }) => {
         if (value !== req.body.password) {
-            throw new Error('Въведените пароли не съвпадат!');
+            throw new Error('Passwords don\'t match');
         }
 
         return true;
