@@ -7,7 +7,7 @@ const petSchema = new Schema({
     location: { type: String, required: true },
     contactName: { type: String, required: true },
     phone: { type: String, required: true },
-    imageUrl: { type: String, default: 'default-profile.png' },
+    imageUrl: { type: String, required: true, default: 'default-profile.png' },
     description: { type: String, required: true },
     owner: { type: Types.ObjectId, ref: 'User' },
     likedByUsers: { type: [Types.ObjectId], ref: 'User', default: [] },
