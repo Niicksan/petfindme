@@ -4,6 +4,7 @@ const cors = require('../middlewares/cors');
 const cookieParser = require('cookie-parser');
 const session = require('../middlewares/session');
 const trimBody = require('../middlewares/trimBody');
+const config = require('./config/config');
 const cookieSecret = process.env.COOKIESECRET || 'petfindme';
 
 module.exports = (app) => {
@@ -25,7 +26,7 @@ module.exports = (app) => {
     app.use('/static', express.static('static'));
 
     app.use(cors({
-        origin: [' http://localhost:4200']
+        origin: config.origin;
     }));
     app.use(cookieParser(cookieSecret));
     app.use(session());
