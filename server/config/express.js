@@ -26,7 +26,7 @@ module.exports = (app) => {
     app.use('/static', express.static('static'));
 
     app.use(cors({
-        origin: config.origin;
+        origin: config.origin
     }));
     app.use(cookieParser(cookieSecret));
     app.use(session());
