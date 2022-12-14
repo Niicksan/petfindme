@@ -25,8 +25,7 @@ module.exports = (app) => {
     app.use('/static', express.static('static'));
 
     app.use(cors({
-        origin: [' http://localhost:4200'],
-        credentials: true
+        origin: [' http://localhost:4200']
     }));
     app.use(cookieParser(cookieSecret));
     app.use(session());
