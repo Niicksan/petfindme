@@ -4,7 +4,7 @@ const cors = require('../middlewares/cors');
 const cookieParser = require('cookie-parser');
 const session = require('../middlewares/session');
 const trimBody = require('../middlewares/trimBody');
-const config = require('./config/config');
+const config = require('./config');
 const cookieSecret = process.env.COOKIESECRET || 'petfindme';
 
 module.exports = (app) => {
