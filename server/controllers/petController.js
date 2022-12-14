@@ -25,6 +25,10 @@ petController.post('/create',
                 throw errors;
             }
 
+            if (req.body.imageUrl == '') {
+                delete req.body.imageUrl;
+            }
+
             const pet = {
                 ...req.body,
                 owner: req.user._id,
