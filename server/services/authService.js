@@ -56,7 +56,7 @@ function createToken({ _id, email }) {
         email,
         expiresAt: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
         authToken: jwt.sign(payload, JWT_SECRET, {
-            expiresIn: '1h'
+            // expiresIn: '1h'
         })
     };
 }
