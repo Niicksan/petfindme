@@ -4,11 +4,16 @@
     .form {
         .lost-found {
             height: 3em;
+            border-radius: 15px;
         }
 
         .add-file {
             padding: 0.7em !important;
             padding-left: 10px;
+        }
+
+        textarea {
+            border-radius: 15px;
         }
     }
 }
