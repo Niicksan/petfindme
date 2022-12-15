@@ -1,5 +1,6 @@
 $white: #fff;
 $navbar-blue: #1C6375;
+$red: #f44336;
 
 .contacts {
     background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url('/assets/images/pets-contact.jpg');
@@ -15,7 +16,10 @@ $navbar-blue: #1C6375;
     justify-content: center;
 
     .form-holder {
-        width: 50%;
+        width: 45%;
+        border-radius: 25px;
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 6em;
         margin: 3em auto;
 
         .form-header {
@@ -50,20 +54,28 @@ $navbar-blue: #1C6375;
                     box-sizing: border-box;
 
                     &::-webkit-input-placeholder {
-                        color: #ffffff;
+                        color: $white;
+                        font-weight: bold;
                     }
                 }
 
+                .error {
+                    color: $red;
+                    text-align: left;
+                    font-weight: bold;
+                }
+
                 .bgcl {
-                    background: rgba(0, 0, 0, 0.8);
-                    -webkit-background: rgba(0, 0, 0, 0.80);
-                    -moz-background: rgba(0, 0, 0, 0.80);
-                    opacity: 0.5;
+                    background: rgba(0, 0, 0, 0.9);
+                    -webkit-background: rgba(0, 0, 0, 0.8);
+                    -moz-background: rgba(0, 0, 0, 0.9);
+                    opacity: 0.6;
                     margin-bottom: 0.5em;
                 }
 
                 input {
                     height: 3em;
+                    border-radius: 15px;
                 }
 
                 textarea {
@@ -92,7 +104,7 @@ $navbar-blue: #1C6375;
                     box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
 
                     &:hover {
-                        background: #f44336;
+                        background: $red;
                         cursor: pointer;
                     }
                 }

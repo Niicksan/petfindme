@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject, catchError, filter, Subscription, tap, throwError } from 'rxjs';
 import { IUser } from '../interfaces/user';
 import { environment } from 'src/environments/environment'
+import { IPet } from '../interfaces/pet';
 
 const apiURL = environment.apiURL;
 
@@ -69,10 +70,16 @@ export class AuthService implements OnDestroy {
         }));
     }
 
-    getProfile() {
-        return this.http.get<IUser>(`/api/user/profile`).pipe(tap((user) => {
-            this.user = user;
-        }));
+    getProfileInfo() {
+        return this.http.get<IUser>(`/api/user/profile/user-info`);
+    }
+
+    getProfilePets() {
+        return this.http.get<IPet[]>(`/api/user/profile/user-pets`);
+    }
+
+    getProfileLiked() {
+        return this.http.get<IPet[]>(`/api/user/profile/user-liked`);
     }
 
     ngOnDestroy(): void {

@@ -34,7 +34,10 @@ export class AppInterceptor implements HttpInterceptor {
 
         if (this.token) {
             return next.handle(req.clone({ setHeaders: { 'X-Authorization': this.token } }));
-        } else {
+        } else if (!this.authService.isLoggedIn) {
+            return next.handle(req.clone({ headers: req.headers.delete('X-Authorization') }));
+        }
+        else {
             return next.handle(req.clone());
         }
     }

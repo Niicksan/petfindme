@@ -13,23 +13,23 @@ export class PetService {
 
     constructor(private httpClient: HttpClient) { }
 
-    createPet() {
-        return this.httpClient.get<IPet>(`${apiURL}/pet/create`);
+    createPet(title: string, status: string, location: string, contactName: string, phone: string, imageUrl: string, description: string) {
+        return this.httpClient.post<IPet>(`/api/pet/create`, { title, status, location, contactName, phone, imageUrl, description });
     }
 
     getPetById(id: number) {
-        return this.httpClient.get<IPet>(`${apiURL}/pet/${id}`);
+        return this.httpClient.get<IPet>(`/api/pet/${id}`);
     }
 
     updatePetById(id: number) {
-        return this.httpClient.get<IPet>(`${apiURL}/pet/${id}`);
+        return this.httpClient.get<IPet>(`/api/pet/${id}`);
     }
 
     deletePetById(id: number) {
-        return this.httpClient.get<IPet>(`${apiURL}/pet/${id}`);
+        return this.httpClient.get<IPet>(`/api/pet/${id}`);
     }
 
     addPetToLikedList(id: number) {
-        return this.httpClient.get<IPet>(`${apiURL}/pet/like/${id}`);
+        return this.httpClient.get<IPet>(`/api/pet/like/${id}`);
     }
 }

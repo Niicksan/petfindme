@@ -6,28 +6,93 @@
         </div>
 
         <div class="form-content">
-            <form id="form" class="form">
-                <input type="text" name="title" class="form-control bgcl" placeholder="Заглавие" required><br>
+            <form [formGroup]="createPetForm" id="form" class="form" (ngSubmit)="createPetHandler()">
+                <!-- title -->
+                <input type="text" formControlName="title" class="form-control bgcl" placeholder="Заглавие"
+                    required><br>
+                <ng-container *ngIf="createPetForm.get('title')?.touched">
+                    <p class="error" *ngIf="createPetForm.get('title')?.errors?.['required']">
+                        Моля въведете заглавие!
+                    </p>
+                    <p class="error" *ngIf="createPetForm.get('title')?.errors?.['minlength']">
+                        Заглавието трябва да е поне 3 символа!
+                    </p>
+                </ng-container>
 
-                <select name="lost-found" class="form-control lost-found bgcl" required>
-                    <option value="" selected disabled hidden> Изгубено / Намерено</option>
-                    <option value=" Изгубено" class="opt-bgc"> Изгубено</option>
-                    <option value=" Намерено" class="opt-bgc"> Намерено</option>
+                <!-- status -->
+                <select formControlName="status" class="form-control lost-found bgcl" required>
+                    <option value="" selected disabled hidden>Изгубено / Намерено</option>
+                    <option value="Изгубено" class="opt-bgc">Изгубено</option>
+                    <option value="Намерено" class="opt-bgc">Намерено</option>
                 </select>
+                <ng-container *ngIf="createPetForm.get('status')?.touched">
+                    <p class="error" *ngIf="createPetForm.get('status')?.errors?.['required']">
+                        Моля изберете статус!
+                    </p>
+                </ng-container>
 
-                <input type="text" name="location" class="form-control bgcl" placeholder="Местоположение" required>
+                <!-- location -->
+                <input type="text" formControlName="location" class="form-control bgcl" placeholder="Местоположение"
+                    required>
+                <ng-container *ngIf="createPetForm.get('location')?.touched">
+                    <p class="error" *ngIf="createPetForm.get('location')?.errors?.['required']">
+                        Моля въведете Местоположение!
+                    </p>
+                    <p class="error" *ngIf="createPetForm.get('location')?.errors?.['minlength']">
+                        Местоположение трябва да е поне 3 символа!
+                    </p>
+                </ng-container>
 
-                <input type="text" name="name" class="form-control bgcl" placeholder="Име за връзка" required>
+                <!-- contactName -->
+                <input type="text" formControlName="contactName" class="form-control bgcl" placeholder="Име за връзка"
+                    required>
+                <ng-container *ngIf="createPetForm.get('contactName')?.touched">
+                    <p class="error" *ngIf="createPetForm.get('contactName')?.errors?.['required']">
+                        Моля въведете име за връзка!
+                    </p>
+                    <p class="error" *ngIf="createPetForm.get('contactName')?.errors?.['minlength']">
+                        Името трябва да е поне 3 символа!
+                    </p>
+                </ng-container>
 
-                <input type="tel" name="phone" class="form-control bgcl" placeholder="Телефон за връзка" required>
+                <!-- phone -->
+                <input type="tel" formControlName="phone" class="form-control bgcl" placeholder="Телефон за връзка"
+                    required>
+                <ng-container *ngIf="createPetForm.get('phone')?.touched">
+                    <p class="error" *ngIf="createPetForm.get('phone')?.errors?.['required']">
+                        Моля въведете телефон за връзка!
+                    </p>
+                    <p class="error" *ngIf="createPetForm.get('phone')?.errors?.['pattern']">
+                        Моля въведете валидеен телефон!
+                    </p>
+                </ng-container>
+                <!-- upload -->
+                <!-- <input type="file" name="upload" class="form-control add-file bgcl" title="Изберете снимка"
+                    value="Изберете снимка"> -->
 
-                <input type="file" name="add" class="form-control add-file bgcl" title="Изберете снимка"
-                    value="Изберете снимка" required>
+                <!-- imageUrl -->
+                <input type="text" formControlName="imageUrl" class="form-control add-file bgcl"
+                    placeholder="Изберете снимка" value="Изберете снимка">
+                <ng-container *ngIf="createPetForm.get('imageUrl')?.touched">
+                    <p class="error" *ngIf="createPetForm.get('imageUrl')?.errors?.['pattern']">
+                        Моля въведете валидеен адрес!
+                    </p>
+                </ng-container>
 
-                <textarea name="description" class="form-control bgcl" rows="6" placeholder="Описание"
+                <!-- description -->
+                <textarea formControlName="description" class="form-control bgcl" rows="6" placeholder="Описание"
                     required></textarea>
+                <ng-container *ngIf="createPetForm.get('description')?.touched">
+                    <p class="error" *ngIf="createPetForm.get('description')?.errors?.['required']">
+                        Моля въведете описание!
+                    </p>
+                    <p class="error" *ngIf="createPetForm.get('description')?.errors?.['minlength']">
+                        Описанието трябва да е поне 20 символа!
+                    </p>
+                </ng-container>
 
-                <input type="submit" class="form-control submit" value="Подай сигнал">
+                <input [disabled]="createPetForm.invalid" type="submit" class="form-control submit"
+                    value="Подай сигнал">
             </form>
         </div>
     </div>

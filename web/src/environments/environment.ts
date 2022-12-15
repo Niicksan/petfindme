@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  imageApi: 'http://localhost:3030/static/images',
   apiURL: 'http://localhost:3030/api'
   //apiURL: 'https://api-petfindme.onrender.com/api'
 };

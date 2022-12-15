@@ -1,1 +1,71 @@
-<p>profile works!</p>
+<main class="index profile">
+    <div class="main-holder">
+        <div class="grid-header">
+            <h1>Моят профил</h1>
+        </div>
+        <div class="my-profile">
+            <div class="image-holder">
+                <img src="{{imageApi}}/users/{{user?.imageUrl}}" alt="">
+            </div>
+            <div class="user-info">
+                <div class="key-value">
+                    <p class="left">Име: </p>
+                    <p class="right">{{user?.name}}</p>
+                </div>
+                <div class="key-value">
+                    <p class="left">Имейл: </p>
+                    <p class="right">{{user?.email}}</p>
+                </div>
+                <div class="key-value">
+                    <p class="left">Брой сигнали: </p>
+                    <p class="right">{{myPetsLength}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-pets">
+            <div class="my-pets-header">
+                <h2>Моите сигнали</h2>
+            </div>
+            <div class="grid-container" *ngIf="myPetsLength > 0">
+                <section *ngFor="let pet of myPets" class="ad-container">
+                    <a routerLink="/pets/details/{{ pet._id }}">
+                        <ng-template #defaultImage>
+                            <img src="{{imageApi}}/pets/{{pet.imageUrl}}" alt="{{pet.title}}">
+                        </ng-template>
+
+                        <ng-template #imageUrl>
+                            <img src="{{pet.imageUrl}}" alt="{{pet.title}}">
+                        </ng-template>
+
+                        <ng-container
+                            *ngTemplateOutlet="pet.imageUrl == 'default-pet.png' ? defaultImage : imageUrl"></ng-container>
+
+                        <div class="ad-section-container">
+                            <div class="ad-head-container">
+                                <h3 class="title">{{pet.title}}</h3>
+                                <p class=""><span class="bold">Статус: </span>{{pet.status}}</p>
+                            </div>
+
+                            <div class="ad-main-container">
+                                <p class="">{{pet.description}}
+                            </div>
+
+                            <div class="ad-footer-container">
+                                <p class=""><span class="bold">Град: </span>{{pet.location}}</p>
+                                <p class=""><span class="bold">За връзка: </span>{{pet.contactName}}</p>
+                                <p class=""><span class="bold">Телефон: </span>{{pet.phone}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </section>
+            </div>
+            <div class="grid-container" *ngIf="!(myPetsLength > 0)">
+                <section class="section-not-found">
+                    <h2>Все още нямате сигнали</h2>
+                    <p>Ако желаете можете да добавите от&nbsp;<a routerLink="/pets/new">тук</a>.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>

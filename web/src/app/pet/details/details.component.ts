@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IPet } from 'src/app/core/interfaces/pet';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-details',
@@ -9,6 +10,7 @@ import { IPet } from 'src/app/core/interfaces/pet';
 })
 export class DetailsComponent implements OnInit {
   pet: IPet;
+  imageApi = environment.imageApi;
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.pet = this.activatedRoute.snapshot.data?.['pet'];

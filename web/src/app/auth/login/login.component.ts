@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
 
-    errors: string | undefined = undefined
+    errors: string | undefined = undefined;
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(5)]]
@@ -35,8 +35,8 @@ export class LoginComponent {
                 }
             },
             error: (err) => {
-                this.errors = err.error.error;
-                console.log(err.error.error);
+                this.errors = err.error;
+                console.log(err.error);
             }
         })
     }

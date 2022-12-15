@@ -1,24 +1,45 @@
-<main class="index">
+<main class="index details">
     <div class="main-holder">
-        <section class="ad-container">
-            <img src="/assets/images/default-pet-image.png" alt="">
+        <div class="grid-header">
+            <h1>{{pet.title}}</h1>
+        </div>
+        <div class="grid-container">
+            <section class="ad-container">
+                <ng-template #defaultImage>
+                    <img src="{{imageApi}}/pets/{{pet.imageUrl}}" alt="{{pet.title}}">
+                </ng-template>
 
-            <div class="ad-section-container">
-                <div class="ad-head-container">
-                    <h3 class="title">{{pet.title}}</h3>
-                    <p class=""><span class="bold">Статус: </span>{{pet.status}}</p>
-                </div>
+                <ng-template #imageUrl>
+                    <img src="{{pet.imageUrl}}" alt="{{pet.title}}">
+                </ng-template>
 
-                <div class="ad-main-container">
-                    <p class="">{{pet.description}}
-                </div>
+                <ng-container
+                    *ngTemplateOutlet="pet.imageUrl == 'default-pet.png' ? defaultImage : imageUrl"></ng-container>
 
-                <div class="ad-footer-container">
-                    <p class=""><span class="bold">Град: </span>{{pet.location}}</p>
-                    <p class=""><span class="bold">За връзка: </span>{{pet.contactName}}</p>
-                    <p class=""><span class="bold">Телефон: </span>{{pet.phone}}</p>
+
+                <div class="ad-section-container">
+                    <div class="ad-head-container">
+                        <h3 class="title">{{pet.title}}</h3>
+                        <p class=""><span class="bold">Статус: </span>{{pet.status}}</p>
+                    </div>
+
+                    <div class="ad-main-container">
+                        <p class="">{{pet.description}}
+                    </div>
+
+                    <div class="ad-footer-container">
+                        <p class=""><span class="bold">Град: </span>{{pet.location}}</p>
+                        <p class=""><span class="bold">За връзка: </span>{{pet.contactName}}</p>
+                        <p class=""><span class="bold">Телефон: </span>{{pet.phone}}</p>
+
+                    </div>
+
+                    <div class="ad-date-container">
+                        <p class=""><span class="bold">Публикувана на: </span>{{pet.createdAt | date: ' hh:mm MM.d.y'}}
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
 </main>

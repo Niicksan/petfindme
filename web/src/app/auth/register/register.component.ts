@@ -41,8 +41,8 @@ export class RegisterComponent {
                 }
             },
             error: (err) => {
-                this.errors = err.error.error;
-                console.log(err.error.error);
+                this.errors = err.error;
+                console.log(err.error);
             }
         });
     }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IPet } from 'src/app/core/interfaces/pet';
 import { CatalogService } from 'src/app/core/services/catalog.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-latest',
@@ -10,8 +11,9 @@ import { CatalogService } from 'src/app/core/services/catalog.service';
 export class LatestComponent implements OnInit {
 
     petsList: IPet[] = [];
-    isPetsFound = this.petsList.length > 0;
+    isPetsFound = false;
     errorFetchingData = false;
+    imageApi = environment.imageApi;
 
     constructor(private catalogService: CatalogService) { }
 
@@ -19,11 +21,10 @@ export class LatestComponent implements OnInit {
         this.catalogService.getLatestPets().subscribe({
             next: (value) => {
                 this.petsList = value;
-                console.log(this.petsList);
             },
             error: (err) => {
                 this.errorFetchingData = true;
-                console.error(err);
+                console.log(err.error);
             }
         });
     }

@@ -9,5 +9,5 @@ export interface IPet {
     description: string;
     owner: string;
     likedByUsers: string[];
-    created_at: string;
+    createdAt: string;
 };

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogService } from 'src/app/core/services/catalog.service';
 import { IPet } from 'src/app/core/interfaces/pet';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lost',
@@ -14,6 +15,8 @@ export class LostComponent implements OnInit {
 
   petsList: IPet[] = [];
   errorFetchingData = false;
+  isPetsFound = this.petsList.length > 0;
+  imageApi = environment.imageApi;
 
   constructor(private catalogService: CatalogService) { }
 
@@ -21,11 +24,10 @@ export class LostComponent implements OnInit {
     this.catalogService.getLostPets().subscribe({
       next: (value) => {
         this.petsList = value;
-        console.log(this.petsList);
       },
       error: (err) => {
         this.errorFetchingData = true;
-        console.error(err);
+        console.log(err.error);
       }
     });
   }

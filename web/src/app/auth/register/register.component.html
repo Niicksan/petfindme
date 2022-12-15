@@ -47,8 +47,8 @@
                     <input type="password" formControlName="repass" class="form-control bgcl"
                         placeholder="Подвърдете вашaта парола" required>
                     <ng-container
-                        *ngIf="registerForm.get('pass')?.errors?.['comparePasswordsValidator'] && registerForm.get('pass')?.get('repass')?.touched"
-                        class="error">Въведените пароли не съвпадат!
+                        *ngIf="registerForm.get('pass')?.errors?.['comparePasswordsValidator'] && registerForm.get('pass')?.get('repass')?.touched">
+                        <p class="error">Въведените пароли не съвпадат!</p>
                     </ng-container>
                 </ng-container>
 
@@ -56,9 +56,9 @@
                 <input [disabled]="registerForm.invalid" type="submit" class="form-control submit"
                     value="Регистрирай се">
             </form>
-            <div class="form-footer">
-                <p>Имате регистрация? <a routerLink="/auth/login">Вход</a>.</p>
-            </div>
+        </div>
+        <div class="form-footer">
+            <p>Имате регистрация? </p><a routerLink="/auth/login">Вход</a>
         </div>
     </div>
 </main>

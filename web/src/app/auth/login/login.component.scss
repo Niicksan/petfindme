@@ -1,26 +1,38 @@
 $navbar-blue: #1C6375;
+$white: white;
+$red: #f44336;
+
 
 .login {
-    background: url('/assets/images/pets-login.jpg');
-    background-size: 70% !important;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url('/assets/images/pets-auth.png');
 
-    .form-footer {
-        margin-top: 2em;
-        color: white;
-
-        a {
+    .form-holder {
+        .form-footer {
+            display: flex;
+            direction: row;
+            justify-content: center;
+            margin-top: 2em;
             font-weight: bold;
-            text-decoration: none;
-        }
+            color: $white;
+            font-size: 1.2em;
 
-        a,
-        :active,
-        a:visited {
-            color: $navbar-blue;
-        }
+            p {
+                padding-right: 1em;
+            }
 
-        a:hover {
-            color: #f44336;
+            a {
+                text-decoration: none;
+            }
+
+            a,
+            :active,
+            a:visited {
+                color: $navbar-blue;
+            }
+
+            a:hover {
+                color: $red;
+            }
         }
     }
 }

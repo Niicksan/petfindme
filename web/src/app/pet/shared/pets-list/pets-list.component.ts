@@ -11,6 +11,7 @@ export class PetsListComponent implements OnInit {
   @Input() petsList: IPet[] = [];
   @Input() errorFetchingData = false;
   @Input() isPetsFound = false;
+  @Input() imageApi = '';
 
   constructor(private router: Router) { }
 

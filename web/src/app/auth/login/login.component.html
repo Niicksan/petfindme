@@ -4,37 +4,39 @@
             <h2>Вход в PetFind.Me</h2>
         </div>
 
-        <div class="form-content">
-            <form [formGroup]="loginForm" id="form" class="form" (ngSubmit)="loginHandler()">
-                <!-- email -->
-                <input type="email" formControlName="email" class="form-control bgcl" placeholder="Вашето email"
-                    required>
-                <ng-container *ngIf="loginForm.get('email')?.touched">
-                    <p class="error" *ngIf="loginForm.get('email')?.errors?.['required']">
-                        Моля въведете имейл!
-                    </p>
-                    <p class="error" *ngIf="loginForm.get('email')?.errors?.['email']">
-                        Моля въведете валиден имейл!
-                    </p>
-                </ng-container>
+        <div class="form-control">
+            <div class="form-content">
+                <form [formGroup]="loginForm" id="form" class="form" (ngSubmit)="loginHandler()">
+                    <!-- email -->
+                    <input type="email" formControlName="email" class="form-control bgcl" placeholder="Вашето email"
+                        required>
+                    <ng-container *ngIf="loginForm.get('email')?.touched">
+                        <p class="error" *ngIf="loginForm.get('email')?.errors?.['required']">
+                            Моля въведете имейл!
+                        </p>
+                        <p class="error" *ngIf="loginForm.get('email')?.errors?.['email']">
+                            Моля въведете валиден имейл!
+                        </p>
+                    </ng-container>
 
-                <!-- passwords -->
-                <input type="password" formControlName="password" class="form-control bgcl" placeholder="Вашatа парола"
-                    required>
-                <ng-container *ngIf="loginForm.get('password')?.touched">
-                    <p class="error" *ngIf="loginForm.get('password')?.errors?.['required']">
-                        Моля въведете вашата парола!
-                    </p>
-                    <p class="error" *ngIf="loginForm.get('password')?.errors?.['minlength']">
-                        Паролата трябва да е поне 5 символа!
-                    </p>
-                </ng-container>
+                    <!-- passwords -->
+                    <input type="password" formControlName="password" class="form-control bgcl"
+                        placeholder="Вашaта парола" required>
+                    <ng-container *ngIf="loginForm.get('password')?.touched">
+                        <p class="error" *ngIf="loginForm.get('password')?.errors?.['required']">
+                            Моля въведете вашата парола!
+                        </p>
+                        <p class="error" *ngIf="loginForm.get('password')?.errors?.['minlength']">
+                            Паролата трябва да е поне 5 символа!
+                        </p>
+                    </ng-container>
 
-                <!-- submit -->
-                <input [disabled]="loginForm.invalid" type="submit" class="form-control submit" value="Вход">
-            </form>
+                    <!-- submit -->
+                    <input [disabled]="loginForm.invalid" type="submit" class="form-control submit" value="Вход">
+                </form>
+            </div>
             <div class="form-footer">
-                <p>Нямате регистрация? <a routerLink="/auth/register">Регистрирайте се</a></p>
+                <p>Нямате регистрация?</p> <a class="btn" routerLink="/auth/register">Регистрирайте се</a>
             </div>
         </div>
     </div>
