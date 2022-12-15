@@ -70,6 +70,7 @@ $red: #f44336;
 
         .ad-container {
             display: grid;
+            border-radius: 15px;
             grid-template-columns: 85% 10%;
             -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
             -moz-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
@@ -130,11 +131,10 @@ $red: #f44336;
                 button {
                     background: $white;
                     text-align: center;
-                    text-transform: uppercase;
                     font-weight: bold;
                     color: $white;
-                    padding: 15px;
-                    border-radius: 15px;
+                    padding: 10px;
+                    border-radius: 10px;
                 }
 
                 .edit,
