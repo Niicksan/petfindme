@@ -15,7 +15,6 @@ export class HasUserGuard implements CanActivate {
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
         const returnUrl = route.url.map(u => u.path).join('/');
-        console.log(route);
         this.authService.redirectUrl = returnUrl;
 
         if (!this.authService.isLoggedIn) {
