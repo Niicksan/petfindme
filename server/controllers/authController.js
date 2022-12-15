@@ -9,6 +9,7 @@ const { parseError } = require('../utils/errorParser');
 
 authController.post('/register',
     check('email').isEmail().withMessage('Invalid email'),
+    check('name').isLength({ min: 2 }).withMessage('Invalid name'),
     check('password').isLength({ min: 5 })
         .withMessage('Passwords must be at least 5 characters long')
         //.matches('[0-9]').withMessage('Паролата трябва да съдържа цифра')
@@ -30,7 +31,7 @@ authController.post('/register',
                 throw errors;
             }
 
-            const token = await register(req.body.email, req.body.password);
+            const token = await register(req.body.email, req.body.name, req.body.password);
 
             if (process.env.NODE_ENV === 'production') {
                 res.cookie(authCookieName, token.authToken, { httpOnly: true, sameSite: 'none', secure: true });
