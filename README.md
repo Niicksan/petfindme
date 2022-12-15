@@ -40,12 +40,12 @@ Base Url: https://localhost:3030/api
 |     GET     | Latest pets      | /catalog/latest   |       No       |
 |     GET     | Lost pets        | /catalog/lost     |       No       |
 |     GET     | Found pets       | /catalog/found    |       No       |
-<!-- |     GET     | Adoption pets | /catalog/adoption |       No       | -->
+|     GET     | Adoption pets    | /catalog/adoption |       No       |
 |     GEt     | Get pet          | /pet/:id          |       No       |
 |     POST    | Create pet       | /pet/create       |       Yes      |
 |     PUT     | Update pet       | /pet/:id          |       Yes      |
 |    DELETE   | Delete pet       | /pet/:id          |       Yes      |
 |     GET     | My Profile info  | /user/user-info   |       Yes      |
 |     GET     | My Profile pets  | /user/user-pets   |       Yes      |
-<!-- |     GET     | My Profile liked | /user/user-liked  |       Yes      | -->
+|     GET     | My Profile liked | /user/user-liked  |       Yes      |
 |     POST    | Sent message     | /api/contact-us   |       No       |
