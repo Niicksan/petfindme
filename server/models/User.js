@@ -3,7 +3,7 @@ const { Schema, model, Types } = require("mongoose");
 
 const userSchema = new Schema({
     email: { type: String, required: true, unique: true },
-    name: { type: String, required: true, default: function () { return this.email } },
+    name: { type: String, required: true },
     hashedPassword: { type: String, required: true },
     imageUrl: { type: String, required: true, default: 'default-profile.png' },
     myPets: { type: [Types.ObjectId], ref: 'Pet', default: [] },

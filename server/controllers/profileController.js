@@ -1,20 +1,39 @@
 const profileController = require('express').Router();
 
 const { getAllPetsCreatedByUser, getAllPetsLikedByUser } = require('../services/petService');
+const { getUserInfo } = require('../services/user');
 const { parseError } = require('../utils/errorParser');
 
 
-profileController.get('/', async (req, res) => {
+profileController.get('/user-info', async (req, res) => {
+    try {
+        const user = await getUserInfo(req.user._id);
+
+        res.json(user);
+    } catch (error) {
+        const message = parseError(error);
+        console.error(message);
+        res.status(400).json({ message });
+    }
+});
+
+profileController.get('/user-pets', async (req, res) => {
     try {
         const userPets = await getAllPetsCreatedByUser(req.user._id);
+
+        res.json(userPets);
+    } catch (error) {
+        const message = parseError(error);
+        console.error(message);
+        res.status(400).json({ message });
+    }
+});
+
+profileController.get('/user-liked', async (req, res) => {
+    try {
         const userLiked = await getAllPetsLikedByUser(req.user._id);
 
-        const user = {
-            user: req.user,
-            userPets,
-            userLiked
-        }
-        res.json(user);
+        res.json(userLiked);
     } catch (error) {
         const message = parseError(error);
         console.error(message);

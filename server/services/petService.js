@@ -18,11 +18,11 @@ async function getAdoptionPets() {
 }
 
 async function getAllPetsCreatedByUser(userId) {
-    return Pet.find({ owner: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 });
+    return Pet.find({ owner: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 });
 }
 
 async function getAllPetsLikedByUser(userId) {
-    return Pet.find({ likedByUsers: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 });
+    return Pet.find({ likedByUsers: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 });
 }
 
 async function getPetById(id) {
