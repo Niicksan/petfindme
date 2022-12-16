@@ -61,6 +61,10 @@ petController.put('/:id',
     async (req, res) => {
         const pet = res.locals.pet;
 
+        if (req.body.imageUrl == '') {
+            req.body.imageUrl = 'default-profile.png';
+        }
+
         try {
             const result = await updatePetById(pet, req.body);
             res.json(result);
