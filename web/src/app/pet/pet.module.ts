@@ -13,6 +13,8 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { PetsNotFoundComponent } from './shared/pets-not-found/pets-not-found.component';
 import { SharedModule } from './shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditComponent } from './edit/edit.component';
+import { DeleteComponent } from './delete/delete.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     PetItemComponent,
     PetsListComponent,
     LoaderComponent,
-    PetsNotFoundComponent
+    PetsNotFoundComponent,
+    EditComponent,
+    DeleteComponent
   ],
   imports: [
     CommonModule,

@@ -17,19 +17,19 @@ export class PetService {
         return this.httpClient.post<IPet>(`/api/pet/create`, { title, status, location, contactName, phone, imageUrl, description });
     }
 
-    getPetById(id: number) {
+    getPetById(id: string) {
         return this.httpClient.get<IPet>(`/api/pet/${id}`);
     }
 
-    updatePetById(id: number) {
+    updatePetById(id: string, title: string, status: string, location: string, contactName: string, phone: string, imageUrl: string, description: string) {
+        return this.httpClient.put<IPet>(`/api/pet/${id}`, { title, status, location, contactName, phone, imageUrl, description });
+    }
+
+    deletePetById(id: string) {
         return this.httpClient.get<IPet>(`/api/pet/${id}`);
     }
 
-    deletePetById(id: number) {
-        return this.httpClient.get<IPet>(`/api/pet/${id}`);
-    }
-
-    addPetToLikedList(id: number) {
+    addPetToLikedList(id: string) {
         return this.httpClient.get<IPet>(`/api/pet/like/${id}`);
     }
 }

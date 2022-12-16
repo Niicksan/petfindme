@@ -50,7 +50,7 @@ $red: #f44336;
                     outline: none;
                     color: $white;
                     font-size: 1.2em;
-                    padding-left: 10px;
+                    padding-left: 15px;
                     box-sizing: border-box;
 
                     &::-webkit-input-placeholder {
@@ -85,6 +85,7 @@ $red: #f44336;
                     margin-bottom: 0px !important;
                     padding-top: 10px;
                     padding-bottom: 0px !important;
+                    padding-right: 15px;
                 }
 
                 textarea::placeholder {

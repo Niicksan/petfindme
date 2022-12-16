@@ -29,7 +29,7 @@
             </div>
             <div class="grid-container" *ngIf="myPetsLength > 0">
                 <section *ngFor="let pet of myPets" class="ad-container">
-                    <a routerLink="/pets/details/{{ pet._id }}">
+                    <a routerLink="/pet/details/{{ pet._id }}">
                         <ng-template #defaultImage>
                             <img src="{{imageApi}}/pets/{{pet.imageUrl}}" alt="{{pet.title}}">
                         </ng-template>
@@ -59,15 +59,15 @@
                         </div>
                     </a>
                     <div class="buttons-handler">
-                        <button class="edit"><a href="">Редактивай</a></button>
-                        <button class="delete"><a href="">Изтрий</a></button>
+                        <button class="edit"><a routerLink="/pet/edit/{{pet._id}}">Редактивай</a></button>
+                        <button class="delete"><a routerLink="/pet/delete/{{pet._id}}">Изтрий</a></button>
                     </div>
                 </section>
             </div>
             <div class="grid-container" *ngIf="!(myPetsLength > 0)">
                 <section class="section-not-found">
                     <h2>Все още нямате сигнали</h2>
-                    <p>Ако желаете можете да добавите от&nbsp;<a routerLink="/pets/new">тук</a>.</p>
+                    <p>Ако желаете можете да добавите от&nbsp;<a routerLink="/pet/new">тук</a>.</p>
                 </section>
             </div>
         </div>
