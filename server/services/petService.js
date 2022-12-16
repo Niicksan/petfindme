@@ -6,11 +6,11 @@ async function getLatestPets() {
 }
 
 async function getLostPets() {
-    return Pet.find({ status: 'Намерено' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+    return Pet.find({ status: 'Изгубено' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getFoundPets() {
-    return Pet.find({ status: 'Изгубено' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+    return Pet.find({ status: 'Намерено' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getAdoptionPets() {
