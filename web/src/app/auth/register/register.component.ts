@@ -13,7 +13,7 @@ import { comparePasswordsValidator } from '../shared/validators/compare-password
     ]
 })
 export class RegisterComponent {
-    errors: string | undefined = undefined;
+    error: string | undefined = undefined;
 
     registerForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -41,8 +41,7 @@ export class RegisterComponent {
                 }
             },
             error: (err) => {
-                this.errors = err.error;
-                console.log(err.error);
+                this.error = err.error.message;
             }
         });
     }

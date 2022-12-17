@@ -19,8 +19,8 @@ contactUsController.post('/',
 
             await createContact(req.body);
             res.json({
-                messageEn: "Message is sent successfully",
-                messageBg: "Съобщението е изпратено успешно"
+                messageEn: "Message is sent successfully!",
+                messageBg: "Съобщението е изпратено успешно!"
             });
         } catch (error) {
             const message = parseError(error);

@@ -16,15 +16,19 @@
                     <p class="error" *ngIf="registerForm.get('email')?.errors?.['email']">
                         Моля въведете валиден имейл!
                     </p>
+                    <!-- error -->
+                    <p class="error" *ngIf="error">
+                        {{error}}
+                    </p>
                 </ng-container>
 
                 <!-- name -->
                 <input type="text" formControlName="name" class="form-control bgcl" placeholder="Вашeтo име" required>
                 <ng-container *ngIf="registerForm.get('name')?.touched">
-                    <p *ngIf="registerForm.get('name')?.errors?.['required']" class="error">
+                    <p class="error" *ngIf="registerForm.get('name')?.errors?.['required']">
                         Моля въведете вашето име!
                     </p>
-                    <p *ngIf="registerForm.get('name')?.errors?.['minlength']" class="error">
+                    <p class="error" *ngIf="registerForm.get('name')?.errors?.['minlength']">
                         Името трябва да е поне 2 символа!
                     </p>
                 </ng-container>

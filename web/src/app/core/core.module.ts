@@ -9,6 +9,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PetModule } from '../pet/pet.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PetModule } from '../pet/pet.module';
   imports: [
     CommonModule,
     RouterModule,
-    PetModule
+    PetModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,

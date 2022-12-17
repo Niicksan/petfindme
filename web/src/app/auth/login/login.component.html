@@ -7,6 +7,13 @@
         <div class="form-control">
             <div class="form-content">
                 <form [formGroup]="loginForm" id="form" class="form" (ngSubmit)="loginHandler()">
+                    <!-- error -->
+                    <ng-container>
+                        <p class="error" *ngIf="error">
+                            {{error}}
+                        </p>
+                    </ng-container>
+
                     <!-- email -->
                     <input type="email" formControlName="email" class="form-control bgcl" placeholder="Вашето email"
                         required>
@@ -25,9 +32,6 @@
                     <ng-container *ngIf="loginForm.get('password')?.touched">
                         <p class="error" *ngIf="loginForm.get('password')?.errors?.['required']">
                             Моля въведете вашата парола!
-                        </p>
-                        <p class="error" *ngIf="loginForm.get('password')?.errors?.['minlength']">
-                            Паролата трябва да е поне 5 символа!
                         </p>
                     </ng-container>
 

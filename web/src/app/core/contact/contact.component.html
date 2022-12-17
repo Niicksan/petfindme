@@ -1,20 +1,67 @@
 <main class="main main-form contacts">
+
     <div class="form-holder">
+        <div *ngIf="formSubmitted" class="form-message">
+            <h3 class="success" *ngIf="message">
+                {{message}}
+            </h3>
+        </div>
+
         <div class="form-header">
             <h2>Свържете се с нас</h2>
             <!--<h2>Изпратете вашето запистване като попълните формата по-долу!</h2> -->
         </div>
 
         <div class="form-content">
-            <form id="form" class="form">
-                <input type="text" name="name" class="form-control bgcl" placeholder="Вашето име" required>
+            <form [formGroup]="contactForm" id="form" class="form" (ngSubmit)="contactHandler()">
+                <!-- name -->
+                <input type="text" formControlName="name" class="form-control bgcl" placeholder="Вашето име" required>
+                <ng-container *ngIf="contactForm.get('name')?.touched">
+                    <p class="error" *ngIf="contactForm.get('name')?.errors?.['required']">
+                        Моля въведете вашето име!
+                    </p>
+                    <p class="error" *ngIf="contactForm.get('name')?.errors?.['minlength']">
+                        Името трябва да е поне 2 символа!
+                    </p>
+                </ng-container>
 
-                <input type="email" name="email" class="form-control bgcl" placeholder="Вашият email" required>
+                <!-- email -->
+                <input type="email" formControlName="email" class="form-control bgcl" placeholder="Вашият email"
+                    required>
+                <ng-container *ngIf="contactForm.get('email')?.touched">
+                    <p class="error" *ngIf="contactForm.get('email')?.errors?.['required']">
+                        Моля въведете имейл!
+                    </p>
+                    <p class="error" *ngIf="contactForm.get('email')?.errors?.['email']">
+                        Моля въведете валиден имейл!
+                    </p>
+                </ng-container>
 
-                <textarea name="message" class="form-control bgcl" rows="6" placeholder="Вашият email"
+                <!-- subject -->
+                <input type="email" formControlName="subject" class="form-control bgcl" placeholder="Вашата тема"
+                    required>
+                <ng-container *ngIf="contactForm.get('subject')?.touched">
+                    <p class="error" *ngIf="contactForm.get('subject')?.errors?.['required']">
+                        Моля въведете тема!
+                    </p>
+                    <p class="error" *ngIf="contactForm.get('subject')?.errors?.['minlength']">
+                        Темата трябва да е поне 2 символа!
+                    </p>
+                </ng-container>
+
+                <!-- message -->
+                <textarea formControlName="message" class="form-control bgcl" rows="6" placeholder="Вашето съобщение..."
                     required></textarea><br>
+                <ng-container *ngIf="contactForm.get('message')?.touched">
+                    <p class="error" *ngIf="contactForm.get('message')?.errors?.['required']">
+                        Моля въведете съобщение!
+                    </p>
+                    <p class="error" *ngIf="contactForm.get('message')?.errors?.['minlength']">
+                        Съобщението трябва да е поне 20 символа!
+                    </p>
+                </ng-container>
 
-                <input type="submit" class="form-control submit" value="Изпрати">
+                <input [disabled]="contactForm.invalid" type="submit" class="form-control submit" value="Изпрати">
             </form>
         </div>
     </div>

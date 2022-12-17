@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IUser } from '../interfaces/user';
 import { AuthService } from '../services/auth.service';
 
+declare const hideMenu: any;
 
 @Component({
 	selector: 'app-header',
@@ -16,5 +17,9 @@ export class HeaderComponent {
 
 	get isLoggedIn() {
 		return this.authService.isLoggedIn;
+	}
+
+	onClick() {
+		hideMenu();
 	}
 }

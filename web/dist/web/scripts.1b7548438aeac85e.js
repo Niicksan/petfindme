@@ -1,0 +1,1 @@
+function hideMenu(){const e=document.querySelector("#menuToggle"),n=document.querySelectorAll("a");for(let c of n)c.addEventListener("click",()=>{e.checked=!1})}

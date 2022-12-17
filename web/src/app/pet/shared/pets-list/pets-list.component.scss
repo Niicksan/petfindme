@@ -10,6 +10,7 @@ $navbar-blue: #1C6375;
     line-height: 1.2em;
 
     .ad-container {
+        border-radius: 15px;
         -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
         -moz-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
         box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
@@ -32,6 +33,7 @@ $navbar-blue: #1C6375;
             img {
                 width: 100%;
                 height: auto;
+                border-radius: 15px;
             }
 
             .ad-section-container {

@@ -18,9 +18,24 @@ $red: #f44336;
     .form-holder {
         width: 45%;
         border-radius: 15px;
-        background-color: rgba(0, 0, 0, 0.3);
-        padding: 6em;
+        // background-color: rgba(0, 0, 0, 0.3);
+        // padding: 6em;
         margin: 3em auto;
+
+        .success {
+            background-color: green;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            border-radius: 15px;
+            width: 90%;
+            color: $white;
+            text-align: center;
+            padding: 25px;
+            margin-top: -2em;
+            margin-bottom: 2em;
+        }
 
         .form-header {
             color: $white;
@@ -124,11 +139,15 @@ $red: #f44336;
 }
 
 @media screen and (max-width: 990px) {
-    .form-holder {
-        width: 80% !important;
+    .main-form {
+        .form-holder {
+            width: 80% !important;
+            background-color: transparent;
+            padding: 0;
 
-        .submit {
-            white-space: normal;
+            .submit {
+                white-space: normal;
+            }
         }
     }
 }
