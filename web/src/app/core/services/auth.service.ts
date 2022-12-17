@@ -42,7 +42,7 @@ export class AuthService implements OnDestroy {
     }
 
     get isLoggedIn() {
-        return localStorage.getItem('authToken') && this.getExpiration() ? true : false;
+        return (Boolean(localStorage.getItem('authToken')) && this.getExpiration()) ? true : false;
     }
 
     get userData() {

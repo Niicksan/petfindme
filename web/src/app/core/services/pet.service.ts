@@ -26,7 +26,7 @@ export class PetService {
     }
 
     deletePetById(id: string) {
-        return this.httpClient.get<IPet>(`/api/pet/${id}`);
+        return this.httpClient.delete<IPet>(`/api/pet/${id}`);
     }
 
     addPetToLikedList(id: string) {
