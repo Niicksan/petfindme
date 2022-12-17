@@ -20,6 +20,23 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Build for production 
 Run `ng build --configuration=production`
 
+## Routes
+
+|   Description    |       Route       | Login Required |
+| :--------------  | :---------------- | :------------: |
+| Register         | /auth/register    |       No       |
+| Logging in       | /auth/login       |       No       |
+| Logging out      | /auth/logout      |       Yes      |
+| Latest pets      | /                 |       No       |
+| Lost pets        | /catalog/lost     |       No       |
+| Found pets       | /catalog/found    |       No       |
+| Create pet       | /pet/add          |       Yes      |
+| Pet details      | /pet/details/:id  |       No       |
+| Edit pet         | /pet/edit/:id     |       Yes      |
+| Delete pet       | /pet/delete/:id   |       Yes      |
+| My Profile       | /user/profile     |       Yes      |
+| About us         | /about-us         |       No       |
+| Contact us       | /contact-us       |       No       |
 
 # REST-API - Server
 
@@ -48,4 +65,4 @@ Base Url: https://localhost:3030/api
 |     GET     | My Profile info  | /user/user-info   |       Yes      |
 |     GET     | My Profile pets  | /user/user-pets   |       Yes      |
 |     GET     | My Profile liked | /user/user-liked  |       Yes      |
-|     POST    | Sent message     | /api/contact-us   |       No       |
+|     POST    | Sent message     | /contact-us       |       No       |

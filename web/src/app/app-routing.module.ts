@@ -17,7 +17,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'contact',
+    path: 'contact-us',
     component: ContactComponent,
     data: {
       title: 'Свържете се с нас'

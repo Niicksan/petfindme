@@ -13,7 +13,7 @@ import { PetResolver } from "./resolvers/pet.resolver";
 
 const routes: Routes = [
     {
-        path: 'pets',
+        path: 'catalog',
         children: [
             {
                 path: 'lost',
@@ -32,7 +32,7 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'pet/new',
+        path: 'pet/add',
         component: NewComponent,
         canActivate: [HasUserGuard],
         data: {
