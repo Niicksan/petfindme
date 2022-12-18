@@ -3,7 +3,7 @@ $white: white;
 $red: #f44336;
 
 .register {
-    background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url('/assets/images/pets-auth.png');
+    // background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url('/assets/images/pets-auth.png');
 
     .form-footer {
         display: flex;
@@ -16,6 +16,7 @@ $red: #f44336;
 
         p {
             padding-right: 1em;
+            color: $navbar-blue;
         }
 
         a {

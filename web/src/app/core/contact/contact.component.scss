@@ -2,9 +2,9 @@ $white: #fff;
 $navbar-blue: #1C6375;
 $red: #f44336;
 
-.contacts {
-    background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url('/assets/images/pets-contact.jpg');
-}
+// .contacts {
+//     background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url('/assets/images/pets-contact.jpg');
+// }
 
 .main-form {
     background-size: cover;
@@ -76,6 +76,7 @@ $red: #f44336;
 
                 .error {
                     color: $red;
+                    font-weight: bold;
                     text-align: left;
                     font-weight: bold;
                 }
