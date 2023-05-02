@@ -3,11 +3,10 @@ const { authCookieName } = require("../config/auth-config");
 
 
 module.exports = () => (req, res, next) => {
-    //const token = req.cookies[authCookieName];
+    const cookie = req.cookies[authCookieName];
     let token = req.headers['x-authorization'];
-
-    //token = token.slice(7);
-
+    console.log(cookie)
+    console.log(token)
     if (token) {
         try {
             const payload = parseToken(token);

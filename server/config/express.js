@@ -29,6 +29,6 @@ module.exports = (app) => {
         origin: config.origin
     }));
     app.use(cookieParser(cookieSecret));
-    app.use(session());
+    // app.use(session());
     app.use(trimBody('password'));
 };
