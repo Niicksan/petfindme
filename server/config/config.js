@@ -4,8 +4,8 @@ const config = {
     development: {
         host: 'localhost',
         port: process.env.PORT || 3030,
-        dbURL: 'mongodb://localhost:27017/petfindme',
-        //dbURL: 'mongodb+srv://niksan:aiROMoGZxAy7vzJY@petfindme.ocortq9.mongodb.net/?retryWrites=true&w=majority',
+        // dbURL: 'mongodb://localhost:27017/petfindme',
+        dbURL: 'mongodb://127.0.0.1:27017/petfindme',
         origin: ['http://localhost:4200']
     },
     production: {
