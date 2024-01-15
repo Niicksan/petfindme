@@ -13,13 +13,13 @@ function hasUser() {
 
 function isGuest() {
     return (req, res, next) => {
-        if (req.session.user) {
+        if (!req.session.user) {
+            next();
+        } else {
             res.status(400).json({
                 messageEn: 'You are already logged in',
                 messageBg: 'Вече сте влезли в профила си'
             });
-        } else {
-            next();
         }
     };
 }
