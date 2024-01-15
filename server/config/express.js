@@ -1,9 +1,10 @@
+const cors = require('cors');
 const express = require('express');
-const { parseError } = require('../utils/errorParser');
-const cors = require('../middlewares/cors');
 const session = require('express-session');
-const trimBody = require('../middlewares/trimBody');
 const config = require('./config');
+const corsMiddleware = require('../middlewares/corsMiddleware');
+const trimBody = require('../middlewares/trimBody');
+const { parseError } = require('../utils/errorParser');
 const { sessionConfig } = require('./session-config');
 
 module.exports = (app) => {
@@ -24,9 +25,11 @@ module.exports = (app) => {
     // Setup the static files
     app.use('/static', express.static('static'));
 
+    // Setup CORS
     app.use(cors({
         origin: config.origin
     }));
+    app.use(corsMiddleware());
 
     app.use(session(sessionConfig));
 
