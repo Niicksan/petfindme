@@ -3,7 +3,7 @@ const authController = require('express').Router();
 const { check, validationResult } = require('express-validator');
 const { sessionCookieName } = require('../config/auth-config');
 const { hasUser, isGuest } = require('../middlewares/guards');
-const { register, login, logout } = require('../services/authService');
+const { register, login, } = require('../services/authService');
 const { parseError } = require('../utils/errorParser');
 
 
