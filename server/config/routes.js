@@ -3,6 +3,7 @@ const authController = require('../controllers/authController');
 const petController = require('../controllers/petController');
 const profileController = require('../controllers/profileController');
 const contactUsController = require('../controllers/contactUsController');
+const notFoundController = require('../controllers/notFoundController');
 
 const { hasUser } = require('../middlewares/guards');
 
@@ -17,4 +18,5 @@ module.exports = (app) => {
     app.use('/api/pet', petController);
     app.use('/api/user/profile', hasUser(), profileController);
     app.use('/api/contact-us', contactUsController);
+    app.use('*', notFoundController);
 };
