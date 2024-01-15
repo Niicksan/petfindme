@@ -9,7 +9,7 @@ module.exports = (...excludedKeys) => (req, res, next) => {
 
                 } catch (error) {
                     const message = parseError(error);
-                    // console.log(message);
+                    console.log(message);
                 }
             }
         }
