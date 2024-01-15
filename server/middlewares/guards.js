@@ -1,6 +1,6 @@
 function hasUser() {
     return (req, res, next) => {
-        if (req.user) {
+        if (req.session.user) {
             next();
         } else {
             res.status(401).json({
@@ -13,7 +13,7 @@ function hasUser() {
 
 function isGuest() {
     return (req, res, next) => {
-        if (req.user) {
+        if (req.session.user) {
             res.status(400).json({
                 messageEn: 'You are already logged in',
                 messageBg: 'Вече сте влезли в профила си'
@@ -26,7 +26,7 @@ function isGuest() {
 
 function isOwner() {
     return (req, res, next) => {
-        if (req.user && res.locals.pet.owner == req.user._id) {
+        if (req.session.user && res.locals.pet.owner == req.session.user.id) {
             res.locals.isOwner = true;
             next();
         } else {

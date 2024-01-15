@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 const { createContact } = require('../services/contactUsService');
 const { parseError } = require('../utils/errorParser');
 
+
 contactUsController.post('/',
     check('name').isLength({ min: 1 }).withMessage('Please enter your name'),
     check('email').isEmail().withMessage('Invalid email'),

@@ -7,7 +7,7 @@ const { parseError } = require('../utils/errorParser');
 
 profileController.get('/user-info', async (req, res) => {
     try {
-        const user = await getUserInfo(req.user._id);
+        const user = await getUserInfo(req.session.user.id);
 
         res.json(user);
     } catch (error) {
@@ -19,7 +19,7 @@ profileController.get('/user-info', async (req, res) => {
 
 profileController.get('/user-pets', async (req, res) => {
     try {
-        const userPets = await getAllPetsCreatedByUser(req.user._id);
+        const userPets = await getAllPetsCreatedByUser(req.session.user.id);
 
         res.json(userPets);
     } catch (error) {
@@ -31,7 +31,7 @@ profileController.get('/user-pets', async (req, res) => {
 
 profileController.get('/user-liked', async (req, res) => {
     try {
-        const userLiked = await getAllPetsLikedByUser(req.user._id);
+        const userLiked = await getAllPetsLikedByUser(req.session.user.id);
 
         res.json(userLiked);
     } catch (error) {

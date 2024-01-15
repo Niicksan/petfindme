@@ -5,8 +5,6 @@ const profileController = require('../controllers/profileController');
 const contactUsController = require('../controllers/contactUsController');
 
 const { hasUser } = require('../middlewares/guards');
-const session = require('../middlewares/session');
-
 
 module.exports = (app) => {
     // Routes
@@ -17,6 +15,6 @@ module.exports = (app) => {
     app.use('/api/catalog', catalogController);
     app.use('/api/auth', authController);
     app.use('/api/pet', petController);
-    app.use('/api/user/profile', session(), profileController);
+    app.use('/api/user/profile', hasUser(), profileController);
     app.use('/api/contact-us', contactUsController);
 };

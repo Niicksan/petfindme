@@ -1,8 +1,7 @@
-// TODO Implement Pet Controller
 const petController = require('express').Router();
 
 const { check, validationResult } = require('express-validator');
-const { createPet, getPetById, updatePetById, deletePetById } = require('../services/petService');
+const { createPet, updatePetById, deletePetById } = require('../services/petService');
 const { parseError } = require('../utils/errorParser');
 const status = require('../enums/petStatus');
 const { hasUser, isOwner } = require('../middlewares/guards');
@@ -31,7 +30,7 @@ petController.post('/create',
 
             const pet = {
                 ...req.body,
-                owner: req.user._id,
+                owner: req.user.id,
             };
 
             const item = await createPet(pet);

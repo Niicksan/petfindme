@@ -1,13 +1,14 @@
 const authController = require('express').Router();
 
 const { check, validationResult } = require('express-validator');
-const { authCookieName } = require('../config/auth-config');
-const { isGuest } = require('../middlewares/guards');
+const { sessionCookieName } = require('../config/auth-config');
+const { hasUser, isGuest } = require('../middlewares/guards');
 const { register, login, logout } = require('../services/authService');
 const { parseError } = require('../utils/errorParser');
 
 
 authController.post('/register',
+    isGuest(),
     check('email').isEmail().withMessage('Invalid email'),
     check('name').isLength({ min: 2 }).withMessage('Invalid name'),
     check('password').isLength({ min: 5 })
@@ -31,15 +32,10 @@ authController.post('/register',
                 throw errors;
             }
 
-            const token = await register(req.body.email, req.body.name, req.body.password);
+            const userInfo = await register(req.body.email, req.body.name, req.body.password);
 
-            if (process.env.NODE_ENV === 'production') {
-                res.cookie(authCookieName, token.authToken, { httpOnly: true, sameSite: 'none', secure: true });
-            } else {
-                res.cookie(authCookieName, token.authToken, { httpOnly: true });
-            }
-
-            res.status(200).json(token);
+            req.session.user = userInfo;
+            res.status(200).json({ user: userInfo });
         } catch (error) {
             const message = parseError(error);
             console.error(message);
@@ -48,17 +44,12 @@ authController.post('/register',
     }
 );
 
-authController.post('/login', async (req, res) => {
+authController.post('/login', isGuest(), async (req, res) => {
     try {
-        const token = await login(req.body.email, req.body.password);
+        const userInfo = await login(req.body.email, req.body.password);
 
-        if (process.env.NODE_ENV === 'production') {
-            res.cookie(authCookieName, token.authToken, { httpOnly: true, sameSite: 'none', secure: true });
-        } else {
-            res.cookie(authCookieName, token.authToken, { httpOnly: true });
-        }
-
-        res.status(200).json(token);
+        req.session.user = userInfo;
+        res.status(200).json({ user: userInfo });
     } catch (error) {
         const message = parseError(error);
         console.error(message);
@@ -66,13 +57,11 @@ authController.post('/login', async (req, res) => {
     }
 });
 
-authController.get('/logout', async (req, res) => {
-    const token = req.token;
-
+authController.get('/logout', hasUser(), async (req, res) => {
     try {
-        await logout(token);
-        res.clearCookie(authCookieName)
-            .status(204)
+        req.session.destroy();
+        res.clearCookie(sessionCookieName)
+            .status(200)
             .send({
                 messageEn: 'Logged out!',
                 messageBg: 'Успешно отписване'
@@ -80,7 +69,7 @@ authController.get('/logout', async (req, res) => {
     } catch (error) {
         const message = parseError(error);
         console.error(message);
-        res.status(401).json({ message });
+        res.status(400).json({ message });
     }
 });
 

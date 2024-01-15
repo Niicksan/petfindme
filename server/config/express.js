@@ -1,11 +1,10 @@
 const express = require('express');
 const { parseError } = require('../utils/errorParser');
 const cors = require('../middlewares/cors');
-const cookieParser = require('cookie-parser');
-const session = require('../middlewares/session');
+const session = require('express-session');
 const trimBody = require('../middlewares/trimBody');
 const config = require('./config');
-const cookieSecret = process.env.COOKIESECRET || 'petfindme';
+const { sessionConfig } = require('./session-config');
 
 module.exports = (app) => {
     // Setup the body parser
@@ -28,7 +27,8 @@ module.exports = (app) => {
     app.use(cors({
         origin: config.origin
     }));
-    app.use(cookieParser(cookieSecret));
-    // app.use(session());
+
+    app.use(session(sessionConfig));
+
     app.use(trimBody('password'));
 };
