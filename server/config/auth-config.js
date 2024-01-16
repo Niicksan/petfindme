@@ -1,4 +1,4 @@
-const sessionCookieName = process.env.NODE_ENV || 'session-cookie';
+const sessionCookieName = process.env.SESSION_COOKIE || 'session-cookie';
 
 module.exports = {
     sessionCookieName,
