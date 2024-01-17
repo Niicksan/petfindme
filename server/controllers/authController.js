@@ -16,7 +16,7 @@ authController.post('/register',
         //.matches('[0-9]').withMessage('Паролата трябва да съдържа цифра')
         //.matches('[A-Z]').withMessage('Password Must Contain an Uppercase Letter')
         .escape(),
-    check('repass').custom((value, { req }) => {
+    check('confirmPassword').custom((value, { req }) => {
         if (value !== req.body.password) {
             throw new Error('Passwords don\'t match');
         }
