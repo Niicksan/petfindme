@@ -27,9 +27,11 @@ module.exports = (app) => {
 
     // Setup CORS
     app.use(cors({
-        origin: config.origin
+        origin: config.origin,
+        methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        allowedHeaders: ['Content-Type'],
+        credentials: true,
     }));
-    app.use(corsMiddleware());
 
     app.use(session(sessionConfig));
 
