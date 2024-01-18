@@ -11,7 +11,7 @@ export const DrawerItems = ({ handleDrawerToggle }) => {
             <Box sx={{ display: 'flex' }}>
                 <Typography variant="h6" sx={{ my: 2, width: '100%', alignContent: 'center', alignItems: 'center' }}>
                     <Link onClick={handleDrawerToggle} to="/" style={{ color: 'black', textDecoration: 'none' }}>
-                        AutoSoft
+                        PetFind.Me
                     </Link>
                 </Typography>
             </Box>
