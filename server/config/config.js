@@ -9,7 +9,7 @@ const config = {
         port: process.env.PORT || 3030,
         // dbURL: 'mongodb://localhost:27017/petfindme',
         dbURL: 'mongodb://127.0.0.1:27017/petfindme',
-        origin: ['http://localhost:4200']
+        origin: ['http://localhost:3000']
     },
     production: {
         sessionSecret: process.env.SESSION_SECRET,
