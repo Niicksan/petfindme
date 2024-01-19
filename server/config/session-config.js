@@ -13,7 +13,7 @@ const sessionConfig = {
         httpOnly: true,
         secure: config.isSessionSecure,
         maxAge: config.sessionMaxAge,
-        sameSite: 'strict',
+        sameSite: 'none',
     },
     store: MongoStore.create({
         mongoUrl: config.dbURL
