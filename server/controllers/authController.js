@@ -53,7 +53,7 @@ authController.post('/login', isGuest(), async (req, res) => {
     } catch (error) {
         const message = parseError(error);
         console.error(message);
-        res.status(401).json({ message });
+        res.status(400).json({ message });
     }
 });
 
