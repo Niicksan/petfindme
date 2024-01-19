@@ -13,7 +13,7 @@ const config = {
     },
     production: {
         sessionSecret: process.env.SESSION_SECRET,
-        isSessionSecure: process.env.IS_SESSION_SECURE,
+        isSessionSecure: true,
         sessionMaxAge: 30 * (60 * 1000),
         host: process.env.HOST,
         port: process.env.PORT,
