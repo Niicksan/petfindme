@@ -13,10 +13,10 @@ const config = {
     },
     production: {
         sessionSecret: process.env.SESSION_SECRET,
-        isSessionSecure: true,
-        sessionMaxAge: 30 * (60 * 1000),
+        isSessionSecure: !!process.env.IS_SESSION_SECURE,
+        sessionMaxAge: parseInt(process.env.SESSION_MAX_AGE),
         host: process.env.HOST,
-        port: process.env.PORT,
+        port: parseInt(process.env.PORT),
         dbURL: process.env.DATABASE_URL,
         origin: ['https://petfindme.onrender.com']
     }
