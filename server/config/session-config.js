@@ -18,7 +18,8 @@ const sessionConfig = {
     },
     store: MongoStore.create({
         mongoUrl: config.dbURL
-    })
+    }),
+    proxy: true
 }
 
 module.exports = {
