@@ -36,4 +36,8 @@ module.exports = (app) => {
     app.use(session(sessionConfig));
 
     app.use(trimBody('password'));
+
+    console.log('env: ', process.env.NODE_ENV);
+    console.log('config: ', config);
+    console.log('session: ', sessionConfig);
 };
