@@ -5,6 +5,7 @@ const config = {
         sessionSecret: 'petfindme',
         isSessionSecure: false,
         sessionMaxAge: 24 * (60 * 60 * 1000), // 1 day of inactivity
+        isSessionProxyEnabled: false,
         host: 'localhost',
         port: process.env.PORT || 3030,
         // dbURL: 'mongodb://localhost:27017/petfindme',
@@ -16,6 +17,7 @@ const config = {
         sessionSecret: process.env.SESSION_SECRET,
         isSessionSecure: !!process.env.IS_SESSION_SECURE,
         sessionMaxAge: parseInt(process.env.SESSION_MAX_AGE),
+        isSessionProxyEnabled: !!process.env.IS_SESSION_PROXY_ENABLED,
         host: process.env.HOST,
         port: parseInt(process.env.PORT),
         dbURL: process.env.DATABASE_URL,
