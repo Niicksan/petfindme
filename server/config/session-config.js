@@ -19,10 +19,6 @@ const sessionConfig = {
     })
 }
 
-if (process.env.NODE_ENV === 'production') {
-    sessionConfig.cookie.sameSite = 'none';
-}
-
 module.exports = {
     sessionConfig,
 }
