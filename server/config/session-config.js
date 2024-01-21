@@ -10,16 +10,18 @@ const sessionConfig = {
     rolling: true, // whether to (re-)set cookie on every response
     saveUninitialized: false, // whether to save empty sessions to the store
     cookie: {
-        domain: config.domain,
         httpOnly: true,
         secure: config.isSessionSecure,
         maxAge: config.sessionMaxAge,
-        sameSite: 'none',
     },
     store: MongoStore.create({
         mongoUrl: config.dbURL
     }),
     proxy: config.isSessionProxyEnabled
+}
+
+if (process.env.NODE_ENV === 'production') {
+    sessionConfig.cookie.sameSite = 'none';
 }
 
 module.exports = {
