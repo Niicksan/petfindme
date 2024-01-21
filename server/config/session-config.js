@@ -16,8 +16,7 @@ const sessionConfig = {
     },
     store: MongoStore.create({
         mongoUrl: config.dbURL
-    }),
-    proxy: config.isSessionProxyEnabled
+    })
 }
 
 if (process.env.NODE_ENV === 'production') {
