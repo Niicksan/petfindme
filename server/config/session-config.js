@@ -13,14 +13,11 @@ const sessionConfig = {
         httpOnly: true,
         secure: config.isSessionSecure,
         maxAge: config.sessionMaxAge,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : true,
     },
     store: MongoStore.create({
         mongoUrl: config.dbURL
     })
-}
-
-if (process.env.NODE_ENV === 'production') {
-    sessionConfig.cookie.sameSite = 'none';
 }
 
 module.exports = {
