@@ -33,13 +33,7 @@ module.exports = (app) => {
         credentials: true,
     }));
 
-    app.set('trust proxy', 1) // trust first proxy
-
     app.use(session(sessionConfig));
 
     app.use(trimBody('password'));
-
-    console.log('env: ', process.env.NODE_ENV);
-    console.log('config: ', config);
-    console.log('session: ', sessionConfig);
 };
