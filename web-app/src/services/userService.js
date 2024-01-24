@@ -1,4 +1,4 @@
-import { apiUrl } from '../env'
+import { apiUrl } from '../env';
 import { requestFactory } from './requester';
 
 const baseUrl = `${apiUrl}/user/profile`;
