@@ -8,6 +8,7 @@ import { AuthProvider } from './contexts/AuthContext';
 
 import { Navigation } from './components/Navigation/Navigation';
 import { Home } from './components/Catalog/Home/Home';
+import { MyProfile } from './components/MyProfile/MyProfile';
 import { Logout } from './components/Logout/Logout';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
@@ -26,7 +27,7 @@ function App() {
                         {/* <Route element={<VehicleOwnerGuard />}> */}
 
                         {/* </Route> */}
-                        {/* <Route path='/user/my-profile' element={<MyProfile />} /> */}
+                        <Route path='/user/my-profile' element={<MyProfile />} />
                         <Route path='/auth/logout' element={<Logout />} />
                         {/* </Route> */}
                         {/* <Route element={<HasUserGuard />}>*/}
