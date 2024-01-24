@@ -1,7 +1,7 @@
 const profileController = require('express').Router();
 
 const { getAllPetsCreatedByUser, getAllPetsLikedByUser } = require('../services/petService');
-const { getUserInfo } = require('../services/user');
+const { getUserInfo } = require('../services/userService');
 const { parseError } = require('../utils/errorParser');
 
 
@@ -9,7 +9,7 @@ profileController.get('/user-info', async (req, res) => {
     try {
         const user = await getUserInfo(req.session.user.id);
 
-        res.json(user);
+        res.set('Cache-Control', 'max-age=600').json(user);
     } catch (error) {
         const message = parseError(error);
         console.error(message);
