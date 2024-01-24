@@ -17,19 +17,11 @@ const request = async (method, url, data) => {
         }
     }
 
-    const sessionCookie = Cookies.get('session-cookie');
-
-    if (sessionCookie) {
-        options.headers = {
-            ...options.headers,
-            'Cookie': `session-cookie=${sessionCookie}`,
-        }
-    }
-
     const response = await fetch(url, options);
 
     if (response.status === 401) {
-        Cookies.remove('session-cookie')
+        Cookies.remove('session-cookie');
+        localStorage.setItem('auth', '{}');
         window.location.pathname = '/auth/login';
     }
 
