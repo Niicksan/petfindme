@@ -2,14 +2,15 @@ import './MyProfile.scss';
 
 import { useEffect, useState } from 'react';
 
-import { imageApi } from '../../env';
+import { imageUrl } from '../../env';
 
+import { useAuthContext } from "../../contexts/AuthContext";
 import { userServiceFactory } from '../../services/userService';
 
 import { Loader } from "../Loader/Loader";
 
 export const MyProfile = () => {
-    const [profileData, setProfileData] = useState({});
+    const { profileData, setProfileData } = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
     const userService = userServiceFactory();
 
@@ -34,7 +35,7 @@ export const MyProfile = () => {
                 </div>
                 <div className="my-profile">
                     <div className="image-holder">
-                        <img src={`${imageApi}/users/${profileData?.imageUrl}`} alt="" />
+                        <img src={`${imageUrl}/users/${profileData?.imageUrl}`} alt="" />
                     </div>
                     <div className="user-info">
                         <div className="key-value">
