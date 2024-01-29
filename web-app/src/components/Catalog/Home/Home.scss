@@ -1,14 +1,39 @@
 $red: #550A21;
 
+h1 {
+    font-size: 2em;
+    text-align: center;
+    color: $red;
+    margin: 1.5em auto;
+}
+
 #catalog-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 60vh;
     margin: 0 auto;
-    margin-top: 2em;
 
-    h1 {
-        font-size: 2em;
+    .no-articles {
+        margin: 1em 0 1.5em;
+    }
+
+    .add {
+        display: inline-block;
+        border: 2px solid $red;
+        border-radius: 50px;
+        font-weight: 550;
+        font-size: 16px;
+        color: $red;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition: 0.5s;
+        padding: 10px 30px;
+
+        &:hover {
+            background-color: $red;
+            color: #fff;
+        }
     }
 }

@@ -1,0 +1,45 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+
+    a {
+        text-decoration: none;
+        color: black;
+
+        .card-content-holder {
+            .image {
+                width: 100%;
+                min-height: 60%;
+            }
+
+            h6 {
+                font-weight: 550;
+                margin: 0 0 0.8em;
+            }
+
+            .content-desc {
+                padding-bottom: 0;
+
+                .content-items-holder {
+                    .content-items {
+                        p {
+                            font-size: 0.9em;
+
+                            .content-item-left {
+                                font-size: 0.9em;
+                                font-weight: bolder;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .favorite {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
