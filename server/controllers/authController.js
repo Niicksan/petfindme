@@ -57,7 +57,7 @@ authController.post('/login', isGuest(), async (req, res) => {
     }
 });
 
-authController.get('/logout', hasUser(), async (req, res) => {
+authController.get('/logout', async (req, res) => {
     try {
         req.session.destroy();
         res.clearCookie(sessionCookieName)
