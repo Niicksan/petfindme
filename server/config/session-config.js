@@ -11,6 +11,7 @@ const sessionConfig = {
     saveUninitialized: false, // whether to save empty sessions to the store
     cookie: {
         httpOnly: true,
+        domain: config.domain,
         secure: config.isSessionSecure,
         maxAge: config.sessionMaxAge,
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : true,
