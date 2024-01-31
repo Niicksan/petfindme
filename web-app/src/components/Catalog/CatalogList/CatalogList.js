@@ -17,8 +17,8 @@ export const CatalogList = () => {
                 <Box sx={{ flexGrow: 1, justifyContent: 'center', width: '80%', maxWidth: '1920px' }}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}>
                         {pets.length !== 0 && (pets.map(x =>
-                            <Grid item xs={4} sm={4} md={4} lg={3}>
-                                <CatalogItem key={x._id} {...x} />
+                            <Grid item xs={4} sm={4} md={4} lg={3} key={x._id}>
+                                <CatalogItem {...x} />
                             </Grid>
                         ))}
                     </Grid>
