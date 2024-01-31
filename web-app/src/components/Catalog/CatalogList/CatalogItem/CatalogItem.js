@@ -2,102 +2,12 @@ import './CatalogItem.scss';
 import { useState, useEffect, useRef } from 'react';
 
 import { Link } from 'react-router-dom';
-import { Card, Box, CardContent, Typography, CardMedia, Tooltip } from '@mui/material';
-import FavortieBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteBorderOutlined from '@mui/icons-material/FavoriteBorder';
+import { Card, Box, CardContent, Typography, CardMedia, Tooltip, colors } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
-export const CatalogItem = ({
-    _id,
-    title,
-    status,
-    location,
-    imageUrl,
-    updatedAt
-}) => {
-    const [imgHeight, setImgHeight] = useState();
-    const [imgWidth, setImgWidth] = useState();
-    const imagRef = useRef(null);
-
-    const date = new Date(updatedAt);
-    const createdAt = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
-
-    useEffect(() => {
-        setImgWidth(imagRef.current.getBoundingClientRect().width);
-    }, []);
-
-    useEffect(() => {
-        setImgHeight(imgWidth);
-    }, [imgWidth]);
-
-    console.log(imgWidth, imgHeight)
-
-    return (
-        <Card sx={{ position: 'relative', width: '100%', height: '100%', boxShadow: 3, cursor: 'pointer', borderRadius: '5px' }}>
-            <Tooltip title={<>Харесайте тук</>}>
-                <FavoriteIcon sx={{
-                    position: 'absolute', top: '5px', right: '5px',
-                    fill: 'rgba(85, 10, 33, 0.8)', stroke: 'white', strokeWidth: 1.5,
-                    p: '2px', m: '5px', borderRadius: 50, fontSize: '2em', zIndex: 50
-                }} />
-            </Tooltip>
-            <Link to={`/catalog/pet/${_id}`} style={{ textDecoration: "none", color: 'black' }}>
-                <Box >
-                    <CardMedia
-                        ref={imagRef}
-                        className='image'
-                        component="img"
-                        image={imageUrl}
-                        alt={imageUrl}
-                        sx={{
-                            position: 'relative',
-                            height: imgHeight / 1.5,
-                            borderRadius: '5px 5px 0 0',
-                        }}
-                    />
-                </Box>
-                <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', p: 2, '&:last-child': { pb: 2 }, pt: 0 }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-                        <Typography component="h5" sx={{
-                            pt: 2, pb: 1,
-                            fontSize: '1.2em',
-                            lineHeight: '1',
-                            display: '-webkit-box',
-                            overflow: 'hidden',
-                            WebkitBoxOrient: 'vertical',
-                            WebkitLineClamp: 2,
-                            height: '60px'
-                        }}>
-                            {title}
-                        </Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', }} >
-                        <Typography variant="caption" sx={{ fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray', }}>
-                            <Typography component='span' sx={{ fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5' }} className='content-item-left'>Статус: </Typography> {status}
-                        </Typography>
-                        <Typography variant="caption" sx={{ fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray', }}>
-                            <Typography component='span' sx={{ fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5' }} className='content-item-left'>Град: </Typography> {location}
-                        </Typography>
-                        <Typography variant="caption" sx={{ fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray' }}>
-                            <Typography component='span' sx={{ fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5' }} className='content-item-left'>Добавено на: </Typography> {createdAt}
-                        </Typography>
-                    </Box>
-                </CardContent >
-            </Link>
-        </Card >
-        // <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-        //     <Typography>
-        //         Добави в любими
-        //     </Typography>
-        //     <Tooltip title={<>Харесайте тук</>}>
-        //         <FavortieBorderIcon sx={{
-        //             p: '2px', m: '10px', borderRadius: 50, fontSize: '2em',
-        //             color: '#550A21', '&:hover': { background: 'rgba(197, 197, 197, 0.5)' }
-        //         }} />
-        //     </Tooltip>
-        // </Box>
-    );
-};
+import InfoIcon from '@mui/icons-material/Info';
+import CircleIcon from '@mui/icons-material/Circle';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 // export const CatalogItem = ({
 //     _id,
@@ -125,16 +35,17 @@ export const CatalogItem = ({
 //     console.log(imgWidth, imgHeight)
 
 //     return (
-//         <Card elevation={0} sx={{ position: 'relative', width: '100%', height: '100%', cursor: 'pointer', borderRadius: '5px', border: 0 }}>
+//         <Card elevation={5} sx={{ position: 'relative', width: '100%', height: '100%', borderRadius: '5px' }}>
 //             <Tooltip title={<>Харесайте тук</>}>
 //                 <FavoriteIcon sx={{
 //                     position: 'absolute', top: '5px', right: '5px',
-//                     fill: 'rgba(85, 10, 33, 0.5)', stroke: 'white', strokeWidth: 1,
-//                     p: '2px', m: '5px', borderRadius: 50, fontSize: '2em', zIndex: 50
+//                     fill: 'rgba(69, 69, 69, 0.8)', stroke: 'white',
+//                     strokeWidth: 1, p: '2px', m: '5px', borderRadius: 50,
+//                     fontSize: '2em', zIndex: 50, '&:hover': { fill: 'rgba(135, 0, 0, 0.8)' }
 //                 }} />
 //             </Tooltip>
-//             <Link to={`/catalog/pet/${_id}`} style={{ textDecoration: "none", color: 'black' }}>
-//                 <Box>
+//             <Link to={`/catalog/pet/${_id}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', textDecoration: "none", color: 'black' }}>
+//                 <Box >
 //                     <CardMedia
 //                         ref={imagRef}
 //                         className='image'
@@ -144,101 +55,143 @@ export const CatalogItem = ({
 //                         sx={{
 //                             position: 'relative',
 //                             height: imgHeight / 1.5,
-//                             borderRadius: '15px',
+//                             borderRadius: '5px 5px 0 0',
 //                         }}
 //                     />
 //                 </Box>
-//                 <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', p: 0, '&:last-child': { pb: 2 } }}>
-//                     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+//                 <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', p: 2, '&:last-child': { pb: 2 }, pt: 0 }}>
+//                     <Box>
 //                         <Typography component="h5" sx={{
-//                             pt: 2, pb: 1,
+//                             py: 1,
 //                             fontSize: '1.2em',
-//                             lineHeight: '1.2',
+//                             lineHeight: '1',
 //                             display: '-webkit-box',
 //                             overflow: 'hidden',
 //                             WebkitBoxOrient: 'vertical',
-//                             WebkitLineClamp: 2,
-//                             height: '60px'
+//                             WebkitLineClamp: 2
 //                         }}>
 //                             {title}
 //                         </Typography>
 //                     </Box>
 //                     <Box sx={{ display: 'flex', flexDirection: 'column', }} >
-//                         <Typography variant="caption" sx={{ fontSize: '1em', lineHeight: '1.5', color: 'dimgray', }}>
-//                             <Typography component='span' sx={{ fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5' }} className='content-item-left'>Статус: </Typography> {status}
+//                         <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray', }}>
+//                             <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+//                                 <InfoIcon sx={{ fill: '#550A21' }} />
+//                             </Typography> {status}
 //                         </Typography>
-//                         <Typography variant="caption" sx={{ fontSize: '1em', lineHeight: '1.5', color: 'dimgray' }}>
-//                             <Typography component='span' sx={{ fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5' }} className='content-item-left'>Град: </Typography> {location}
+//                         <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray' }}>
+//                             <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+//                                 <LocationOnIcon sx={{ fill: '#550A21' }} />
+//                             </Typography> {location}
 //                         </Typography>
-//                         <Typography variant="caption" sx={{ fontSize: '1em', lineHeight: '1.5', color: 'dimgray' }}>
-//                             <Typography component='span' sx={{ fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5' }} className='content-item-left'>Дата: </Typography> {createdAt}
+//                         <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray' }}>
+//                             <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+//                                 <CalendarMonthIcon sx={{ fill: '#550A21' }} />
+//                             </Typography> {createdAt}
 //                         </Typography>
 //                     </Box>
 //                 </CardContent >
 //             </Link>
-//             {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-//                 <Typography>
-//                     Добави в любими
-//                 </Typography>
-//                 <Tooltip title={<>Харесайте тук</>}>
-//                     <FavortieBorderIcon sx={{
-//                         p: '2px', m: '10px', borderRadius: 50, fontSize: '2em',
-//                         color: '#550A21', '&:hover': { background: 'rgba(197, 197, 197, 0.5)' }
-//                     }} />
-//                 </Tooltip>
-//             </Box> */}
 //         </Card >
 //     );
 // };
 
-// export const CatalogItem = ({
-//     _id,
-//     title,
-//     status,
-//     location,
-//     imageUrl,
-//     updatedAt
-// }) => {
-//     const date = new Date(updatedAt);
-//     const createdAt = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
+export const CatalogItem = ({
+    _id,
+    title,
+    status,
+    location,
+    imageUrl,
+    updatedAt
+}) => {
+    const [imgHeight, setImgHeight] = useState();
+    const [imgWidth, setImgWidth] = useState();
+    const imagRef = useRef(null);
 
-//     return (
-//         <>
-//             <Card className='card' sx={{ boxShadow: 3 }}>
-//                 <Link to={`/catalog/pet/${_id}`}>
-//                     <Box className='card-content-holder'>
-//                         <CardMedia
-//                             className='image'
-//                             component='img'
-//                             image={imageUrl}
-//                             alt={imageUrl}
-//                         />
-//                         <CardContent className='content-desc'>
-//                             <Typography component="h6">
-//                                 {title}
-//                             </Typography>
-//                             <Box className='content-items-holder'>
-//                                 <Box className='content-items'>
-//                                     <Typography color="text.secondary">
-//                                         <Typography component='span' className='content-item-left'>Статус: </Typography>{status}
-//                                     </Typography>
-//                                     <Typography color="text.secondary">
-//                                         <Typography component='span' className='content-item-left'>Град: </Typography>{location}
-//                                     </Typography>
-//                                     <Typography color="text.secondary">
-//                                         <Typography component='span' className='content-item-left'>Добавено на: </Typography>{createdAt}
-//                                     </Typography>
-//                                 </Box>
-//                             </Box>
-//                         </CardContent>
-//                     </Box>
-//                 </Link >
-//                 <Box className='favorite'>
-//                     <IconButton aria-label="favorite">
-//                         <FavortieBorderIcon />
-//                     </IconButton>
-//                 </Box>
-//             </Card >
-//         </>
-//     );
-// };
+    const statusColor = {
+        'Изгубено': '#CE0000',
+        'Намерено': 'green',
+        'За осиновяване': 'orange'
+    }
+
+    const date = new Date(updatedAt);
+    const createdAt = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    useEffect(() => {
+        setImgWidth(imagRef.current.getBoundingClientRect().width);
+    }, []);
+
+    useEffect(() => {
+        setImgHeight(imgWidth);
+    }, [imgWidth]);
+
+    return (
+        <Card elevation={0} sx={{ position: 'relative', width: '100%', height: '100%' }}>
+            <Tooltip title={<>Добавете в Любими</>}>
+                <FavoriteIcon sx={{
+                    position: 'absolute', top: '5px', right: '5px',
+                    fill: 'rgba(69, 69, 69, 0.8)', stroke: 'white',
+                    strokeWidth: 1, p: '2px', m: '5px', borderRadius: 50,
+                    fontSize: '2em', zIndex: 50, '&:hover': { fill: 'rgba(135, 0, 0, 0.8)' }
+                }} />
+            </Tooltip>
+            <Link to={`/catalog/pet/${_id}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', textDecoration: "none", color: 'black' }}>
+                <Box>
+                    <CardMedia
+                        ref={imagRef}
+                        className='image'
+                        component="img"
+                        image={imageUrl}
+                        alt={imageUrl}
+                        sx={{
+                            position: 'relative',
+                            height: imgHeight / 1.5,
+                            borderRadius: '15px',
+                        }}
+                    />
+                </Box>
+                <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', p: 0, '&:last-child': { pb: 2 } }}>
+                    <Box>
+                        <Typography component="h5" sx={{
+                            py: 1,
+                            fontSize: '1.2em',
+                            lineHeight: '1',
+                            display: '-webkit-box',
+                            overflow: 'hidden',
+                            WebkitBoxOrient: 'vertical',
+                            WebkitLineClamp: 2
+                        }}>
+                            {title}
+                        </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', }} >
+                        <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray', }}>
+                            <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+                                <Tooltip title={<>Статус</>}>
+                                    <CircleIcon sx={{ fill: statusColor[status] }} />
+                                </Tooltip>
+                            </Typography>
+                            {status}
+                        </Typography>
+                        <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray' }}>
+                            <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+                                <Tooltip title={<>Местоположение</>}>
+                                    <LocationOnIcon sx={{ fill: '#550A21' }} />
+                                </Tooltip>
+                            </Typography>
+                            {location}
+                        </Typography>
+                        <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray' }}>
+                            <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+                                <Tooltip title={<>Дата на добавяне</>}>
+                                    <CalendarMonthIcon sx={{ fill: '#550A21' }} />
+                                </Tooltip>
+                            </Typography>
+                            {createdAt}
+                        </Typography>
+                    </Box>
+                </CardContent >
+            </Link>
+        </Card >
+    );
+};
