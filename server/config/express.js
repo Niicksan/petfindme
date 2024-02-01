@@ -33,6 +33,10 @@ module.exports = (app) => {
         credentials: true,
     }));
 
+    // TODO Remove when deploy on the official domain
+    // Trust first proxy
+    app.set('trust proxy', 1)
+
     // Setup session
     app.use(session(sessionConfig));
 
