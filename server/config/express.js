@@ -33,6 +33,9 @@ module.exports = (app) => {
         credentials: true,
     }));
 
+    // trust first proxy
+    app.set('trust proxy', 1)
+
     // Setup session
     app.use(session(sessionConfig));
 
