@@ -9,6 +9,7 @@ import { PetProvider } from './contexts/PetContext';
 
 import { Navigation } from './components/Navigation/Navigation';
 import { Home } from './components/Catalog/Home/Home';
+import { PetDetails } from './components/Pet/PetDetails/PetDetails';
 import { MyProfile } from './components/MyProfile/MyProfile';
 import { Logout } from './components/Logout/Logout';
 import { Login } from './components/Login/Login';
@@ -25,6 +26,7 @@ function App() {
                         <Toolbar />
                         <Routes>
                             <Route path='/' element={<Home />} />
+                            <Route path='/catalog/pet/:id' element={< PetDetails />} />
                             {/* <Route element={<AuthGuard />}> */}
                             {/* <Route element={<VehicleOwnerGuard />}> */}
 
