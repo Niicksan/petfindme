@@ -8,10 +8,8 @@ export const Home = () => {
     return (
         <>
             <h1>Добре дошли в PetFind.Me</h1>
-            <section id="catalog-page">
-
+            <section id="home-page-catalog">
                 <CatalogList />
-
             </section>
         </>
     );

@@ -1,13 +1,14 @@
 $red: #550A21;
 
 h1 {
-    font-size: 2em;
+    width: 90%;
+    font-size: 2rem;
     text-align: center;
     color: $red;
-    margin: 1.5em auto;
+    margin: 2.5rem auto;
 }
 
-#catalog-page {
+#home-page-catalog {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,11 +16,11 @@ h1 {
     min-height: 60vh;
     margin: 0 auto;
 
-    .no-articles {
-        margin: 1em 0 1.5em;
+    .no-articles-title {
+        margin: 1rem 0 1.5rem;
     }
 
-    .add {
+    .add-button {
         display: inline-block;
         border: 2px solid $red;
         border-radius: 50px;
@@ -34,6 +35,14 @@ h1 {
         &:hover {
             background-color: $red;
             color: #fff;
+        }
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    #home-page-catalog {
+        .main-grid-container {
+            width: 90%;
         }
     }
 }

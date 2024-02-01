@@ -1,54 +1,49 @@
-p {
-    font-size: 0.9em;
-
-    .content-item-left {
-        font-size: 0.9em;
-        font-weight: bolder;
-    }
-}
-
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100%;
-
     a {
+        display: flex;
+        flex-direction: column;
         text-decoration: none;
+        height: 100%;
         color: black;
 
-        .card-content-holder {
-            .image {
-                width: 100%;
-                min-height: 60%;
+        .image {
+            position: relative;
+            border-radius: 15px;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0;
+            padding-bottom: 1rem;
+
+            .title {
+                padding: 0.5rem 0;
+                font-size: 1.2rem;
+                line-height: 1.1;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
             }
 
-            h6 {
-                font-weight: 550;
-                margin: 0 0 0.8em;
-            }
+            .span-row {
+                display: flex;
+                align-items: center;
+                font-size: 0.9rem;
+                line-height: 1.5;
+                color: dimgray;
 
-            .content-desc {
-                padding-bottom: 0;
-
-                .content-items-holder {
-                    .content-items {
-                        p {
-                            font-size: 0.9em;
-
-                            .content-item-left {
-                                font-size: 0.9em;
-                                font-weight: bolder;
-                            }
-                        }
-                    }
+                .icon {
+                    display: flex;
+                    font-size: 1rem;
+                    font-weight: bolder;
+                    line-height: 1.5;
+                    margin-right: 0.4rem;
                 }
             }
         }
-    }
-
-    .favorite {
-        display: flex;
-        justify-content: flex-end;
     }
 }

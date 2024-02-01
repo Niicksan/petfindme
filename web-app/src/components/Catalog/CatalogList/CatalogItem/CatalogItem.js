@@ -126,7 +126,7 @@ export const CatalogItem = ({
     }, [imgWidth]);
 
     return (
-        <Card elevation={0} sx={{ position: 'relative', width: '100%', height: '100%' }}>
+        <Card elevation={0} className='card' sx={{ position: 'relative', width: '100%', height: '100%' }}>
             <Tooltip title={<>Добавете в Любими</>}>
                 <FavoriteIcon sx={{
                     position: 'absolute', top: '5px', right: '5px',
@@ -135,7 +135,7 @@ export const CatalogItem = ({
                     fontSize: '2em', zIndex: 50, '&:hover': { fill: 'rgba(135, 0, 0, 0.8)' }
                 }} />
             </Tooltip>
-            <Link to={`/catalog/pet/${_id}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', textDecoration: "none", color: 'black' }}>
+            <Link to={`/catalog/pet/${_id}`}>
                 <Box>
                     <CardMedia
                         ref={imagRef}
@@ -144,45 +144,35 @@ export const CatalogItem = ({
                         image={imageUrl}
                         alt={imageUrl}
                         sx={{
-                            position: 'relative',
                             height: imgHeight / 1.5,
-                            borderRadius: '15px',
                         }}
                     />
                 </Box>
-                <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', p: 0, '&:last-child': { pb: 2 } }}>
+                <CardContent className='card-content'>
                     <Box>
-                        <Typography component="h5" sx={{
-                            py: 1,
-                            fontSize: '1.2em',
-                            lineHeight: '1',
-                            display: '-webkit-box',
-                            overflow: 'hidden',
-                            WebkitBoxOrient: 'vertical',
-                            WebkitLineClamp: 2
-                        }}>
+                        <Typography component="h5" className='title'>
                             {title}
                         </Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', }} >
-                        <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray', }}>
-                            <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }} >
+                        <Typography variant="caption" className='span-row' >
+                            <Typography component='span' className='icon'>
                                 <Tooltip title={<>Статус</>}>
                                     <CircleIcon sx={{ fill: statusColor[status] }} />
                                 </Tooltip>
                             </Typography>
                             {status}
                         </Typography>
-                        <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray' }}>
-                            <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+                        <Typography variant="caption" className='span-row'>
+                            <Typography component='span' className='icon'>
                                 <Tooltip title={<>Местоположение</>}>
                                     <LocationOnIcon sx={{ fill: '#550A21' }} />
                                 </Tooltip>
                             </Typography>
                             {location}
                         </Typography>
-                        <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray' }}>
-                            <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
+                        <Typography variant="caption" className='span-row'>
+                            <Typography component='span' className='icon'>
                                 <Tooltip title={<>Дата на добавяне</>}>
                                     <CalendarMonthIcon sx={{ fill: '#550A21' }} />
                                 </Tooltip>
