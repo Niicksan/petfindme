@@ -2,9 +2,8 @@ import './CatalogItem.scss';
 import { useState, useEffect, useRef } from 'react';
 
 import { Link } from 'react-router-dom';
-import { Card, Box, CardContent, Typography, CardMedia, Tooltip, colors } from '@mui/material';
+import { Card, Box, CardContent, Typography, CardMedia, Tooltip } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import InfoIcon from '@mui/icons-material/Info';
 import CircleIcon from '@mui/icons-material/Circle';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
