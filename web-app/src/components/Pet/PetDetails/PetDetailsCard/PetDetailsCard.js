@@ -1,7 +1,8 @@
-import { Directions } from '@mui/icons-material';
 import './PetDetailsCard.scss';
 
-import { Card, Box, CardContent, Typography, CardMedia } from '@mui/material';
+import { Card, Box, CardContent, Typography } from '@mui/material';
+import { MapContainer, TileLayer, Circle, Tooltip } from 'react-leaflet'
+import ReactImageGallery from 'react-image-gallery';
 
 export const PetDetailsCard = ({
     _id,
@@ -14,17 +15,61 @@ export const PetDetailsCard = ({
     description,
     createdAtFormated,
 }) => {
+    const images = [
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+        {
+            original: imageUrl,
+            thumbnail: imageUrl,
+        },
+    ];
+
+    const center = [42.8672352, 25.3166931]
+    const fillBlueOptions = { fillColor: 'blue' }
+
     return (
         <>
-            <Card className='details-card' sx={{ m: 2, width: '80%', maxWidth: '1920px' }}>
-                <CardMedia component='img'
-                    sx={{ minWidth: '30%', maxWidth: '40%', flex: 1, objectFit: 'cover' }}
-                    className='image'
-                    image={imageUrl}
-                    title={imageUrl}
+            <Card className='details-card' elevation={0} sx={{ m: 2, width: '80%', maxWidth: '1920px' }}>
+                <ReactImageGallery
+                    showBullets={true}
+                    showPlayButton={false}
+                    showIndex={true}
+                    items={images}
                 />
+
                 <Box className='details-card-content-holder'>
-                    <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+                    <CardContent sx={{ display: 'flex', flexDirection: 'column', p: 0, mb: '2rem' }}>
+                        <Typography component='h3' sx={{ fontWeight: 'bold', textAlign: 'left', fontSize: '1.2rem' }} >{title}</Typography>
                         <Box className='details-content-items-holder'>
                             <Box className='details-content-items' >
                                 <Typography color="text.secondary" >
@@ -46,12 +91,23 @@ export const PetDetailsCard = ({
                             <Box className='content-desc' >{description}</Box>
                         </Box>
 
-                        <Box>
+                        <Box sx={{ mt: '1rem' }}>
                             <Typography color="text.secondary" sx={{ textAlign: 'left' }}>
                                 <Typography component='span' className='content-item-left'>Публикувано на: </Typography>{createdAtFormated}
                             </Typography>
                         </Box>
                     </CardContent>
+                    <Box sx={{ width: '100%' }}>
+                        <MapContainer center={center} zoom={15} scrollWheelZoom={true} style={{ width: '100%', height: '400px' }}>
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <Circle center={center} pathOptions={fillBlueOptions} radius={50} >
+                                <Tooltip>Radius of 50 metres</Tooltip>
+                            </Circle>
+                        </MapContainer >
+                    </Box>
                 </Box>
             </Card >
         </>

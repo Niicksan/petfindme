@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { PetDetailsCard } from "./PetDetailsCard/PetDetailsCard";
 import { Loader } from "../../Loader/Loader";
@@ -29,10 +29,6 @@ export const PetDetails = () => {
         <>
             {isLoading && (<Loader />)}
             {!isLoading && (<Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                <Typography gutterBottom variant="h4" component="div" sx={{ display: 'flex', justifyContent: 'center', width: '80%', color: '#550A21', marginTop: '1em' }}>
-                    {pet?.title}
-                </Typography>
-
                 <PetDetailsCard key={pet?._id} {...pet} createdAtFormated={createdAtFormated} />
             </Box>)
             }
