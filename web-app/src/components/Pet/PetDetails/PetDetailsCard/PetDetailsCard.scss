@@ -28,6 +28,20 @@
         .image-gallery-index {
             border-radius: 14px;
         }
+
+        .fullscreen {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .image-gallery-thumbnail {
+            border-radius: 10px;
+
+            .image-gallery-thumbnail-image {
+                border-radius: 5px;
+            }
+        }
     }
 
     .details-card-content-holder {
