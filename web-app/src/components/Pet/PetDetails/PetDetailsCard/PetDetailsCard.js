@@ -1,8 +1,12 @@
 import './PetDetailsCard.scss';
 
+import { Icon } from 'leaflet'
 import { Card, Box, CardContent, Typography } from '@mui/material';
-import { MapContainer, TileLayer, Circle, Tooltip } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle, Tooltip, Marker } from 'react-leaflet'
+
 import ReactImageGallery from 'react-image-gallery';
+import marker from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 export const PetDetailsCard = ({
     _id,
@@ -54,6 +58,18 @@ export const PetDetailsCard = ({
         },
     ];
 
+    const markerIcon = new Icon({
+        iconUrl: marker,
+        iconSize: [25, 41],
+        iconAnchor: [12, 41]
+    })
+
+    const mmarkerShadow = new Icon({
+        iconUrl: markerShadow,
+        iconSize: [41, 41],
+        iconAnchor: [12, 41]
+    })
+
     const center = [42.8672352, 25.3166931]
     const fillBlueOptions = { fillColor: 'blue' }
 
@@ -97,14 +113,17 @@ export const PetDetailsCard = ({
                             </Typography>
                         </Box>
                     </CardContent>
+
                     <Box sx={{ width: '100%' }}>
                         <MapContainer center={center} zoom={15} scrollWheelZoom={true} style={{ width: '100%', height: '400px' }}>
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
+                            <Marker position={center} icon={markerIcon} zIndexOffset={10} />
+                            <Marker position={center} icon={mmarkerShadow} />
                             <Circle center={center} pathOptions={fillBlueOptions} radius={50} >
-                                <Tooltip>Radius of 50 metres</Tooltip>
+                                <Tooltip>Радиус от 50 метра</Tooltip>
                             </Circle>
                         </MapContainer >
                     </Box>
