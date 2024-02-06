@@ -64,7 +64,7 @@ export const PetDetailsCard = ({
         iconAnchor: [12, 41]
     })
 
-    const mmarkerShadow = new Icon({
+    const markerShadowIcon = new Icon({
         iconUrl: markerShadow,
         iconSize: [41, 41],
         iconAnchor: [12, 41]
@@ -121,7 +121,7 @@ export const PetDetailsCard = ({
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
                             <Marker position={center} icon={markerIcon} zIndexOffset={10} />
-                            <Marker position={center} icon={mmarkerShadow} />
+                            <Marker position={center} icon={markerShadowIcon} />
                             <Circle center={center} pathOptions={fillBlueOptions} radius={50} >
                                 <Tooltip>Радиус от 50 метра</Tooltip>
                             </Circle>
