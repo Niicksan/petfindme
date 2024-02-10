@@ -30,7 +30,7 @@ petController.post('/',
 
             const pet = {
                 ...req.body,
-                owner: req.user.id,
+                owner: req.session.user.id,
             };
 
             const item = await createPet(pet);
