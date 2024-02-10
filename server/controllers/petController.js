@@ -78,7 +78,7 @@ petController.put('/:id',
 petController.delete('/:id', preloader(), isOwner(), async (req, res) => {
     try {
         await deletePetById(req.params.id);
-        res.status(204).json({
+        res.status(200).json({
             messageEn: "Item deleted successfully",
             messageBg: "Успешно изтриване"
         });
