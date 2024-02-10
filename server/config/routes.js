@@ -15,7 +15,7 @@ module.exports = (app) => {
 
     app.use('/api/catalog', catalogController);
     app.use('/api/auth', authController);
-    app.use('/api/pet', petController);
+    app.use('/api/pets', petController);
     app.use('/api/user/profile', hasUser(), profileController);
     app.use('/api/contact-us', contactUsController);
     app.use('*', notFoundController);

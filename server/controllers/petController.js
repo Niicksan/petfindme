@@ -8,7 +8,7 @@ const { hasUser, isOwner } = require('../middlewares/guards');
 const preloader = require('../middlewares/preloader');
 
 
-petController.post('/create',
+petController.post('/',
     check('title').isLength({ min: 3 }).withMessage('Title must be at least 3 characters'),
     check('status').isIn(Object.values(status)).withMessage('Please select a valid status'),
     check('location').isLength({ min: 3 }).withMessage('Location must be at least 3 characters'),
