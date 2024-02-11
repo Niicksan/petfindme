@@ -108,8 +108,8 @@ export const CatalogItem = ({
     const imagRef = useRef(null);
 
     const statusColor = {
-        'Изгубено': '#CE0000',
-        'Намерено': 'green',
+        'Изгубен': '#CE0000',
+        'Намерен': 'green',
         'За осиновяване': 'orange'
     }
 
@@ -153,7 +153,7 @@ export const CatalogItem = ({
                             {title}
                         </Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column' }} >
+                    <Box sx={{ display: 'flex', flexDirection: 'column', pt: '0.5rem' }} >
                         <Typography variant="caption" className='span-row' >
                             <Typography component='span' className='icon'>
                                 <Tooltip title={<>Статус</>}>
