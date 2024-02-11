@@ -2,7 +2,7 @@ import { apiUrl } from '../env';
 
 import { requestFactory } from './requester';
 
-const baseUrl = `${apiUrl}/pet`;
+const baseUrl = `${apiUrl}/pets`;
 
 export const petServiceFactory = () => {
     const request = requestFactory();

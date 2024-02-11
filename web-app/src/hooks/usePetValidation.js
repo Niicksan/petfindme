@@ -18,6 +18,7 @@ const statuses = [
 
 export const usePetValidation = () => {
     const urlRegex = new RegExp(/^https?:\/\/.+$/);
+    const phoneRegex = new RegExp(/^\+?\d{5,13}$/);
 
     const [isPetFormValid, setIsPetFormValid] = useState(false);
     const { error, setError, getPetById, onCreatePetSubmit, onEditPetSubmit } = usePetContext();
@@ -32,7 +33,7 @@ export const usePetValidation = () => {
     });
 
     const handleClickTitle = (e) => {
-        if ((e.target.value).length > 3) {
+        if ((e.target.value).length < 3) {
             setError({ ...error, title: true });
         } else {
             setError({ ...error, title: false });
@@ -41,18 +42,18 @@ export const usePetValidation = () => {
         setPetForm({ ...form, title: e.target.value });
     };
 
-    const handleClicStatus = (e) => {
+    const handleClickStatus = (e) => {
         if (statuses.some(x => x.value === e.target.value)) {
-            setError({ ...error, status: true });
-        } else {
             setError({ ...error, status: false });
+        } else {
+            setError({ ...error, status: true });
         }
 
         setPetForm({ ...form, status: e.target.value });
     };
 
     const handleClickLocation = (e) => {
-        if ((e.target.value).length > 3) {
+        if ((e.target.value).length < 3) {
             setError({ ...error, location: true });
         } else {
             setError({ ...error, location: false });
@@ -62,7 +63,7 @@ export const usePetValidation = () => {
     };
 
     const handleClickContactName = (e) => {
-        if ((e.target.value).length > 1) {
+        if ((e.target.value).length < 3) {
             setError({ ...error, contactName: true });
         } else {
             setError({ ...error, contactName: false });
@@ -71,28 +72,18 @@ export const usePetValidation = () => {
         setPetForm({ ...form, contactName: e.target.value });
     };
 
-    const handleClickFuel = (e) => {
-        if (fuels.some(x => x.value === e.target.value)) {
-            setError({ ...error, fuel: true });
+    const handleClickPhone = (e) => {
+        if (!phoneRegex.test(e.target.value)) {
+            setError({ ...error, phone: true });
         } else {
-            setError({ ...error, fuel: false });
+            setError({ ...error, phone: false });
         }
 
-        setPetForm({ ...form, fuel: e.target.value });
-    };
-
-    const handleClickYearOfManufacture = (e) => {
-        if (years.some(x => x.value === e.target.value)) {
-            setError({ ...error, yearOfManufacture: true });
-        } else {
-            setError({ ...error, yearOfManufacture: false });
-        }
-
-        setPetForm({ ...form, yearOfManufacture: e.target.value });
+        setPetForm({ ...form, phone: e.target.value });
     };
 
     const handleClickImageUrl = (e) => {
-        if (urlRegex.test(e.target.value)) {
+        if (!urlRegex.test(e.target.value)) {
             setError({ ...error, imageUrl: true });
         } else {
             setError({ ...error, imageUrl: false });
@@ -101,35 +92,44 @@ export const usePetValidation = () => {
         setPetForm({ ...form, imageUrl: e.target.value });
     };
 
-    const checkIsVehicleFormValid = () => {
+    const handleClickDescription = (e) => {
+        if ((e.target.value).length < 20) {
+            setError({ ...error, description: true });
+        } else {
+            setError({ ...error, description: false });
+        }
+
+        setPetForm({ ...form, description: e.target.value });
+    };
+
+    const checkIsPetFormValid = () => {
         (
-            (error.vinNumber && form.vinNumber !== '') &&
-            (error.make && form.make !== '') &&
-            (error.model && form.model !== '') &&
-            (error.engine && form.engine !== '') &&
-            (error.fuel && form.fuel !== '') &&
-            (error.yearOfManufacture && form.yearOfManufacture !== '') &&
-            (error.imageUrl && form.imageUrl !== '')
-        ) ? setIsVehicleFormValid(true) : setIsVehicleFormValid(false);
+            (!error.title && form.title !== '') &&
+            (!error.status && form.status !== '') &&
+            (!error.location && form.location !== '') &&
+            (!error.contactName && form.contactName !== '') &&
+            (!error.phone && form.phone !== '') &&
+            (!error.imageUrl && form.imageUrl !== '') &&
+            (!error.description && form.description !== '')
+        ) ? setIsPetFormValid(true) : setIsPetFormValid(false);
     };
 
     return {
-        fuels,
-        years,
+        statuses,
         form,
         error,
-        setVehicleForm,
-        isVehicleFormValid,
-        handleClickVinNumber,
-        handleClickMake,
-        handleClickModel,
-        handleClickEngine,
-        handleClickFuel,
-        handleClickYearOfManufacture,
+        setPetForm,
+        isPetFormValid,
+        handleClickTitle,
+        handleClickStatus,
+        handleClickLocation,
+        handleClickContactName,
+        handleClickPhone,
         handleClickImageUrl,
-        getVehicleById,
-        onCreateVehicleSubmit,
-        onEditVehicleSubmit,
-        checkIsVehicleFormValid
+        handleClickDescription,
+        getPetById,
+        onCreatePetSubmit,
+        onEditPetSubmit,
+        checkIsPetFormValid
     };
 };

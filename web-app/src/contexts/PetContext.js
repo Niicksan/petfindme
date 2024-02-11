@@ -10,12 +10,23 @@ export const PetProvider = ({
     children,
 }) => {
     const navigate = useNavigate();
+    const pathname = window.location.pathname;
 
     const [pets, setPets] = useState([]);
     const [pet, setPet] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const catalogService = catalogServiceFactory();
     const petService = petServiceFactory();
+    const [error, setError] = useState({
+        title: false,
+        status: false,
+        location: false,
+        contactName: false,
+        phone: false,
+        imageUrl: false,
+        description: false,
+        serverErrors: false
+    });
 
     useEffect(() => {
         setIsLoading(true);
@@ -26,12 +37,24 @@ export const PetProvider = ({
             });
     }, []);
 
+    useEffect(() => {
+        setError({
+            title: false,
+            status: false,
+            location: false,
+            contactName: false,
+            phone: false,
+            imageUrl: false,
+            description: false,
+            serverErrors: false
+        });
+    }, [pathname]);
+
     const getPetById = async (petId) => {
         try {
             const pet = await petService.getPetById(petId);
 
             return pet;
-
         } catch (err) {
             if (err.messageEn === "Item doesn't exist") {
                 navigate('/404');
@@ -41,12 +64,61 @@ export const PetProvider = ({
         }
     };
 
+    const onCreatePetSubmit = async (data) => {
+        try {
+            const newPet = await petService.createPet(data);
+
+            setPets(state => [newPet, ...state]);
+            navigate('/');
+        } catch (err) {
+            setError({ ...error, serverErrors: err?.message });
+
+            if (err.messageEn === "Access denied! You don't have rights to access this page!") {
+                navigate('/403');
+            }
+        }
+    };
+
+    const onEditPetSubmit = async (petId, data) => {
+        try {
+            const pet = await petService.editPet(petId, data);
+
+            setPets(state => state.map(p => p._id === petId ? pet : p))
+            navigate('/');
+        } catch (err) {
+            setError({ ...error, serverErrors: err?.message });
+
+            if (err.messageEn === "Access denied! You don't have rights to access this page!") {
+                navigate('/403');
+            }
+        }
+    };
+
+    const onDeletePetSubmit = async (petId) => {
+        try {
+            await petService.deletePet(petId);
+
+            setPets(state => state.filter(pet => pet._id !== petId));
+        } catch (err) {
+            setError({ ...error, serverErrors: err?.message });
+
+            if (err.messageEn === "Access denied! You don't have rights to access this page!") {
+                navigate('/403');
+            }
+        }
+    };
+
     const contextValues = {
         pets,
         pet,
         setPet,
+        error,
+        setError,
+        isLoading,
         getPetById,
-        isLoading
+        onCreatePetSubmit,
+        onEditPetSubmit,
+        onDeletePetSubmit,
     };
 
     return (
