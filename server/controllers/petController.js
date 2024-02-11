@@ -13,7 +13,7 @@ petController.post('/',
     check('status').isIn(Object.values(status)).withMessage('Please select a valid status'),
     check('location').isLength({ min: 3 }).withMessage('Location must be at least 3 characters'),
     check('contactName').isLength({ min: 3 }).withMessage('Name must be at least 3 characters'),
-    check('phone').isNumeric().withMessage('Please type a valid number'),
+    check('phone').matches(/^\+?\d{5,13}$/).withMessage('Please enter a valid phone number'),
     check('description').isLength({ min: 20 }).withMessage('Description must be at least 20 characters'),
     hasUser(),
     async (req, res) => {
@@ -48,12 +48,12 @@ petController.get('/:id', preloader(), async (req, res) => {
     res.json(item);
 });
 
-petController.put('/:id',
+petController.patch('/:id',
     check('title').isLength({ min: 3 }).withMessage('Title must be at least 3 characters long'),
     check('status').isIn(Object.values(status)).withMessage('Please select a valid status'),
     check('location').isLength({ min: 3 }).withMessage('Location must be at least 3 characters long'),
     check('contactName').isLength({ min: 3 }).withMessage('Name must be at least 3 characters long'),
-    check('phone').isNumeric().withMessage('Please type a valid number'),
+    check('phone').matches(/^\+?\d{5,13}$/).withMessage('Please enter a valid phone number'),
     check('description').isLength({ min: 20 }).withMessage('Description must be at least 20 characters long'),
     preloader(),
     isOwner(),
