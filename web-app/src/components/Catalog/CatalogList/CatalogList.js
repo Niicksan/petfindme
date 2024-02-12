@@ -27,7 +27,7 @@ export const CatalogList = () => {
             {!isLoading && pets.length === 0 && (
                 <>
                     <h3 className="no-articles-title">Все още няма добавени сигнали за изгубени или намерени животни.</h3>
-                    <Link to="/vehicle/create" className="add-button">
+                    <Link to="/pet/create" className="add-button">
                         Подай сигнал
                     </Link>
                 </>
