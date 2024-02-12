@@ -79,7 +79,7 @@ export const PetProvider = ({
         }
     };
 
-    const onEditPetSubmit = async (petId, data) => {
+    const onEditPetSubmit = async (data, petId) => {
         try {
             const pet = await petService.editPet(petId, data);
 

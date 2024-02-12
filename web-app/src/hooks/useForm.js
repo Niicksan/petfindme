@@ -9,7 +9,7 @@ export const useForm = (initialValues, onSubmitHandler, petId) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        onSubmitHandler(petId, values);
+        onSubmitHandler(values, petId);
     };
 
     return {
