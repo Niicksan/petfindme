@@ -133,7 +133,7 @@ export const MyProfile = () => {
                                 }
                             }}
                             sx={{
-                                ".MuiTab-root.Mui-selected": {
+                                ".MuiTab-root.Mui-selected, .MuiTab-root.MuiTab-Mui-selected": {
                                     color: '#550A21'
                                 }
                             }}
