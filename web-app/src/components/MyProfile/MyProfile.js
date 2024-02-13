@@ -129,13 +129,12 @@ export const MyProfile = () => {
                             aria-label="lab API tabs example"
                             TabIndicatorProps={{
                                 sx: {
-                                    backgroundColor: '#550A21',
-                                    color: "red"
-                                },
+                                    backgroundColor: '#550A21'
+                                }
                             }}
                             sx={{
-                                ".Mui-selected": {
-                                    color: '#550A21',
+                                ".MuiTab-root.Mui-selected": {
+                                    color: '#550A21'
                                 }
                             }}
                         >
