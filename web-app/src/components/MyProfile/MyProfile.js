@@ -9,10 +9,12 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { userServiceFactory } from '../../services/userService';
 
 import { Loader } from "../Loader/Loader";
-import { Box, Card, CardMedia, Typography, Tab } from '@mui/material';
+import { Grid, Box, Card, CardMedia, Typography, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+
+import { ProfileItem } from './ProfileItem/ProfileItem'
 
 export const MyProfile = () => {
     const { profileData, setProfileData } = useAuthContext();
@@ -41,8 +43,9 @@ export const MyProfile = () => {
             {isLoading && (<Loader />)}
             {!isLoading && (
                 <Box className="profile">
-                    <Card >
+                    <Card className='profile-card'>
                         <CardMedia
+                            className='profile-image'
                             alt='My profile picture'
                             component='img'
                             title='My profile picture'
@@ -73,7 +76,7 @@ export const MyProfile = () => {
                             <Box sx={{ display: 'flex', justifyContent: 'space-evenly', my: '2rem' }} >
                                 <Typography component="p" >
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
-                                        5
+                                        {profileData.myPets?.length}
                                     </Typography>
                                     <Typography component="p">
                                         Сигнали
@@ -82,7 +85,7 @@ export const MyProfile = () => {
 
                                 <Typography component="p" >
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
-                                        10
+                                        {profileData.likedPets?.length}
                                     </Typography>
                                     <Typography component="p" >
                                         Любими
@@ -118,8 +121,32 @@ export const MyProfile = () => {
                                     <Tab icon={<FavoriteIcon />} iconPosition="start" label="Любими" value="2" />
                                 </TabList>
                             </Box>
-                            <TabPanel value="1">Нямате подадени сигнали.</TabPanel>
-                            <TabPanel value="2">Колекцията Любими е празна.</TabPanel>
+                            <TabPanel value="1" sx={{ px: 1 }}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: '1920px' }}>
+                                    <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 1, md: 1, lg: 1 }}>
+                                        {profileData.myPets?.length && (profileData.myPets.map(x =>
+                                            <Grid item xs={1} sm={1} md={1} lg={1} key={x._id}>
+                                                <ProfileItem {...x} />
+                                            </Grid>
+                                        ))}
+
+                                    </Grid>
+                                    {!profileData.myPets?.length && (<Typography component="p" >Нямате подадени сигнали.</Typography>)}
+                                </Box>
+
+                            </TabPanel>
+                            <TabPanel value="2">
+                                <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: '1920px' }}>
+                                    <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 1, md: 1, lg: 1 }}>
+                                        {profileData.likedPets?.length && (profileData.likedPets.map(x =>
+                                            <Grid item xs={1} sm={1} md={1} lg={1} key={x._id}>
+                                                <ProfileItem {...x} isFavourite={true} />
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                    {!profileData.likedPets?.length && (<Typography component="p" >Колекцията Любими е празна.</Typography>)}
+                                </Box>
+                            </TabPanel>
                         </TabContext>
                     </Box>
                 </Box>

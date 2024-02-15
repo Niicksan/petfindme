@@ -6,7 +6,7 @@ $red: #f44336;
     width: 80%;
     margin: 8rem auto 0;
 
-    .MuiCard-root {
+    .profile-card {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -17,7 +17,7 @@ $red: #f44336;
         box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
         margin: 0 auto;
 
-        .MuiCardMedia-img {
+        .profile-image {
             position: absolute;
             top: 0;
             left: 50%;
@@ -51,175 +51,6 @@ $red: #f44336;
             }
         }
     }
-
-    .my-pets-header {
-        h2 {
-            text-align: center;
-            color: $navbar-red;
-            line-height: 1.2em;
-            margin: 1.5em 0 auto;
-        }
-    }
-
-    .grid-container {
-        display: grid;
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: 100%;
-        grid-row-gap: 1.3em;
-        line-height: 1.2em;
-        margin-top: 2em;
-
-        .ad-container {
-            display: grid;
-            border-radius: 15px;
-            grid-template-columns: 85% 10%;
-            -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-            -moz-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-            box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-
-            a,
-            a:hover,
-            a:visited,
-            a:valid,
-            a:active {
-                color: black;
-                text-decoration: none;
-            }
-
-            a {
-                display: grid;
-                grid-template-columns: 30% 50%;
-                grid-column-gap: 1em;
-                align-items: center;
-
-                img {
-                    width: 100%;
-                    height: auto;
-                    border-radius: 15px;
-
-                }
-
-                .ad-section-container {
-                    padding: 0.5em 0;
-
-                    .ad-head-container {
-                        .title {
-                            margin-bottom: 0.3em;
-                        }
-                    }
-
-                    .ad-head-container,
-                    .ad-main-container,
-                    .ad-foot-container {
-                        margin-bottom: 0.5em;
-                        margin-right: 0.8em;
-                    }
-
-                    .ad-head-container,
-                    .ad-footer-container {
-                        .bold {
-                            color: $navbar-red;
-                            font-weight: bold !important;
-                        }
-                    }
-                }
-            }
-
-            .buttons-handler {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                gap: 0.7em;
-
-                button {
-                    background: $white;
-                    text-align: center;
-                    font-weight: bold;
-                    color: $white;
-                    padding: 10px;
-                    border-radius: 10px;
-                }
-
-                .edit,
-                .delete {
-                    a {
-                        display: flex;
-                        justify-content: center;
-                        text-align: center;
-                        padding: 0;
-                    }
-                }
-
-                .edit {
-                    border: 1px solid $navbar-red;
-
-                    a {
-                        color: $navbar-red;
-                    }
-
-                    &:hover {
-                        background-color: $navbar-red;
-
-                        a {
-                            color: $white;
-                        }
-                    }
-                }
-
-                .delete {
-                    border: 1px solid $red;
-
-                    a {
-                        color: $red;
-                    }
-
-                    &:hover {
-                        background-color: $red;
-
-                        a {
-                            color: $white;
-                        }
-                    }
-                }
-
-            }
-        }
-
-        .section-not-found {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 50px;
-            -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-            -moz-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-            box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.7);
-
-            h2 {
-                color: $navbar-red;
-                margin: 1em auto;
-            }
-
-            p {
-                display: flex;
-                flex-direction: row;
-                font-size: 1.1em;
-
-                a,
-                a:visited,
-                a:valid,
-                a:active {
-                    color: $navbar-red;
-                    font-weight: bold;
-                    text-decoration: none;
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
 }
 
 @media screen and (max-width: 480px) {
@@ -240,50 +71,14 @@ $red: #f44336;
         width: 90%;
         margin: 6rem auto 0;
 
-        .MuiCard-root {
-            .MuiCardMedia-img {
+        .profile-card {
+            .profile-image {
                 width: 10rem;
                 height: 10rem;
             }
 
             .user-profile-name {
                 margin: 2rem 0;
-            }
-        }
-
-        .grid-container {
-            .ad-container {
-                display: flex !important;
-                flex-direction: column;
-
-                .buttons-handler {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    gap: 0.7em;
-                    margin: 1em 0;
-
-                    button {
-                        min-width: 75px;
-                        padding: 15px;
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 990px) {
-    .profile {
-        .grid-container {
-            display: grid;
-            grid-template-columns: 100%;
-
-            .ad-container {
-                a {
-                    display: grid;
-                    grid-template-columns: 38% 60%;
-                }
             }
         }
     }
