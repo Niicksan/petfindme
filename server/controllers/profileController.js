@@ -8,6 +8,16 @@ const { parseError } = require('../utils/errorParser');
 profileController.get('/user-info', async (req, res) => {
     try {
         const user = await getUserInfo(req.session.user.id);
+        const userPets = await getAllPetsCreatedByUser(req.session.user.id);
+        const userLikedPets = await getAllPetsLikedByUser(req.session.user.id);
+
+        userPets.map(pet => {
+            user.myPets.push(pet);
+        });
+
+        userLikedPets.map(pet => {
+            user.likedPets.push(pet);
+        });
 
         res.set('Cache-Control', 'max-age=600').json(user);
     } catch (error) {
