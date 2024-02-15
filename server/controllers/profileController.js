@@ -19,7 +19,7 @@ profileController.get('/user-info', async (req, res) => {
             user.likedPets.push(pet);
         });
 
-        res.set('Cache-Control', 'max-age=600').json(user);
+        res.json(user);
     } catch (error) {
         const message = parseError(error);
         console.error(message);
