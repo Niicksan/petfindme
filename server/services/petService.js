@@ -18,11 +18,11 @@ async function getAdoptionPets() {
 }
 
 async function getAllPetsCreatedByUser(userId) {
-    return Pet.find({ owner: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 });
+    return Pet.find({ owner: userId }, { owner: 0, contactName: 0, phone: 0, description: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 });
 }
 
 async function getAllPetsLikedByUser(userId) {
-    return Pet.find({ likedByUsers: userId }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 });
+    return Pet.find({ likedByUsers: userId }, { owner: 0, contactName: 0, phone: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 });
 }
 
 async function getPetById(id) {
@@ -56,8 +56,21 @@ async function deletePetById(id) {
 async function addPetToLikedList(petId, userId) {
     const pet = await getPetById(petId);
 
-    pet.likedByUsers.push(userId)
+    pet.likedByUsers.push(userId);
     return pet.save();
+}
+
+async function removePetFromLikedList(petId, userId) {
+    const pet = await getPetById(petId);
+
+    pet.likedByUsers.remove(userId);
+    return pet.save();
+}
+
+async function isPetLikedFromUser(petId, userId) {
+    const pet = await getPetById(petId);
+
+    return pet.likedByUsers.includes(userId);
 }
 
 module.exports = {
@@ -71,5 +84,7 @@ module.exports = {
     createPet,
     updatePetById,
     deletePetById,
-    addPetToLikedList
+    addPetToLikedList,
+    removePetFromLikedList,
+    isPetLikedFromUser
 }

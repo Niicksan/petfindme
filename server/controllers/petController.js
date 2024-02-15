@@ -1,7 +1,7 @@
 const petController = require('express').Router();
 
 const { check, validationResult } = require('express-validator');
-const { createPet, updatePetById, deletePetById } = require('../services/petService');
+const { createPet, updatePetById, deletePetById, isPetLikedFromUser, addPetToLikedList, removePetFromLikedList } = require('../services/petService');
 const { parseError } = require('../utils/errorParser');
 const status = require('../enums/petStatus');
 const { hasUser, isOwner } = require('../middlewares/guards');
@@ -82,6 +82,62 @@ petController.delete('/:id', preloader(), isOwner(), async (req, res) => {
             messageEn: "Item deleted successfully",
             messageBg: "Успешно изтриване"
         });
+    } catch (error) {
+        const message = parseError(error);
+        console.error(message);
+        res.status(400).json({ message });
+    }
+});
+
+petController.get('/favourite/add/:id', hasUser(), async (req, res) => {
+    try {
+        let message = {};
+        const isLiked = await isPetLikedFromUser(req.params.id, req.session.user.id);
+
+        if (!isLiked) {
+            await addPetToLikedList(req.params.id, req.session.user.id);
+
+            message = {
+                messageEn: "Successfully added to favorites",
+                messageBg: "Успешно добавяне в Любими"
+            }
+        } else {
+            message = {
+                messageEn: "Item already exists",
+                messageBg: "Сигналът вече е добавен в Любими"
+            }
+        }
+
+        res.status(200).json(message);
+    } catch (error) {
+        const message = parseError(error);
+        console.error(message);
+        res.status(400).json({ message });
+    }
+});
+
+petController.get('/favourite/remove/:id', hasUser(), async (req, res) => {
+    try {
+        let message = {};
+
+        const isLiked = await isPetLikedFromUser(req.params.id, req.session.user.id);
+
+        if (isLiked) {
+            await removePetFromLikedList(req.params.id, req.session.user.id);
+
+            message = {
+                messageEn: "Successfully removed from favorites",
+                messageBg: "Успешно премахване от Любими"
+            }
+
+        } else {
+            message = {
+                messageEn: "Item does't exists",
+                messageBg: "сигналът е вече премагнат от Любими"
+            }
+        }
+
+        res.status(200).json(message);
     } catch (error) {
         const message = parseError(error);
         console.error(message);
