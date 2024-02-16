@@ -124,7 +124,7 @@ export const MyProfile = () => {
                             <TabPanel value="1" sx={{ px: 1 }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: '1920px' }}>
                                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 1, md: 1, lg: 1 }}>
-                                        {profileData.myPets?.length !== 0 && (profileData.myPets.map(x =>
+                                        {profileData.myPets?.length !== 0 && (profileData.myPets?.map(x =>
                                             <Grid item xs={1} sm={1} md={1} lg={1} key={x._id}>
                                                 <ProfileItem {...x} />
                                             </Grid>
@@ -134,10 +134,10 @@ export const MyProfile = () => {
                                 </Box>
 
                             </TabPanel>
-                            <TabPanel value="2">
-                                <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: '1920px', pl: '8px' }}>
+                            <TabPanel value="2" sx={{ pl: '8px' }}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: '1920px' }}>
                                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 1, md: 1, lg: 1 }}>
-                                        {profileData.likedPets?.length !== 0 && (profileData.likedPets.map(x =>
+                                        {profileData.likedPets?.length !== 0 && (profileData.likedPets?.map(x =>
                                             <Grid item xs={1} sm={1} md={1} lg={1} key={x._id}>
                                                 <ProfileItem {...x} isFavourite={true} />
                                             </Grid>
