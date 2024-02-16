@@ -134,7 +134,7 @@ export const MyProfile = () => {
                                 </Box>
 
                             </TabPanel>
-                            <TabPanel value="2" sx={{ pl: '8px' }}>
+                            <TabPanel value="2" sx={{ px: 1 }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: '1920px' }}>
                                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 1, md: 1, lg: 1 }}>
                                         {profileData.likedPets?.length !== 0 && (profileData.likedPets?.map(x =>
