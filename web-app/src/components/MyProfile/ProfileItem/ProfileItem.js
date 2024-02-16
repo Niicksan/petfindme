@@ -99,7 +99,7 @@ export const ProfileItem = ({
                     <>
                         {!isFavourite && (
                             <>
-                                <Link to={`/catalog/pet/${_id}`}>
+                                <Link to={`/pet/edit/${_id}`}>
                                     <Button size="small" variant="text" className="icon-button" sx={{ top: 0, right: 1, color: '#262626' }} >
                                         <EditIcon />
                                     </Button>
@@ -129,7 +129,7 @@ export const ProfileItem = ({
                         {!isFavourite && (
                             <>
                                 <Button size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ borderRadius: '5px' }} >Изтрий</Button>
-                                <Link to={`/catalog/pet/${_id}`}>
+                                <Link to={`/pet/edit/${_id}`}>
                                     <Button component={Link} size="small" variant="outlined" startIcon={<EditIcon />} sx={{ border: '1px solid #161616', borderRadius: '5px', color: '#262626' }} >Редактирай</Button>
                                 </Link>
                             </>
