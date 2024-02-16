@@ -43,7 +43,7 @@ export const ProfileItem = ({
         <Card className='profile-item-card' ref={cardRef} sx={{ borderRadius: '10px' }}>
             <Link to={`/catalog/pet/${_id}`} className='card-link'>
                 <Box >
-                    {isFavourite && (<FavoriteIcon sx={{
+                    {(cardWidth <= 524 && isFavourite) && (<FavoriteIcon sx={{
                         position: 'absolute', top: '5px', right: '5px',
                         fill: 'rgba(135, 0, 0, 0.8)', stroke: 'white',
                         strokeWidth: 1, p: '2px', m: '5px', borderRadius: 50,
