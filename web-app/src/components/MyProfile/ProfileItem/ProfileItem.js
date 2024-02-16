@@ -112,7 +112,7 @@ export const ProfileItem = ({
                         {isFavourite && (
                             <>
                                 <FavoriteIcon sx={{
-                                    position: 'absolute', top: '0px', right: '1px',
+                                    position: 'absolute', top: '0px', right: '0px',
                                     fill: 'rgba(135, 0, 0, 0.8)', stroke: 'white',
                                     strokeWidth: 1, p: '2px', m: '5px', borderRadius: 50,
                                     fontSize: '2em', zIndex: 50
