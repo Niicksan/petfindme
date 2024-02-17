@@ -15,20 +15,22 @@ export const ProfileProvider = ({
     const navigate = useNavigate();
 
     const { handleOpenSnackbar, setMessage } = useSnackbarContext();
-    const { profileData, setProfileData } = useAuthContext();
+    const { isAuthenticated, profileData, setProfileData } = useAuthContext();
     const { pets } = usePetContext();
     const [isLoading, setIsLoading] = useState(false);
     const userService = userServiceFactory();
     const petService = petServiceFactory();
 
     useEffect(() => {
-        setIsLoading(true);
-        userService.getUserInfo()
-            .then(result => {
-                setProfileData(result);
-                setIsLoading(false);
-            })
-    }, []);
+        if (isAuthenticated) {
+            setIsLoading(true);
+            userService.getUserInfo()
+                .then(result => {
+                    setProfileData(result);
+                    setIsLoading(false);
+                })
+        }
+    }, [isAuthenticated]);
 
     const addtoFavouriteById = async (petId) => {
         try {
