@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { catalogServiceFactory } from '../services/catalogService';
 import { petServiceFactory } from '../services/petService';
+import { useAuthContext } from './AuthContext';
 
 export const PetContext = createContext();
 
@@ -12,6 +13,7 @@ export const PetProvider = ({
     const navigate = useNavigate();
     const pathname = window.location.pathname;
 
+    const { profileData, setProfileData } = useAuthContext();
     const [pets, setPets] = useState([]);
     const [pet, setPet] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -69,6 +71,7 @@ export const PetProvider = ({
             const newPet = await petService.createPet(data);
 
             setPets(state => [newPet, ...state]);
+            setProfileData({ ...profileData, myPets: [newPet, ...profileData.myPets] });
             navigate('/');
         } catch (err) {
             setError({ ...error, serverErrors: err?.message });
@@ -83,7 +86,7 @@ export const PetProvider = ({
         try {
             const pet = await petService.editPet(petId, data);
 
-            setPets(state => state.map(p => p._id === petId ? pet : p))
+            setPets(state => state.map(p => p._id === petId ? pet : p));
             navigate('/');
         } catch (err) {
             setError({ ...error, serverErrors: err?.message });
@@ -99,6 +102,7 @@ export const PetProvider = ({
             await petService.deletePet(petId);
 
             setPets(state => state.filter(pet => pet._id !== petId));
+            setProfileData({ ...profileData, myPets: [...profileData.myPets.filter(pet => pet._id !== petId)] });
         } catch (err) {
             setError({ ...error, serverErrors: err?.message });
 

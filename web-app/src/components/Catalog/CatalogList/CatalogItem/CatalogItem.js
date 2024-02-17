@@ -1,12 +1,16 @@
 import './CatalogItem.scss';
-import { useState, useEffect, useRef } from 'react';
 
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+
 import { Card, Box, CardContent, Typography, CardMedia, Tooltip } from '@mui/material';
+
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CircleIcon from '@mui/icons-material/Circle';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+
+import { useProfileContext } from '../../../../contexts/ProfileContext';
 
 // export const CatalogItem = ({
 //     _id,
@@ -103,7 +107,7 @@ export const CatalogItem = ({
     imageUrl,
     updatedAt
 }) => {
-    const [imgHeight, setImgHeight] = useState();
+    const { addtoFavouriteById } = useProfileContext();
     const [imgWidth, setImgWidth] = useState();
     const imagRef = useRef(null);
 
@@ -111,7 +115,7 @@ export const CatalogItem = ({
         'Изгубен': '#CE0000',
         'Намерен': 'green',
         'За осиновяване': 'orange'
-    }
+    };
 
     const date = new Date(updatedAt);
     const createdAt = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -119,10 +123,6 @@ export const CatalogItem = ({
     useEffect(() => {
         setImgWidth(imagRef.current.getBoundingClientRect().width);
     }, []);
-
-    useEffect(() => {
-        setImgHeight(imgWidth);
-    }, [imgWidth]);
 
     return (
         <Card elevation={0} className='card' sx={{ position: 'relative', width: '100%', height: '100%' }}>
@@ -132,7 +132,10 @@ export const CatalogItem = ({
                     fill: 'rgba(69, 69, 69, 0.8)', stroke: 'white',
                     strokeWidth: 1, p: '2px', m: '5px', borderRadius: 50,
                     fontSize: '2em', zIndex: 50, '&:hover': { fill: 'rgba(135, 0, 0, 0.8)' }
-                }} />
+                }}
+                    onClick={() => {
+                        addtoFavouriteById(_id);
+                    }} />
             </Tooltip>
             <Link to={`/catalog/pet/${_id}`}>
                 <Box>
@@ -143,7 +146,7 @@ export const CatalogItem = ({
                         image={imageUrl}
                         alt={imageUrl}
                         sx={{
-                            height: imgHeight / 1.5,
+                            height: imgWidth / 1.5,
                         }}
                     />
                 </Box>

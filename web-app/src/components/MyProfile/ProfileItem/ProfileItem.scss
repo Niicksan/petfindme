@@ -66,6 +66,10 @@
             padding: 8px;
             margin: 0;
         }
+
+        .MuiButton-startIcon {
+            margin-right: 2px;
+        }
     }
 }
 
@@ -92,6 +96,15 @@
             .icon-button {
                 position: relative;
             }
+        }
+    }
+}
+
+
+@media screen and (min-width: 601px) {
+    .profile-item-card {
+        .action {
+            width: 32px;
         }
     }
 }
