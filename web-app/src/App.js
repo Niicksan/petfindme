@@ -7,6 +7,7 @@ import { Box, Toolbar } from '@mui/material';
 import { AuthProvider } from './contexts/AuthContext';
 import { PetProvider } from './contexts/PetContext';
 import { ProfileProvider } from './contexts/ProfileContext';
+import { SnackarProvider } from './contexts/SnackbarContext';
 
 import { Navigation } from './components/Navigation/Navigation';
 import { Home } from './components/Catalog/Home/Home';
@@ -17,34 +18,36 @@ import { MyProfile } from './components/MyProfile/MyProfile';
 import { Logout } from './components/Logout/Logout';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
+import { SnackbarModal } from './components/SnackbarModal/SnackbarModal';
 import { Footer } from './components/Footer/Footer';
 
 function App() {
     return (
-        <AuthProvider >
-            <PetProvider >
-                <ProfileProvider>
-                    <div className="app">
-                        <Navigation />
-                        <Box component="main" className="main">
-                            <Toolbar />
-                            <Routes>
-                                <Route path='/' element={<Home />} />
-                                <Route path='/catalog/pet/:id' element={< PetDetails />} />
-                                <Route path='/catalog/pet/edit/:id' element={< EditPet />} />
-                                {/* <Route element={<AuthGuard />}> */}
-                                {/* <Route element={<VehicleOwnerGuard />}> */}
+        <SnackarProvider>
+            <AuthProvider >
+                <PetProvider >
+                    <ProfileProvider>
+                        <div className="app">
+                            <Navigation />
+                            <Box component="main" className="main">
+                                <Toolbar />
+                                <Routes>
+                                    <Route path='/' element={<Home />} />
+                                    <Route path='/catalog/pet/:id' element={< PetDetails />} />
+                                    <Route path='/catalog/pet/edit/:id' element={< EditPet />} />
+                                    {/* <Route element={<AuthGuard />}> */}
+                                    {/* <Route element={<VehicleOwnerGuard />}> */}
 
-                                {/* </Route> */}
-                                <Route path='/pet/create' element={<CreatePet />} />
-                                <Route path='/user/my-profile' element={<MyProfile />} />
-                                <Route path='/auth/logout' element={<Logout />} />
-                                {/* </Route> */}
-                                {/* <Route element={<HasUserGuard />}>*/}
+                                    {/* </Route> */}
+                                    <Route path='/pet/create' element={<CreatePet />} />
+                                    <Route path='/user/my-profile' element={<MyProfile />} />
+                                    <Route path='/auth/logout' element={<Logout />} />
+                                    {/* </Route> */}
+                                    {/* <Route element={<HasUserGuard />}>*/}
 
-                                <Route path='/auth/login' element={<Login />} />
-                                <Route path='/auth/register' element={<Register />} />
-                                {/*
+                                    <Route path='/auth/login' element={<Login />} />
+                                    <Route path='/auth/register' element={<Register />} />
+                                    {/*
                                 </Route>
                                 <Route path='/about' element={<About />} />
                                 <Route path='/contacts' element={<Contacts />} />
@@ -53,15 +56,17 @@ function App() {
                                 <Route path="*" element={<NotFound />} /> 
                             */}
 
-                            </Routes>
-                            <Toolbar />
-                        </Box>
+                                </Routes>
+                                <Toolbar />
+                            </Box>
 
-                        <Footer />
-                    </div>
-                </ProfileProvider>
-            </PetProvider >
-        </AuthProvider >
+                            <SnackbarModal />
+                            <Footer />
+                        </div>
+                    </ProfileProvider>
+                </PetProvider >
+            </AuthProvider >
+        </SnackarProvider>
     );
 }
 

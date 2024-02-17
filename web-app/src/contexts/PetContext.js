@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { catalogServiceFactory } from '../services/catalogService';
 import { petServiceFactory } from '../services/petService';
+import { useSnackbarContext } from './SnackbarContext';
 import { useAuthContext } from './AuthContext';
 
 export const PetContext = createContext();
@@ -13,6 +14,7 @@ export const PetProvider = ({
     const navigate = useNavigate();
     const pathname = window.location.pathname;
 
+    const { handleOpenSnackbar, setMessage } = useSnackbarContext();
     const { profileData, setProfileData } = useAuthContext();
     const [pets, setPets] = useState([]);
     const [pet, setPet] = useState([]);
@@ -72,7 +74,11 @@ export const PetProvider = ({
 
             setPets(state => [newPet, ...state]);
             setProfileData({ ...profileData, myPets: [newPet, ...profileData.myPets] });
-            navigate('/');
+
+            setMessage('Сигналът беше подаден успешно!');
+            handleOpenSnackbar();
+
+            navigate('/user/my-profile');
         } catch (err) {
             setError({ ...error, serverErrors: err?.message });
 
@@ -87,7 +93,11 @@ export const PetProvider = ({
             const pet = await petService.editPet(petId, data);
 
             setPets(state => state.map(p => p._id === petId ? pet : p));
-            navigate('/');
+
+            setMessage('Успешно редактиране!');
+            handleOpenSnackbar();
+
+            navigate('/user/my-profile');
         } catch (err) {
             setError({ ...error, serverErrors: err?.message });
 
@@ -99,10 +109,13 @@ export const PetProvider = ({
 
     const onDeletePetSubmit = async (petId) => {
         try {
-            await petService.deletePet(petId);
+            const response = await petService.deletePet(petId);
 
             setPets(state => state.filter(pet => pet._id !== petId));
             setProfileData({ ...profileData, myPets: [...profileData.myPets.filter(pet => pet._id !== petId)] });
+
+            setMessage(response.messageBg);
+            handleOpenSnackbar();
         } catch (err) {
             setError({ ...error, serverErrors: err?.message });
 

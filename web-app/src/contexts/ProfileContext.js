@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useSnackbarContext } from "../contexts/SnackbarContext";
 import { useAuthContext } from '../contexts/AuthContext';
 import { usePetContext } from '../contexts/PetContext';
 import { userServiceFactory } from '../services/userService';
@@ -13,6 +14,7 @@ export const ProfileProvider = ({
 }) => {
     const navigate = useNavigate();
 
+    const { handleOpenSnackbar, setMessage } = useSnackbarContext();
     const { profileData, setProfileData } = useAuthContext();
     const { pets } = usePetContext();
     const [isLoading, setIsLoading] = useState(false);
@@ -30,11 +32,16 @@ export const ProfileProvider = ({
 
     const addtoFavouriteById = async (petId) => {
         try {
-            await petService.addtoFavourite(petId);
+            const response = await petService.addtoFavourite(petId);
 
-            const likedPet = pets.find(pet => pet._id === petId);
+            if (response.messageBg !== 'Сигналът вече е добавен в Любими!') {
+                const likedPet = pets.find(pet => pet._id === petId);
 
-            setProfileData({ ...profileData, likedPets: [likedPet, ...profileData.likedPets] });
+                setProfileData({ ...profileData, likedPets: [likedPet, ...profileData.likedPets] });
+            }
+
+            setMessage(response.messageBg);
+            handleOpenSnackbar();
         } catch (err) {
             if (err.messageEn === "Access denied! You don't have rights to access this page!") {
                 navigate('/403');
@@ -44,9 +51,11 @@ export const ProfileProvider = ({
 
     const removeFromFavouriteById = async (petId) => {
         try {
-            await petService.removeFromFavourite(petId);
+            const response = await petService.removeFromFavourite(petId);
 
             setProfileData({ ...profileData, likedPets: [...profileData.likedPets.filter(pet => pet._id !== petId)] });
+            setMessage(response.messageBg);
+            handleOpenSnackbar();
         } catch (err) {
             if (err.messageEn === "Access denied! You don't have rights to access this page!") {
                 navigate('/403');
