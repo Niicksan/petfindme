@@ -80,7 +80,7 @@ petController.delete('/:id', preloader(), isOwner(), async (req, res) => {
         await deletePetById(req.params.id);
         res.status(200).json({
             messageEn: "Item deleted successfully",
-            messageBg: "Успешно изтриване"
+            messageBg: "Успешно изтриване!"
         });
     } catch (error) {
         const message = parseError(error);
@@ -99,12 +99,12 @@ petController.get('/favourite/add/:id', hasUser(), async (req, res) => {
 
             message = {
                 messageEn: "Successfully added to favorites",
-                messageBg: "Успешно добавяне в Любими"
+                messageBg: "Успешно добавяне в Любими!"
             }
         } else {
             message = {
                 messageEn: "Item already exists",
-                messageBg: "Сигналът вече е добавен в Любими"
+                messageBg: "Сигналът вече е добавен в Любими!"
             }
         }
 
@@ -127,13 +127,13 @@ petController.get('/favourite/remove/:id', hasUser(), async (req, res) => {
 
             message = {
                 messageEn: "Successfully removed from favorites",
-                messageBg: "Успешно премахване от Любими"
+                messageBg: "Успешно премахване от Любими!"
             }
 
         } else {
             message = {
                 messageEn: "Item does't exists",
-                messageBg: "сигналът е вече премагнат от Любими"
+                messageBg: "сигналът е вече премахнат от Любими!"
             }
         }
 
