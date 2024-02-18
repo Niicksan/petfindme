@@ -22,7 +22,7 @@ import { SnackbarModal } from './components/SnackbarModal/SnackbarModal';
 import { Footer } from './components/Footer/Footer';
 
 import { AuthGuard } from './guards/AuthGuard';
-// import { OwnerGuard } from './guards/OwnerGuard';
+import { OwnerGuard } from './guards/OwnerGuard';
 import { HasUserGuard } from './guards/HasUserGuard';
 
 function App() {
@@ -42,9 +42,9 @@ function App() {
                                         <Route path='/pet/create' element={<CreatePet />} />
                                         <Route path='/user/my-profile' element={<MyProfile />} />
                                         <Route path='/auth/logout' element={<Logout />} />
-                                        {/* <Route element={<OwnerGuard />}> */}
-                                        <Route path='/catalog/pet/edit/:id' element={< EditPet />} />
-                                        {/* </Route> */}
+                                        <Route element={<OwnerGuard />}>
+                                            <Route path='/catalog/pet/edit/:id' element={< EditPet />} />
+                                        </Route>
                                     </Route>
                                     <Route element={<HasUserGuard />}>
                                         <Route path='/auth/login' element={<Login />} />

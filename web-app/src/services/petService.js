@@ -13,6 +13,7 @@ export const petServiceFactory = () => {
         editPet: (petId, petData) => request.patch(`${baseUrl}/${petId}`, petData),
         deletePet: (petId) => request.delete(`${baseUrl}/${petId}`),
         addtoFavourite: (petId) => request.get(`${baseUrl}/favourite/add/${petId}`),
-        removeFromFavourite: (petId) => request.get(`${baseUrl}/favourite/remove/${petId}`)
+        removeFromFavourite: (petId) => request.get(`${baseUrl}/favourite/remove/${petId}`),
+        checkIsOwner: (petId) => request.get(`${baseUrl}/owner/${petId}`)
     };
 };

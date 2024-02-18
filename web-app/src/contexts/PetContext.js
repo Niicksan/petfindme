@@ -18,6 +18,7 @@ export const PetProvider = ({
     const { profileData, setProfileData } = useAuthContext();
     const [pets, setPets] = useState([]);
     const [pet, setPet] = useState([]);
+    const [isOwner, setIsOwner] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const catalogService = catalogServiceFactory();
     const petService = petServiceFactory();
@@ -129,6 +130,8 @@ export const PetProvider = ({
         pets,
         pet,
         setPet,
+        isOwner,
+        setIsOwner,
         error,
         setError,
         isLoading,
