@@ -145,4 +145,10 @@ petController.get('/favourite/remove/:id', hasUser(), async (req, res) => {
     }
 });
 
+petController.get('/owner/:id', preloader(), async (req, res) => {
+    const isOwner = req.session.user && res.locals.pet.owner == req.session.user.id
+
+    res.json({ isOwner: isOwner });
+});
+
 module.exports = petController;
