@@ -37,13 +37,13 @@ function App() {
                                 <Toolbar />
                                 <Routes>
                                     <Route path='/' element={<Home />} />
-                                    <Route path='/catalog/pet/:id' element={< PetDetails />} />
+                                    <Route path='/catalog/pets/details/:id' element={< PetDetails />} />
                                     <Route element={<AuthGuard />}>
                                         <Route path='/pet/create' element={<CreatePet />} />
                                         <Route path='/user/my-profile' element={<MyProfile />} />
                                         <Route path='/auth/logout' element={<Logout />} />
                                         <Route element={<OwnerGuard />}>
-                                            <Route path='/catalog/pet/edit/:id' element={< EditPet />} />
+                                            <Route path='/catalog/pets/edit/:id' element={< EditPet />} />
                                         </Route>
                                     </Route>
                                     <Route element={<HasUserGuard />}>

@@ -66,7 +66,7 @@ export const ProfileItem = ({
             />)}
 
             <Card className='profile-item-card' ref={cardRef} sx={{ borderRadius: '10px' }}>
-                <Link to={`/catalog/pet/${_id}`} className='card-link'>
+                <Link to={`/catalog/pets/details/${_id}`} className='card-link'>
                     <Box >
                         {(cardWidth <= 524 && isFavourite) && (<FavoriteIcon sx={{
                             position: 'absolute', top: '5px', right: '5px',
@@ -124,7 +124,7 @@ export const ProfileItem = ({
                         <>
                             {!isFavourite && (
                                 <>
-                                    <Link to={`/catalog/pet/edit/${_id}`}>
+                                    <Link to={`/catalog/pets/edit/${_id}`}>
                                         <Button size="small" variant="text" className="icon-button" sx={{ top: 0, right: 1, color: '#262626' }} >
                                             <EditIcon />
                                         </Button>
@@ -154,7 +154,7 @@ export const ProfileItem = ({
                             {!isFavourite && (
                                 <>
                                     <Button size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ borderRadius: '5px', textTransform: 'none' }} onClick={handleClickOpenDeleteModal} >Изтрий</Button>
-                                    <Link to={`/catalog/pet/edit/${_id}`}>
+                                    <Link to={`/catalog/pets/edit/${_id}`}>
                                         <Button size="small" variant="outlined" startIcon={<EditIcon />} sx={{ border: '1px solid #161616', borderRadius: '5px', color: '#262626', textTransform: 'none' }} >Редактирай</Button>
                                     </Link>
                                 </>

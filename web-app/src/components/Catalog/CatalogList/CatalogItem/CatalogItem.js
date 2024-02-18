@@ -47,7 +47,7 @@ import { useProfileContext } from '../../../../contexts/ProfileContext';
 //                     fontSize: '2em', zIndex: 50, '&:hover': { fill: 'rgba(135, 0, 0, 0.8)' }
 //                 }} />
 //             </Tooltip>
-//             <Link to={`/catalog/pet/${_id}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', textDecoration: "none", color: 'black' }}>
+//             <Link to={`/catalog/pets/details/${_id}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', textDecoration: "none", color: 'black' }}>
 //                 <Box >
 //                     <CardMedia
 //                         ref={imagRef}
@@ -137,7 +137,7 @@ export const CatalogItem = ({
                         addtoFavouriteById(_id);
                     }} />
             </Tooltip>
-            <Link to={`/catalog/pet/${_id}`}>
+            <Link to={`/catalog/pets/details/${_id}`}>
                 <Box>
                     <CardMedia
                         ref={imagRef}
