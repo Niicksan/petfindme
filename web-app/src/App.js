@@ -21,6 +21,10 @@ import { Register } from './components/Register/Register';
 import { SnackbarModal } from './components/SnackbarModal/SnackbarModal';
 import { Footer } from './components/Footer/Footer';
 
+import { AuthGuard } from './guards/AuthGuard';
+// import { OwnerGuard } from './guards/OwnerGuard';
+import { HasUserGuard } from './guards/HasUserGuard';
+
 function App() {
     return (
         <SnackarProvider>
@@ -34,21 +38,19 @@ function App() {
                                 <Routes>
                                     <Route path='/' element={<Home />} />
                                     <Route path='/catalog/pet/:id' element={< PetDetails />} />
-                                    <Route path='/catalog/pet/edit/:id' element={< EditPet />} />
-                                    {/* <Route element={<AuthGuard />}> */}
-                                    {/* <Route element={<VehicleOwnerGuard />}> */}
-
-                                    {/* </Route> */}
-                                    <Route path='/pet/create' element={<CreatePet />} />
-                                    <Route path='/user/my-profile' element={<MyProfile />} />
-                                    <Route path='/auth/logout' element={<Logout />} />
-                                    {/* </Route> */}
-                                    {/* <Route element={<HasUserGuard />}>*/}
-
-                                    <Route path='/auth/login' element={<Login />} />
-                                    <Route path='/auth/register' element={<Register />} />
+                                    <Route element={<AuthGuard />}>
+                                        <Route path='/pet/create' element={<CreatePet />} />
+                                        <Route path='/user/my-profile' element={<MyProfile />} />
+                                        <Route path='/auth/logout' element={<Logout />} />
+                                        {/* <Route element={<OwnerGuard />}> */}
+                                        <Route path='/catalog/pet/edit/:id' element={< EditPet />} />
+                                        {/* </Route> */}
+                                    </Route>
+                                    <Route element={<HasUserGuard />}>
+                                        <Route path='/auth/login' element={<Login />} />
+                                        <Route path='/auth/register' element={<Register />} />
+                                    </Route>
                                     {/*
-                                </Route>
                                 <Route path='/about' element={<About />} />
                                 <Route path='/contacts' element={<Contacts />} />
                                 <Route path="/403" element={<Forbidden />} />
@@ -59,7 +61,6 @@ function App() {
                                 </Routes>
                                 <Toolbar />
                             </Box>
-
                             <SnackbarModal />
                             <Footer />
                         </div>
