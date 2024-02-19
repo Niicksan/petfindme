@@ -2,23 +2,23 @@ const Pet = require("../models/Pet");
 
 
 async function getLatestPets() {
-    return Pet.find({}, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+    return Pet.find({}, { contactName: 0, phone: 0, owner: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getLostPets() {
-    return Pet.find({ status: 'Изгубено' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+    return Pet.find({ status: 'Изгубено' }, { contactName: 0, phone: 0, owner: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getFoundPets() {
-    return Pet.find({ status: 'Намерено' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+    return Pet.find({ status: 'Намерено' }, { contactName: 0, phone: 0, owner: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getAdoptionPets() {
-    return Pet.find({ status: 'adoption' }, { owner: 0, createdAt: 0, likedByUsers: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+    return Pet.find({ status: 'За осиновяване' }, { contactName: 0, phone: 0, owner: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getAllPetsCreatedByUser(userId) {
-    return Pet.find({ owner: userId }, { owner: 0, contactName: 0, phone: 0, description: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 });
+    return Pet.find({ owner: userId }, { owner: 0, contactName: 0, phone: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 });
 }
 
 async function getAllPetsLikedByUser(userId) {
@@ -26,7 +26,7 @@ async function getAllPetsLikedByUser(userId) {
 }
 
 async function getPetById(id) {
-    return Pet.findById(id);
+    return Pet.findById(id, { owner: 0, likedByUsers: 0, updatedAt: 0, __v: 0 });
 }
 
 async function createPet(pet) {
