@@ -20,6 +20,8 @@ import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { SnackbarModal } from './components/SnackbarModal/SnackbarModal';
 import { Footer } from './components/Footer/Footer';
+import { Forbidden } from './components/Errors/Forbidden/Forbidden';
+import { NotFound } from './components/Errors/NotFound/NotFound';
 
 import { AuthGuard } from './guards/AuthGuard';
 import { OwnerGuard } from './guards/OwnerGuard';
@@ -37,7 +39,7 @@ function App() {
                                 <Toolbar />
                                 <Routes>
                                     <Route path='/' element={<Home />} />
-                                    <Route path='/catalog/pets/details/:id' element={< PetDetails />} />
+                                    <Route path='/catalog/pets//:id' element={< PetDetails />} />
                                     <Route element={<AuthGuard />}>
                                         <Route path='/pet/create' element={<CreatePet />} />
                                         <Route path='/user/my-profile' element={<MyProfile />} />
@@ -51,13 +53,13 @@ function App() {
                                         <Route path='/auth/register' element={<Register />} />
                                     </Route>
                                     {/*
-                                <Route path='/about' element={<About />} />
-                                <Route path='/contacts' element={<Contacts />} />
-                                <Route path="/403" element={<Forbidden />} />
-                                <Route path="/404" element={<NotFound />} />
-                                <Route path="*" element={<NotFound />} /> 
-                            */}
+                                        <Route path='/about' element={<About />} />
+                                        <Route path='/contacts' element={<Contacts />} />
+                                    */}
 
+                                    <Route path="/403" element={<Forbidden />} />
+                                    <Route path="/404" element={<NotFound />} />
+                                    <Route path="*" element={<NotFound />} />
                                 </Routes>
                                 <Toolbar />
                             </Box>
