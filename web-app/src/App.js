@@ -39,7 +39,7 @@ function App() {
                                 <Toolbar />
                                 <Routes>
                                     <Route path='/' element={<Home />} />
-                                    <Route path='/catalog/pets//:id' element={< PetDetails />} />
+                                    <Route path='/catalog/pets/details/:id' element={< PetDetails />} />
                                     <Route element={<AuthGuard />}>
                                         <Route path='/pet/create' element={<CreatePet />} />
                                         <Route path='/user/my-profile' element={<MyProfile />} />
