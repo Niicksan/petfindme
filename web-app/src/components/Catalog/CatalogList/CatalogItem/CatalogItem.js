@@ -18,14 +18,14 @@ import { useProfileContext } from '../../../../contexts/ProfileContext';
 //     status,
 //     location,
 //     imageUrl,
-//     updatedAt
+//     createdAt
 // }) => {
 //     const [imgHeight, setImgHeight] = useState();
 //     const [imgWidth, setImgWidth] = useState();
 //     const imagRef = useRef(null);
 
-//     const date = new Date(updatedAt);
-//     const createdAt = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
+//     const date = new Date(createdAt);
+//     const createdDate = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
 
 //     useEffect(() => {
 //         setImgWidth(imagRef.current.getBoundingClientRect().width);
@@ -90,7 +90,7 @@ import { useProfileContext } from '../../../../contexts/ProfileContext';
 //                         <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', fontSize: '0.9em', lineHeight: '1.5', color: 'dimgray' }}>
 //                             <Typography component='span' sx={{ display: 'flex', fontSize: '1em', fontWeight: 'bolder', lineHeight: '1.5', mr: 0.5 }} className='content-item-left'>
 //                                 <CalendarMonthIcon sx={{ fill: '#550A21' }} />
-//                             </Typography> {createdAt}
+//                             </Typography> {createdDate}
 //                         </Typography>
 //                     </Box>
 //                 </CardContent >
@@ -105,7 +105,7 @@ export const CatalogItem = ({
     status,
     location,
     imageUrl,
-    updatedAt
+    createdAt
 }) => {
     const { addtoFavouriteById } = useProfileContext();
     const [imgWidth, setImgWidth] = useState();
@@ -117,8 +117,8 @@ export const CatalogItem = ({
         'За осиновяване': 'orange'
     };
 
-    const date = new Date(updatedAt);
-    const createdAt = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
+    const date = new Date(createdAt);
+    const createdDate = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
 
     useEffect(() => {
         setImgWidth(imagRef.current.getBoundingClientRect().width);
@@ -179,7 +179,7 @@ export const CatalogItem = ({
                                     <CalendarMonthIcon sx={{ fill: '#550A21' }} />
                                 </Tooltip>
                             </Typography>
-                            {createdAt}
+                            {createdDate}
                         </Typography>
                     </Box>
                 </CardContent >
