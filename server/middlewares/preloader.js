@@ -1,10 +1,10 @@
-const { getPetById } = require("../services/petService");
+const { getPetByIdRaw } = require("../services/petService");
 const { parseError } = require("../utils/errorParser");
 
 
 module.exports = () => async (req, res, next) => {
     try {
-        res.locals.pet = await getPetById(req.params.id);
+        res.locals.pet = await getPetByIdRaw(req.params.id);
 
         if (res.locals.pet == null) {
             throw new Error("Item doesn't exist");

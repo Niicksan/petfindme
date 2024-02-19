@@ -2,7 +2,7 @@ const Pet = require("../models/Pet");
 
 
 async function getLatestPets() {
-    return Pet.find({}, { contactName: 0, phone: 0, owner: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 }).limit(12);
+    return Pet.find({}).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getLostPets() {
@@ -18,15 +18,19 @@ async function getAdoptionPets() {
 }
 
 async function getAllPetsCreatedByUser(userId) {
-    return Pet.find({ owner: userId }, { owner: 0, contactName: 0, phone: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 });
+    return Pet.find({ owner: userId }).sort({ createdAt: -1 });
 }
 
 async function getAllPetsLikedByUser(userId) {
-    return Pet.find({ likedByUsers: userId }, { owner: 0, contactName: 0, phone: 0, description: 0, likedByUsers: 0, updatedAt: 0, __v: 0 }).sort({ createdAt: -1 });
+    return Pet.find({ likedByUsers: userId }).sort({ createdAt: -1 });
 }
 
 async function getPetById(id) {
     return Pet.findById(id, { owner: 0, likedByUsers: 0, updatedAt: 0, __v: 0 });
+}
+
+async function getPetByIdRaw(id) {
+    return Pet.findById(id);
 }
 
 async function createPet(pet) {
@@ -54,21 +58,21 @@ async function deletePetById(id) {
 }
 
 async function addPetToLikedList(petId, userId) {
-    const pet = await getPetById(petId);
+    const pet = await getPetByIdRaw(petId);
 
     pet.likedByUsers.push(userId);
     return pet.save();
 }
 
 async function removePetFromLikedList(petId, userId) {
-    const pet = await getPetById(petId);
+    const pet = await getPetByIdRaw(petId);
 
     pet.likedByUsers.remove(userId);
     return pet.save();
 }
 
 async function isPetLikedFromUser(petId, userId) {
-    const pet = await getPetById(petId);
+    const pet = await getPetByIdRaw(petId);
 
     return pet.likedByUsers.includes(userId);
 }
@@ -81,6 +85,7 @@ module.exports = {
     getAllPetsCreatedByUser,
     getAllPetsLikedByUser,
     getPetById,
+    getPetByIdRaw,
     createPet,
     updatePetById,
     deletePetById,
