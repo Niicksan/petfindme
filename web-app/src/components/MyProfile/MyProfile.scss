@@ -30,26 +30,6 @@ $red: #f44336;
             background-color: $white;
             box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
         }
-
-        .add-button {
-            display: inline-block;
-            border: 2px solid $navbar-red;
-            background-color: white;
-            border-radius: 50px;
-            font-weight: 550;
-            font-size: 16px;
-            color: $navbar-red;
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: 0.5s;
-            padding: 10px 30px;
-
-            &:hover {
-                background-color: $navbar-red;
-                border: 2px solid $navbar-red;
-                color: $white;
-            }
-        }
     }
 }
 

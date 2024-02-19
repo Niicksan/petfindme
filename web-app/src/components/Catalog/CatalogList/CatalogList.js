@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
-
 import { Box, Grid } from '@mui/material';
 
 import { usePetContext } from '../../../contexts/PetContext';
 
 import { CatalogItem } from './CatalogItem/CatalogItem';
-import { Loader } from "../../Loader/Loader";
+import { MainButton } from '../../Buttons/MainButton/MainButton';
+import { Loader } from '../../Loader/Loader';
 
 export const CatalogList = () => {
     const { pets, isLoading } = usePetContext();
@@ -27,9 +26,7 @@ export const CatalogList = () => {
             {!isLoading && pets.length === 0 && (
                 <>
                     <h3 className="no-articles-title">Все още няма добавени сигнали за изгубени или намерени животни.</h3>
-                    <Link to="/pet/create" className="add-button">
-                        Подай сигнал
-                    </Link>
+                    <MainButton path={"/pet/create"} text={"Подай сигнал"} />
                 </>
             )}
         </>

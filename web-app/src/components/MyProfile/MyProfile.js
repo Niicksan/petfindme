@@ -1,7 +1,6 @@
 import './MyProfile.scss';
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { imageUrl } from '../../env';
 
@@ -12,6 +11,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { Loader } from "../Loader/Loader";
+import { MainButton } from '../Buttons/MainButton/MainButton';
 
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useProfileContext } from '../../contexts/ProfileContext';
@@ -85,9 +85,7 @@ export const MyProfile = () => {
                             </Box>
 
                             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <Link to="/pet/create" className="add-button">
-                                    Подай сигнал
-                                </Link>
+                                <MainButton path={"/pet/create"} text={"Подай сигнал"} />
                             </Box>
                         </Box>
                     </Card>
