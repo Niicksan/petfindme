@@ -53,6 +53,20 @@ async function updatePetById(pet, data) {
     return pet.save();
 }
 
+async function archiveById(id) {
+    const pet = Pet.findById(id);
+
+    pet.isActive = false;
+    pet.save();
+}
+
+async function activateById(id) {
+    const pet = Pet.findById(id);
+
+    pet.isActive = true;
+    pet.save();
+}
+
 async function deletePetById(id) {
     return Pet.findByIdAndDelete(id);
 }
@@ -88,6 +102,8 @@ module.exports = {
     getPetByIdRaw,
     createPet,
     updatePetById,
+    archiveById,
+    activateById,
     deletePetById,
     addPetToLikedList,
     removePetFromLikedList,
