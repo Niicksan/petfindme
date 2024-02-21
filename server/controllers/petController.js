@@ -44,8 +44,14 @@ petController.post('/',
 );
 
 petController.get('/:id', preloader(), async (req, res) => {
-    const item = res.locals.pet;
-    res.json(item);
+    try {
+        const item = res.locals.pet;
+        res.json(item);
+    } catch (error) {
+        const message = parseError(error);
+        console.log(message);
+        return res.status(400).json({ message });
+    }
 });
 
 petController.patch('/:id',
