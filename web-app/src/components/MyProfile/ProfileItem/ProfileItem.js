@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { Card, Box, Button, CardContent, CardActions, Typography, CardMedia, Tooltip } from '@mui/material';
 
 import EditIcon from '@mui/icons-material/Edit';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CircleIcon from '@mui/icons-material/Circle';
@@ -24,7 +26,8 @@ export const ProfileItem = ({
     status,
     location,
     imageUrl,
-    updatedAt,
+    createdAt,
+    isArchived,
     isFavourite
 }) => {
     const [cardWidth, setTabWith] = useState();
@@ -33,7 +36,7 @@ export const ProfileItem = ({
     const imagRef = useRef(null);
 
     const { openDeleteModal, handleClickOpenDeleteModal, handleClickCloseDeleteModal } = useModal();
-    const { onDeletePetSubmit } = usePetContext();
+    const { onDeletePetSubmit, archivePetById, activatePetById } = usePetContext();
     const { removeFromFavouriteById } = useProfileContext();
 
     const statusColor = {
@@ -42,10 +45,11 @@ export const ProfileItem = ({
         'За осиновяване': 'orange'
     };
 
-    const date = new Date(updatedAt);
+    const date = new Date(createdAt);
     const deleteMessage = 'Сигурни ли сте, че искате да изтриете сигнала?';
+    const archiveMessage = 'Сигурни ли сте, че искате да архивирате сигнала?';
     const removeMessage = 'Сигурни ли сте, че искате да премахнете сигнала от Любими?';
-    const createdAt = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
+    const createdAtDate = date.toLocaleDateString('Bg-bg', { year: 'numeric', month: 'long', day: 'numeric' });
 
     useEffect(() => {
         setImgWidth(imagRef.current.getBoundingClientRect().width);
@@ -57,11 +61,14 @@ export const ProfileItem = ({
             {openDeleteModal && (<DeleteModal
                 open={openDeleteModal}
                 title={title}
-                message={isFavourite ? removeMessage : deleteMessage}
+                message={isFavourite ? removeMessage : isArchived ? deleteMessage : archiveMessage}
                 handleClose={handleClickCloseDeleteModal}
                 onDeleteSubmit={onDeletePetSubmit}
+                archivePetById={archivePetById}
+                activatePetById={activatePetById}
                 removeFromFavourite={removeFromFavouriteById}
                 petId={_id}
+                isArchived={isArchived}
                 isFavourite={isFavourite}
             />)}
 
@@ -114,7 +121,7 @@ export const ProfileItem = ({
                                         <CalendarMonthIcon sx={{ fill: '#550A21' }} />
                                     </Tooltip>
                                 </Typography>
-                                {createdAt}
+                                {createdAtDate}
                             </Typography>
                         </Box>
                     </CardContent >
@@ -129,6 +136,13 @@ export const ProfileItem = ({
                                             <EditIcon />
                                         </Button>
                                     </Link>
+
+                                    {isArchived && (
+                                        <Button size="small" color="success" className="icon-button" sx={{ bottom: '40px', right: -1 }} onClick={() => { activatePetById(_id) }} >
+                                            <RestoreFromTrashIcon sx={{ fontSize: '1.8rem' }} />
+                                        </Button>
+                                    )}
+
                                     <Button size="small" variant="contained" color="error" className="icon-button" sx={{ bottom: 1, right: 1 }} onClick={handleClickOpenDeleteModal} >
                                         <DeleteIcon />
                                     </Button>
@@ -153,7 +167,15 @@ export const ProfileItem = ({
                         <>
                             {!isFavourite && (
                                 <>
-                                    <Button size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ borderRadius: '5px', textTransform: 'none' }} onClick={handleClickOpenDeleteModal} >Изтрий</Button>
+                                    {!isArchived && (
+                                        <Button size="small" variant="contained" color="error" startIcon={<RemoveCircleIcon />} sx={{ borderRadius: '5px', textTransform: 'none' }} onClick={handleClickOpenDeleteModal} >Архивирай</Button>
+                                    )}
+                                    {isArchived && (
+                                        <>
+                                            <Button size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ borderRadius: '5px', textTransform: 'none' }} onClick={handleClickOpenDeleteModal} >Изтрий</Button>
+                                            <Button size="small" variant="contained" color="success" startIcon={<RestoreFromTrashIcon />} sx={{ borderRadius: '5px', textTransform: 'none' }} onClick={() => { activatePetById(_id) }} >Активирай</Button>
+                                        </>
+                                    )}
                                     <Link to={`/catalog/pets/edit/${_id}`}>
                                         <Button size="small" variant="outlined" startIcon={<EditIcon />} sx={{ border: '1px solid #161616', borderRadius: '5px', color: '#262626', textTransform: 'none' }} >Редактирай</Button>
                                     </Link>

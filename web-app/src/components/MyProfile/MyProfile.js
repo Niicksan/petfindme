@@ -8,6 +8,7 @@ import { Box, Card, CardMedia, Typography, Tab } from '@mui/material';
 import { TabContext, TabList, } from '@mui/lab';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { Loader } from "../Loader/Loader";
@@ -67,10 +68,19 @@ export const MyProfile = () => {
                             <Box sx={{ display: 'flex', justifyContent: 'space-evenly', my: '2rem' }} >
                                 <Typography component="p" >
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
-                                        {profileData.myPets?.length}
+                                        {profileData.myPets?.filter(p => p.isActive).length}
                                     </Typography>
                                     <Typography component="p">
-                                        Сигнали
+                                        Активни
+                                    </Typography>
+                                </Typography>
+
+                                <Typography component="p" sx={{ mx: 3 }}>
+                                    <Typography sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
+                                        {profileData.myPets?.filter(p => !p.isActive).length}
+                                    </Typography>
+                                    <Typography component="p">
+                                        Архивирани
                                     </Typography>
                                 </Typography>
 
@@ -106,12 +116,14 @@ export const MyProfile = () => {
                                         }
                                     }}
                                 >
-                                    <Tab icon={<AccountCircleIcon />} iconPosition="start" label="Сигнали" value="1" />
-                                    <Tab icon={<FavoriteIcon />} iconPosition="start" label="Любими" value="2" />
+                                    <Tab icon={<AccountCircleIcon className='tab-icon' />} iconPosition="start" label="Активни" value="1" />
+                                    <Tab icon={<DeleteIcon lassName='tab-icon' />} iconPosition="start" label="Архивирани" value="2" />
+                                    <Tab icon={<FavoriteIcon lassName='tab-icon' />} iconPosition="start" label="Любими" value="3" />
                                 </TabList>
                             </Box>
-                            <ProfileTabPanel tabValue={'1'} data={profileData?.myPets} isFavourite={false} />
-                            <ProfileTabPanel tabValue={'2'} data={profileData?.likedPets} isFavourite={true} />
+                            <ProfileTabPanel tabValue={'1'} data={profileData?.myPets?.filter(p => p.isActive)} isArchived={false} isFavourite={false} />
+                            <ProfileTabPanel tabValue={'2'} data={profileData?.myPets?.filter(p => !p.isActive)} isArchived={true} isFavourite={false} />
+                            <ProfileTabPanel tabValue={'3'} data={profileData?.likedPets} isArchived={false} isFavourite={true} />
                         </TabContext>
                     </Box>
                 </Box>

@@ -8,8 +8,11 @@ export const DeleteModal = ({
     message,
     handleClose,
     onDeleteSubmit,
+    archivePetById,
+    activatePetById,
     removeFromFavourite,
     petId,
+    isArchived,
     isFavourite
 }) => {
     return (
@@ -31,7 +34,16 @@ export const DeleteModal = ({
                     <Button autoFocus onClick={handleClose} sx={{ color: '#232323', textTransform: 'none' }}>
                         Назад
                     </Button>
-                    {!isFavourite && (
+                    {(!isArchived && !isFavourite) && (
+                        <Button variant="contained" color={'error'} startIcon={<DeleteIcon />} sx={{ textTransform: 'none', }}
+                            onClick={() => {
+                                archivePetById(petId);
+                                handleClose();
+                            }}>
+                            Да
+                        </Button>
+                    )}
+                    {isArchived && (
                         <Button variant="contained" color={'error'} startIcon={<DeleteIcon />} sx={{ textTransform: 'none', }}
                             onClick={() => {
                                 onDeleteSubmit(petId);

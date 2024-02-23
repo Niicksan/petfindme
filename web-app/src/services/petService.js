@@ -14,6 +14,8 @@ export const petServiceFactory = () => {
         deletePet: (petId) => request.delete(`${baseUrl}/${petId}`),
         addtoFavourite: (petId) => request.get(`${baseUrl}/favourite/add/${petId}`),
         removeFromFavourite: (petId) => request.get(`${baseUrl}/favourite/remove/${petId}`),
+        archivePet: (petId) => request.patch(`${baseUrl}/archive/${petId}`),
+        activatePet: (petId) => request.patch(`${baseUrl}/activate/${petId}`),
         checkIsOwner: (petId) => request.get(`${baseUrl}/owner/${petId}`)
     };
 };

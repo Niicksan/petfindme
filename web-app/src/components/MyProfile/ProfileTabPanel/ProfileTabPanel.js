@@ -6,7 +6,8 @@ import { ProfileItem } from "../ProfileItem/ProfileItem";
 export const ProfileTabPanel = ({
     tabValue,
     data,
-    isFavourite
+    isArchived,
+    isFavourite,
 }) => {
     return (
         <TabPanel value={tabValue} sx={{ px: 1 }}>
@@ -14,11 +15,12 @@ export const ProfileTabPanel = ({
                 <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 1, md: 1, lg: 1 }}>
                     {data?.length !== 0 && (data?.map(x =>
                         <Grid item xs={1} sm={1} md={1} lg={1} key={x._id}>
-                            <ProfileItem {...x} isFavourite={isFavourite} />
+                            <ProfileItem {...x} isArchived={isArchived} isFavourite={isFavourite} />
                         </Grid>
                     ))}
                     {(tabValue === '1' && !data?.length) && (<Typography component="p" sx={{ pl: 2 }}>Нямате подадени сигнали.</Typography>)}
-                    {(tabValue === '2' && !data?.length) && (<Typography component="p" sx={{ pl: 2 }}>Колекцията Любими е празна.</Typography>)}
+                    {(tabValue === '2' && !data?.length) && (<Typography component="p" sx={{ pl: 2 }}>Нямате архивирани сигнали.</Typography>)}
+                    {(tabValue === '3' && !data?.length) && (<Typography component="p" sx={{ pl: 2 }}>Колекцията Любими е празна.</Typography>)}
                 </Grid>
             </Box>
         </TabPanel>

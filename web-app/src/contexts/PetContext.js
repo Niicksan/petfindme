@@ -91,9 +91,10 @@ export const PetProvider = ({
 
     const onEditPetSubmit = async (data, petId) => {
         try {
-            const pet = await petService.editPet(petId, data);
+            const editedPet = await petService.editPet(petId, data);
 
-            setPets(state => state.map(p => p._id === petId ? pet : p));
+            setPets(state => state.map(p => p._id === petId ? editedPet : p));
+            setProfileData({ ...profileData, myPets: [...profileData.myPets.map(pet => pet._id === petId ? editedPet : pet)] });
 
             setMessage('Успешно редактиране!');
             handleOpenSnackbar();
@@ -126,6 +127,48 @@ export const PetProvider = ({
         }
     };
 
+    const archivePetById = async (petId) => {
+        try {
+            const response = await petService.archivePet(petId);
+
+            if (response.messageBg === 'Успешно архивиране!') {
+                const achrivedPet = profileData.myPets.find(pet => pet._id === petId);
+                achrivedPet.isActive = false;
+
+                setPets(state => state.filter(pet => pet._id !== petId));
+                setProfileData({ ...profileData, myPets: [...profileData.myPets.map(pet => pet._id === petId ? achrivedPet : pet)] });
+            };
+
+            setMessage(response.messageBg);
+            handleOpenSnackbar();
+        } catch (err) {
+            if (err.messageEn === "Access denied! You don't have rights to access this page!") {
+                navigate('/403');
+            }
+        }
+    };
+
+    const activatePetById = async (petId) => {
+        try {
+            const response = await petService.activatePet(petId);
+
+            if (response.messageBg === 'Успешно активиране!') {
+                const activatedPet = profileData.myPets.find(pet => pet._id === petId);
+                activatedPet.isActive = true;
+
+                setPets(pets => [...pets, activatedPet]);
+                setProfileData({ ...profileData, myPets: [...profileData.myPets.map(pet => pet._id === petId ? activatedPet : pet)] });
+            }
+
+            setMessage(response.messageBg);
+            handleOpenSnackbar();
+        } catch (err) {
+            if (err.messageEn === "Access denied! You don't have rights to access this page!") {
+                navigate('/403');
+            }
+        }
+    };
+
     const contextValues = {
         pets,
         pet,
@@ -139,6 +182,8 @@ export const PetProvider = ({
         onCreatePetSubmit,
         onEditPetSubmit,
         onDeletePetSubmit,
+        archivePetById,
+        activatePetById
     };
 
     return (
