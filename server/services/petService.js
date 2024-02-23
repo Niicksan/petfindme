@@ -2,7 +2,7 @@ const Pet = require("../models/Pet");
 
 
 async function getLatestPets() {
-    return Pet.find({}).sort({ createdAt: -1 }).limit(12);
+    return Pet.find({ isActive: true }, { _id: 1, title: 1, status: 1, location: 1, imageUrl: 1, createdAt: 1 }).sort({ createdAt: -1 }).limit(12);
 }
 
 async function getLostPets() {
@@ -18,11 +18,11 @@ async function getAdoptionPets() {
 }
 
 async function getAllPetsCreatedByUser(userId) {
-    return Pet.find({ owner: userId }).sort({ createdAt: -1 });
+    return Pet.find({ owner: userId }, { _id: 1, title: 1, status: 1, location: 1, imageUrl: 1, createdAt: 1 }).sort({ createdAt: -1 });
 }
 
 async function getAllPetsLikedByUser(userId) {
-    return Pet.find({ likedByUsers: userId }).sort({ createdAt: -1 });
+    return Pet.find({ likedByUsers: userId }, { _id: 1, title: 1, status: 1, location: 1, imageUrl: 1, createdAt: 1 }).sort({ createdAt: -1 });
 }
 
 async function getPetById(id) {
@@ -54,17 +54,23 @@ async function updatePetById(pet, data) {
 }
 
 async function archiveById(id) {
-    const pet = Pet.findById(id);
+    const update = {
+        isActive: false,
+        archivedAt: new Date().toLocaleString('eu-Eu'),
+        updatedAt: new Date().toLocaleString('eu-Eu')
+    };
 
-    pet.isActive = false;
-    pet.save();
+    return Pet.findByIdAndUpdate(id, update);
 }
 
 async function activateById(id) {
-    const pet = Pet.findById(id);
+    const update = {
+        isActive: true,
+        archivedAt: null,
+        updatedAt: new Date().toLocaleString('eu-Eu')
+    };
 
-    pet.isActive = true;
-    pet.save();
+    return Pet.findByIdAndUpdate(id, update);
 }
 
 async function deletePetById(id) {
@@ -75,6 +81,7 @@ async function addPetToLikedList(petId, userId) {
     const pet = await getPetByIdRaw(petId);
 
     pet.likedByUsers.push(userId);
+    pet.updatedAt = new Date().toLocaleString('eu-Eu');
     return pet.save();
 }
 
@@ -82,6 +89,7 @@ async function removePetFromLikedList(petId, userId) {
     const pet = await getPetByIdRaw(petId);
 
     pet.likedByUsers.remove(userId);
+    pet.updatedAt = new Date().toLocaleString('eu-Eu');
     return pet.save();
 }
 

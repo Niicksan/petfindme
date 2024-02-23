@@ -10,7 +10,9 @@ const petSchema = new Schema({
     imageUrl: { type: String, required: true, default: 'default-pet.png' },
     description: { type: String, required: true },
     owner: { type: Types.ObjectId, ref: 'User' },
+    isActive: { type: Boolean, required: true, default: true },
     likedByUsers: { type: [Types.ObjectId], ref: 'User', default: [] },
+    archivedAt: { type: String, required: true, default: null },
     createdAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) },
     updatedAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) },
 });
@@ -37,6 +39,20 @@ petSchema.index({ location: 1 }, {
 });
 
 petSchema.index({ description: 1 }, {
+    collation: {
+        locale: 'en',
+        strength: 2
+    }
+});
+
+petSchema.index({ owner: 1 }, {
+    collation: {
+        locale: 'en',
+        strength: 2
+    }
+});
+
+petSchema.index({ isActive: 1 }, {
     collation: {
         locale: 'en',
         strength: 2

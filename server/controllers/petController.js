@@ -1,7 +1,7 @@
 const petController = require('express').Router();
 
 const { check, validationResult } = require('express-validator');
-const { createPet, updatePetById, deletePetById, isPetLikedFromUser, addPetToLikedList, removePetFromLikedList } = require('../services/petService');
+const { createPet, updatePetById, archiveById, activateById, deletePetById, isPetLikedFromUser, addPetToLikedList, removePetFromLikedList } = require('../services/petService');
 const { parseError } = require('../utils/errorParser');
 const status = require('../enums/petStatus');
 const { hasUser, isOwner } = require('../middlewares/guards');
@@ -34,11 +34,11 @@ petController.post('/',
             };
 
             const item = await createPet(pet);
-            res.json(item);
+            return res.json(item);
         } catch (error) {
             const message = parseError(error);
             console.log(message);
-            res.status(400).json({ message });
+            return res.status(400).json({ message });
         }
     }
 );
@@ -46,7 +46,7 @@ petController.post('/',
 petController.get('/:id', preloader(), async (req, res) => {
     try {
         const item = res.locals.pet;
-        res.json(item);
+        return res.json(item);
     } catch (error) {
         const message = parseError(error);
         console.log(message);
@@ -72,30 +72,61 @@ petController.patch('/:id',
 
         try {
             const result = await updatePetById(pet, req.body);
-            res.json(result);
+            return res.json(result);
         } catch (error) {
             const message = parseError(error);
             console.log(message);
-            res.status(400).json({ message });
+            return res.status(400).json({ message });
         }
     }
 );
 
+petController.patch('/archive/:id', preloader(), isOwner(), async (req, res) => {
+    try {
+        await archiveById(req.params.id);
+
+        return res.status(200).json({
+            messageEn: "Item archived successfully",
+            messageBg: "Успешно архивиране!"
+        });
+    } catch (error) {
+        const message = parseError(error);
+        console.error(message);
+        return res.status(400).json({ message });
+    }
+});
+
+petController.patch('/activate/:id', preloader(), isOwner(), async (req, res) => {
+    try {
+        await activateById(req.params.id);
+
+        return res.status(200).json({
+            messageEn: "Item activated successfully",
+            messageBg: "Успешно активиране!"
+        });
+    } catch (error) {
+        const message = parseError(error);
+        console.error(message);
+        return res.status(400).json({ message });
+    }
+});
+
 petController.delete('/:id', preloader(), isOwner(), async (req, res) => {
     try {
         await deletePetById(req.params.id);
-        res.status(200).json({
+
+        return res.status(200).json({
             messageEn: "Item deleted successfully",
             messageBg: "Успешно изтриване!"
         });
     } catch (error) {
         const message = parseError(error);
         console.error(message);
-        res.status(400).json({ message });
+        return res.status(400).json({ message });
     }
 });
 
-petController.get('/favourite/add/:id', hasUser(), async (req, res) => {
+petController.get('/favourite/add/:id', preloader(), hasUser(), async (req, res) => {
     try {
         let message = {};
         const isLiked = await isPetLikedFromUser(req.params.id, req.session.user.id);
@@ -114,15 +145,15 @@ petController.get('/favourite/add/:id', hasUser(), async (req, res) => {
             }
         }
 
-        res.status(200).json(message);
+        return res.status(200).json(message);
     } catch (error) {
         const message = parseError(error);
         console.error(message);
-        res.status(400).json({ message });
+        return res.status(400).json({ message });
     }
 });
 
-petController.get('/favourite/remove/:id', hasUser(), async (req, res) => {
+petController.get('/favourite/remove/:id', preloader(), hasUser(), async (req, res) => {
     try {
         let message = {};
 
@@ -143,18 +174,18 @@ petController.get('/favourite/remove/:id', hasUser(), async (req, res) => {
             }
         }
 
-        res.status(200).json(message);
+        return res.status(200).json(message);
     } catch (error) {
         const message = parseError(error);
         console.error(message);
-        res.status(400).json({ message });
+        return res.status(400).json({ message });
     }
 });
 
 petController.get('/owner/:id', preloader(), async (req, res) => {
     const isOwner = req.session.user && res.locals.pet.owner == req.session.user.id
 
-    res.json({ isOwner: isOwner });
+    return res.json({ isOwner: isOwner });
 });
 
 module.exports = petController;
