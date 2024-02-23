@@ -12,7 +12,7 @@ const petSchema = new Schema({
     owner: { type: Types.ObjectId, ref: 'User' },
     isActive: { type: Boolean, required: true, default: true },
     likedByUsers: { type: [Types.ObjectId], ref: 'User', default: [] },
-    archivedAt: { type: String, required: true, default: null },
+    archivedAt: { type: String, default: null },
     createdAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) },
     updatedAt: { type: String, required: true, default: () => (new Date().toLocaleString('eu-Eu')) },
 });
