@@ -11,6 +11,7 @@ import { SnackarProvider } from './contexts/SnackbarContext';
 
 import { Navigation } from './components/Navigation/Navigation';
 import { Home } from './components/Catalog/Home/Home';
+import { Catalog } from './components/Catalog/Catalog';
 import { PetDetails } from './components/Pet/PetDetails/PetDetails';
 import { CreatePet } from './components/Pet/CreatePet/CreatePet';
 import { EditPet } from './components/Pet/EditPet/EditPet';
@@ -39,6 +40,7 @@ function App() {
                                 <Toolbar />
                                 <Routes>
                                     <Route path='/' element={<Home />} />
+                                    <Route path='/catalog/pets/' element={<Catalog />} />
                                     <Route path='/catalog/pets/details/:id' element={< PetDetails />} />
                                     <Route element={<AuthGuard />}>
                                         <Route path='/pet/create' element={<CreatePet />} />
