@@ -17,6 +17,7 @@ export const PetProvider = ({
     const { handleOpenSnackbar, setMessage } = useSnackbarContext();
     const { profileData, setProfileData } = useAuthContext();
     const [pets, setPets] = useState([]);
+    const [catalogPets, setCatalogPets] = useState([]);
     const [pet, setPet] = useState([]);
     const [isOwner, setIsOwner] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -171,6 +172,8 @@ export const PetProvider = ({
 
     const contextValues = {
         pets,
+        catalogPets,
+        setCatalogPets,
         pet,
         setPet,
         isOwner,
@@ -178,6 +181,7 @@ export const PetProvider = ({
         error,
         setError,
         isLoading,
+        setIsLoading,
         getPetById,
         onCreatePetSubmit,
         onEditPetSubmit,

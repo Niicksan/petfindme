@@ -7,6 +7,7 @@ import { Card, Box, CardContent, Typography, CardMedia, Tooltip } from '@mui/mat
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CircleIcon from '@mui/icons-material/Circle';
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
@@ -160,7 +161,8 @@ export const CatalogItem = ({
                         <Typography variant="caption" className='span-row' >
                             <Typography component='span' className='icon'>
                                 <Tooltip title={<>Статус</>}>
-                                    <CircleIcon sx={{ fill: statusColor[status] }} />
+                                    {/* <CircleIcon sx={{ fill: statusColor[status] }} /> */}
+                                    <RadioButtonCheckedIcon sx={{ fill: statusColor[status] }} />
                                 </Tooltip>
                             </Typography>
                             {status}

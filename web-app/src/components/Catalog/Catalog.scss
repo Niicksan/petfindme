@@ -3,13 +3,13 @@ $red: #550A21;
 .main-catalog {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     min-height: 60vh;
     margin: 0 auto;
 
     .no-articles-title {
-        margin: 1rem 0 1.5rem;
+        text-align: center;
+        margin: 8rem 2rem 1.5rem;
     }
 
     .MuiButtonBase-root.MuiPaginationItem-root.Mui-selected {
@@ -20,6 +20,8 @@ $red: #550A21;
 
 @media only screen and (max-width: 599px) {
     .main-catalog {
+
+        .form,
         .main-grid-container {
             width: 90%;
         }
