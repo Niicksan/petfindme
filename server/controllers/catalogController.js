@@ -1,8 +1,24 @@
 const catalogController = require('express').Router();
 
-const { getLatestPets, getLostPets, getFoundPets, getAdoptionPets } = require('../services/petService');
+const { getAllPetsBySearch, getLatestPets, getLostPets, getFoundPets, getAdoptionPets } = require('../services/petService');
 const { parseError } = require('../utils/errorParser');
 
+
+catalogController.get('/search', async (req, res) => {
+    try {
+        const search = req.query.search;
+        const location = req.query.location;
+        const status = req.query.status;
+        const page = req.query.page
+
+        const pets = await getAllPetsBySearch(search, location, status, page);
+        return res.json(pets);
+    } catch (error) {
+        const message = parseError(error);
+        console.log(message);
+        return res.status(400).json({ message });
+    }
+});
 
 catalogController.get('/latest', async (req, res) => {
     try {

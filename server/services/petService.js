@@ -1,6 +1,38 @@
 const Pet = require("../models/Pet");
 
 
+async function getAllPetsBySearch(search, location, status, page) {
+    const query = {};
+    const take = 3;
+    let skip = 0;
+
+    if (search) {
+        // query.title = new RegExp(search, 'i');
+        query.description = new RegExp(search, 'i');
+    }
+
+    if (location) {
+        query.location = new RegExp(location, 'i');
+    }
+
+    if (status && status !== 'Всички') {
+        query.status = status;
+    }
+
+    if (page && Number(page) && Number(page) > 1) {
+        skip = (page - 1) * take;
+    }
+
+    query.isActive = true;
+
+    const results = {};
+    results.items = await Pet.find(query, { _id: 1, title: 1, status: 1, location: 1, imageUrl: 1, createdAt: 1 }).sort({ createdAt: -1 }).skip(skip).limit(take);
+    results.totalCount = await Pet.find(query).count();
+    results.itemsPerPage = take;
+
+    return results;
+}
+
 async function getLatestPets() {
     return Pet.find({ isActive: true }, { _id: 1, title: 1, status: 1, location: 1, imageUrl: 1, createdAt: 1 }).sort({ createdAt: -1 }).limit(12);
 }
@@ -100,6 +132,7 @@ async function isPetLikedFromUser(petId, userId) {
 }
 
 module.exports = {
+    getAllPetsBySearch,
     getLatestPets,
     getLostPets,
     getFoundPets,
