@@ -4,6 +4,7 @@ $red: #550A21;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 4rem auto 4rem;
 
     .lds-dual-ring {
         display: inline-block;
@@ -34,6 +35,6 @@ $red: #550A21;
 
 @media only screen and (max-width:767px) {
     .loader {
-        height: 70vh;
+        height: 40vh;
     }
 }

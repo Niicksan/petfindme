@@ -84,7 +84,7 @@ export const Catalog = () => {
                         alignItems: 'center',
                         width: '80%',
                         maxWidth: '1920px',
-                        mt: 8,
+                        mt: 6,
                         mb: 4
                     }}
                 >
