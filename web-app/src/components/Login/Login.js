@@ -6,7 +6,6 @@ import {
     Avatar,
     Button,
     CssBaseline,
-    TextField,
     Box,
     Grid,
     Typography,
@@ -69,21 +68,21 @@ export const Login = () => {
                         Вход в PetFind.Me
                     </Typography>
                     <Box component="form" onSubmit={onSubmit} sx={{ mt: 1, minWidth: '100%' }}>
-                        <TextField
-                            error={!error.email}
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Имейл адрес"
-                            name="email"
-                            autoComplete="email"
-                            value={values.email}
-                            onChange={(e) => {
-                                changeHandler(e);
-                                handleClickEmail(e);
-                            }}
-                        />
+                        <FormControl fullWidth required sx={{ margin: '8px 0' }} variant="outlined">
+                            <InputLabel htmlFor="email">Имейл адрес</InputLabel>
+                            <OutlinedInput
+                                error={!error.email}
+                                id="email"
+                                label="Имейл адрес"
+                                name="email"
+                                autoComplete="email"
+                                value={values.email}
+                                onChange={(e) => {
+                                    changeHandler(e);
+                                    handleClickEmail(e);
+                                }}
+                            />
+                        </FormControl>
                         {!error.email && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Невалиден имейл</Typography>}
 
                         <FormControl fullWidth required sx={{ margin: '8px 0' }} variant="outlined">
