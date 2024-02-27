@@ -2,84 +2,31 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { WebNavButton } from '../../Buttons/WebNavButton/WebNavButton';
 
 export const WebNavItems = () => {
     const { isAuthenticated } = useAuthContext();
 
     return (
         <>
+            <WebNavButton path={'/catalog/pets'} key={'catalog'} text={'Каталог'} />
+
             {isAuthenticated && (
                 <>
-                    <Button component={Link} to='/catalog/lost' key={'lost'} sx={{
-                        color: '#fff', ":hover": {
-                            bgcolor: "white",
-                            color: "#550A21"
-                        }
-                    }}>
-                        Изгубени
-                    </Button>
-                    <Button component={Link} to='/catalog/found' key={'found'} sx={{
-                        color: '#fff', ":hover": {
-                            bgcolor: "white",
-                            color: "#550A21"
-                        }
-                    }}>
-                        Намерени
-                    </Button>
-                    <Button component={Link} to='/catalog/adotpion' key={'adotpion'} sx={{
-                        color: '#fff', ":hover": {
-                            bgcolor: "white",
-                            color: "#550A21"
-                        }
-                    }}>
-                        За осиновяване
-                    </Button>
-                    <Button component={Link} to='/pet/create' key={'pet-create'} sx={{
-                        color: '#fff', ":hover": {
-                            bgcolor: "white",
-                            color: "#550A21"
-                        }
-                    }}>
-                        Добави
-                    </Button>
-                    <Button component={Link} to='/user/my-profile' key={'my-profile'} sx={{
-                        color: '#fff', ":hover": {
-                            bgcolor: "white",
-                            color: "#550A21"
-                        }
-                    }}>
-                        Моят профил
-                    </Button>
-                    <Button component={Link} to='/auth/logout' key={'logout'} sx={{
-                        color: '#fff', ":hover": {
-                            bgcolor: "white",
-                            color: "#550A21"
-                        }
-                    }}>
-                        Изход
-                    </Button>
+                    {/* <WebNavButton path={'/catalog/lost'} key={'lost'} text={'Изгубени'} />
+                    <WebNavButton path={'/catalog/found'} key={'found'} text={'Намерени'} />
+                    <WebNavButton path={'/catalog/adotpion'} key={'adotpion'} text={'За осиновяване'} /> */}
+
+                    <WebNavButton path={'/pet/create'} key={'pet-create'} text={'Добави'} />
+                    <WebNavButton path={'/user/my-profile'} key={'my-profile'} text={'Моят профил'} />
+                    <WebNavButton path={'/auth/logout'} key={'logout'} text={'Изход'} />
                 </>
             )}
 
             {!isAuthenticated && (
                 <>
-                    <Button component={Link} to='/auth/login' key={'login'} sx={{
-                        color: '#fff', ":hover": {
-                            bgcolor: "white",
-                            color: "#550A21"
-                        }
-                    }}>
-                        Вход
-                    </Button>
-
-                    <Button component={Link} to='/auth/register' key={'register'} sx={{
-                        color: '#fff', ":hover": {
-                            bgcolor: "white",
-                            color: "#550A21"
-                        }
-                    }}>
-                        Регистрация
-                    </Button>
+                    <WebNavButton path={'/auth/login'} key={'login'} text={'Вход'} />
+                    <WebNavButton path={'/auth/register'} key={'register'} text={'Регистрация'} />
                 </>
             )}
         </>

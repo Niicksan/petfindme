@@ -1,98 +1,31 @@
-import { Link } from 'react-router-dom';
-import { ListItem, ListItemButton, ListItemText } from '@mui/material';
-
 import { useAuthContext } from '../../../contexts/AuthContext';
+
+import { MobileNavButton } from '../../Buttons/MobileNavButton/MobileNavButton';
 
 export const MobileNavItems = ({ handleDrawerToggle }) => {
     const { isAuthenticated } = useAuthContext();
 
     return (
         <>
+            <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/catalog/pets'} key={'catalog'} text={'Каталог'} />
+
             {isAuthenticated && (
                 <>
-                    <ListItem onClick={handleDrawerToggle} component={Link} to="/catalog/lost" key={'lost'} disablePadding>
-                        <ListItemButton sx={{
-                            textAlign: 'left', color: '#550A21', paddingLeft: "90px", ":hover": {
-                                border: "1px solid #550A21"
-                            }
-                        }}>
-                            <ListItemText primary={'Изгубени'} />
-                        </ListItemButton>
-                    </ListItem>
+                    {/* <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/catalog/lost'} key={'lost'} text={'Изгубени'} />
+                    <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/catalog/found'} key={'found'} text={'Намерени'} />
+                    <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/catalog/adotpion'} key={'adotpion'} text={'За осиновяване'} /> */}
 
-                    <ListItem onClick={handleDrawerToggle} component={Link} to="/catalog/found" key={'found'} disablePadding>
-                        <ListItemButton sx={{
-                            textAlign: 'left', color: '#550A21', paddingLeft: "90px", ":hover": {
-                                border: "1px solid #550A21"
-                            }
-                        }}>
-                            <ListItemText primary={'Намерени'} />
-                        </ListItemButton>
-                    </ListItem>
+                    <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/pet/create'} key={'pet-craete'} text={'Добави'} />
+                    <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/user/my-profile'} key={'my-profile'} text={'Моя Профил'} />
+                    <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/auth/logout'} key={'logout'} text={'Изход'} />
 
-                    <ListItem onClick={handleDrawerToggle} component={Link} to="/catalog/adotpion" key={'adotpion'} disablePadding>
-                        <ListItemButton sx={{
-                            textAlign: 'left', color: '#550A21', paddingLeft: "90px", ":hover": {
-                                border: "1px solid #550A21"
-                            }
-                        }}>
-                            <ListItemText primary={'За осиновяване'} />
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem onClick={handleDrawerToggle} component={Link} to="/pet/create" key={'pet-craete'} disablePadding>
-                        <ListItemButton sx={{
-                            textAlign: 'left', color: '#550A21', paddingLeft: "90px", ":hover": {
-                                border: "1px solid #550A21"
-                            }
-                        }}>
-                            <ListItemText primary={'Добави'} />
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem onClick={handleDrawerToggle} component={Link} to="/user/my-profile" key={'my-profile'} disablePadding>
-                        <ListItemButton sx={{
-                            textAlign: 'left', color: '#550A21', paddingLeft: "90px", ":hover": {
-                                border: "1px solid #550A21"
-                            }
-                        }}>
-                            <ListItemText primary={'Моя Профил'} />
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem onClick={handleDrawerToggle} component={Link} to="/auth/logout" key={'logot'} disablePadding>
-                        <ListItemButton sx={{
-                            textAlign: 'left', color: '#550A21', paddingLeft: "90px", ":hover": {
-                                border: "1px solid #550A21"
-                            }
-                        }}>
-                            <ListItemText primary={'Изход'} />
-                        </ListItemButton>
-                    </ListItem>
                 </>
             )}
 
             {!isAuthenticated && (
                 <>
-                    <ListItem onClick={handleDrawerToggle} component={Link} to="/auth/login" key={'login'} disablePadding>
-                        <ListItemButton sx={{
-                            textAlign: 'left', color: '#550A21', paddingLeft: "90px", ":hover": {
-                                border: "1px solid #550A21"
-                            }
-                        }}>
-                            <ListItemText primary={'Вход'} />
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem onClick={handleDrawerToggle} component={Link} to="/auth/register" key={'register'} disablePadding>
-                        <ListItemButton sx={{
-                            textAlign: 'left', color: '#550A21', paddingLeft: "90px", ":hover": {
-                                border: "1px solid #550A21"
-                            }
-                        }}>
-                            <ListItemText primary={'Регистрация'} />
-                        </ListItemButton>
-                    </ListItem>
+                    <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/auth/login'} key={'login'} text={'Вход'} />
+                    <MobileNavButton handleDrawerToggle={handleDrawerToggle} path={'/auth/register'} key={'register'} text={'Регистрация'} />
                 </>
             )}
         </>
