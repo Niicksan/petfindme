@@ -1,22 +1,38 @@
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 
-import { Container, Avatar, Button, CssBaseline, TextField, Box, Grid, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {
+    Container,
+    Avatar,
+    Button,
+    CssBaseline,
+    TextField,
+    Box,
+    Grid,
+    Typography,
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    InputAdornment,
+    IconButton
+} from '@mui/material';
+
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useForm } from "../../hooks/useForm";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { useAuthValidation } from "../../hooks/useAuthValidation";
 
 const theme = createTheme();
 
 export const Register = () => {
+    const { onRegisterSubmit } = useAuthContext();
     const {
         error,
         user,
         isRegFormValid,
-        onRegisterSubmit,
         handleClickEmail,
         handleClickName,
         handleClickPassword,

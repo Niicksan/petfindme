@@ -16,21 +16,23 @@ import {
     InputAdornment,
     IconButton
 } from '@mui/material';
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useForm } from "../../hooks/useForm";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { useAuthValidation } from "../../hooks/useAuthValidation";
 
 const theme = createTheme();
 
 export const Login = () => {
+    const { onLoginSubmit } = useAuthContext();
     const {
         error,
         user,
         isLoginFormValid,
-        onLoginSubmit,
         handleClickEmail,
         handleClickPassword,
         checkIsLoginFormValid,

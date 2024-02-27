@@ -6,7 +6,7 @@ export const useAuthValidation = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const { error, setError, onLoginSubmit, onRegisterSubmit } = useAuthContext();
+    const { error, setError } = useAuthContext();
     const [isLoginFormValid, setIsLoginFormValid] = useState(false);
     const [isRegFormValid, setIsRegFormValid] = useState(false);
     const [user, setUser] = useState({
@@ -84,8 +84,6 @@ export const useAuthValidation = () => {
         user,
         isLoginFormValid,
         isRegFormValid,
-        onLoginSubmit,
-        onRegisterSubmit,
         handleClickEmail,
         handleClickName,
         handleClickPassword,
