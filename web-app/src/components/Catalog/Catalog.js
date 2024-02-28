@@ -27,7 +27,6 @@ export const Catalog = () => {
         status: searchParams.get('status') || ''
     });
 
-    console.log('queryString', queryString);
     const changeValueHandler = (e) => {
         setParams(state => ({ ...state, [e.target.name]: e.target.value }));
     };
