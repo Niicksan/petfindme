@@ -66,29 +66,29 @@ export const MyProfile = () => {
                             </Typography>
 
                             <Box sx={{ display: 'flex', justifyContent: 'space-evenly', my: '2rem' }} >
-                                <Typography component="p" >
-                                    <Typography sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
+                                <Typography component="p" sx={{ display: 'flex', flexDirection: 'column' }} >
+                                    <Typography component="span" sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
                                         {profileData.myPets?.filter(p => p.isActive).length}
                                     </Typography>
-                                    <Typography component="p">
+                                    <Typography component="span">
                                         Активни
                                     </Typography>
                                 </Typography>
 
-                                <Typography component="p" sx={{ mx: 3 }}>
-                                    <Typography sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
+                                <Typography component="p" sx={{ display: 'flex', flexDirection: 'column', mx: 3 }}>
+                                    <Typography component="span" sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
                                         {profileData.myPets?.filter(p => !p.isActive).length}
                                     </Typography>
-                                    <Typography component="p">
+                                    <Typography component="span">
                                         Архивирани
                                     </Typography>
                                 </Typography>
 
-                                <Typography component="p" >
-                                    <Typography sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
+                                <Typography component="p" sx={{ display: 'flex', flexDirection: 'column' }} >
+                                    <Typography component="span" sx={{ fontWeight: 'bold', fontSize: '1.6rem', textAlign: 'center' }} >
                                         {profileData.likedPets?.length}
                                     </Typography>
-                                    <Typography component="p" >
+                                    <Typography component="span" >
                                         Любими
                                     </Typography>
                                 </Typography>
@@ -117,8 +117,8 @@ export const MyProfile = () => {
                                     }}
                                 >
                                     <Tab icon={<AccountCircleIcon className='tab-icon' />} iconPosition="start" label="Активни" value="1" />
-                                    <Tab icon={<DeleteIcon lassName='tab-icon' />} iconPosition="start" label="Архивирани" value="2" />
-                                    <Tab icon={<FavoriteIcon lassName='tab-icon' />} iconPosition="start" label="Любими" value="3" />
+                                    <Tab icon={<DeleteIcon className='tab-icon' />} iconPosition="start" label="Архивирани" value="2" />
+                                    <Tab icon={<FavoriteIcon className='tab-icon' />} iconPosition="start" label="Любими" value="3" />
                                 </TabList>
                             </Box>
                             <ProfileTabPanel tabValue={'1'} data={profileData?.myPets?.filter(p => p.isActive)} isArchived={false} isFavourite={false} />
