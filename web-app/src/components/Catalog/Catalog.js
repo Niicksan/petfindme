@@ -3,7 +3,7 @@ import './Catalog.scss';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { Box, TextField, MenuItem, Button, Grid, Stack, Pagination, PaginationItem, InputAdornment } from "@mui/material";
+import { Box, TextField, FormControl, InputLabel, InputAdornment, Select, MenuItem, Button, Grid, Stack, Pagination, PaginationItem } from "@mui/material";
 
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -13,12 +13,11 @@ import { usePetValidation } from '../../hooks/usePetValidation';
 import { usePetContext } from '../../contexts/PetContext';
 import { catalogServiceFactory } from '../../services/catalogService';
 
-
 export const Catalog = () => {
     let queryString = decodeURIComponent(window.location.search);
     const catalogService = catalogServiceFactory();
     const { statuses } = usePetValidation();
-    const { isLoading, setIsLoading, catalogPets, setCatalogPets } = usePetContext();
+    const { isLoading, setIsLoading, cities, catalogPets, setCatalogPets } = usePetContext();
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
     const [params, setParams] = useState({
@@ -112,37 +111,53 @@ export const Catalog = () => {
                         </Grid>
                         <Grid item xs={4} sm={4} md={6} lg={6}>
                             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
-                                <TextField
-                                    id="location"
-                                    label="Град"
-                                    name="location"
-                                    value={params.location}
-                                    sx={{ width: '33.33%', pr: 0.5 }}
-                                    onChange={(e) => {
-                                        changeValueHandler(e);
-                                    }}
-                                />
-                                <TextField
-                                    select
-                                    id="status"
-                                    label="Статус"
-                                    name="status"
-                                    margin="normal"
-                                    value={params.status}
-                                    sx={{ width: '33.33%', px: 0.5, my: 0 }}
-                                    onChange={(e) => {
-                                        changeValueHandler(e);
-                                    }}
-                                >
-                                    <MenuItem key="Всички" value="Всички">
-                                        Всички
-                                    </MenuItem>
-                                    {statuses.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
+                                <FormControl fullWidth sx={{ width: '33.33%', pr: 0.5 }} >
+                                    <InputLabel id="location-label" htmlFor="location">Град</InputLabel>
+                                    <Select
+                                        id="location"
+                                        name="location"
+                                        label="Град"
+                                        value={params.location}
+                                        MenuProps={{
+                                            style: {
+                                                maxHeight: 600,
+                                            },
+                                        }}
+                                        onChange={(e) => {
+                                            changeValueHandler(e);
+                                        }}
+                                    >
+                                        <MenuItem key="Всички градове" value="Всички">
+                                            Всички
                                         </MenuItem>
-                                    ))}
-                                </TextField>
+                                        {cities?.map((option) => (
+                                            <MenuItem key={option.key} value={option.name}>
+                                                {option.name}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                                <FormControl fullWidth sx={{ width: '33.33%', px: 0.5 }} >
+                                    <InputLabel id="status-label" htmlFor="status">Статус</InputLabel>
+                                    <Select
+                                        id="status"
+                                        name="status"
+                                        label="Статус"
+                                        value={params.status}
+                                        onChange={(e) => {
+                                            changeValueHandler(e);
+                                        }}
+                                    >
+                                        <MenuItem key="Всички" value="Всички">
+                                            Всички
+                                        </MenuItem>
+                                        {statuses.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
                                 <Button
                                     type="submit"
                                     variant="contained"

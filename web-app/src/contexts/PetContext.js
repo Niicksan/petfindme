@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { locationServiceFactory } from '../services/locationService';
 import { catalogServiceFactory } from '../services/catalogService';
 import { petServiceFactory } from '../services/petService';
 import { useSnackbarContext } from './SnackbarContext';
@@ -16,11 +17,13 @@ export const PetProvider = ({
 
     const { handleOpenSnackbar, setMessage } = useSnackbarContext();
     const { profileData, setProfileData } = useAuthContext();
+    const [cities, setSities] = useState();
     const [pets, setPets] = useState([]);
     const [catalogPets, setCatalogPets] = useState([]);
     const [pet, setPet] = useState([]);
     const [isOwner, setIsOwner] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const locationService = locationServiceFactory();
     const catalogService = catalogServiceFactory();
     const petService = petServiceFactory();
     const [error, setError] = useState({
@@ -33,6 +36,13 @@ export const PetProvider = ({
         description: false,
         serverErrors: false
     });
+
+    useEffect(() => {
+        locationService.getAllCities()
+            .then(result => {
+                setSities(result);
+            });
+    }, []);
 
     useEffect(() => {
         setIsLoading(true);
@@ -171,6 +181,7 @@ export const PetProvider = ({
     };
 
     const contextValues = {
+        cities,
         pets,
         catalogPets,
         setCatalogPets,

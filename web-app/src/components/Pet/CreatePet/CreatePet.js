@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Avatar, Container, Box, TextField, Typography, MenuItem, Button } from '@mui/material';
+import { CssBaseline, Avatar, Container, Box, TextField, Typography, MenuItem, Button, FormControl, InputLabel, Select } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
+import { usePetContext } from '../../../contexts/PetContext';
 import { usePetValidation } from '../../../hooks/usePetValidation';
 import { useForm } from '../../../hooks/useForm';
 import { PetForm } from '../PetForm/PetForm';
@@ -11,6 +12,7 @@ import { PetForm } from '../PetForm/PetForm';
 const theme = createTheme();
 
 export const CreatePet = () => {
+    const { cities } = usePetContext();
     const {
         form,
         error,
@@ -109,21 +111,30 @@ export const CreatePet = () => {
                         </TextField>
                         {error.status && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Изберете статус</Typography>}
 
-                        <TextField
-                            error={error.location}
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="location"
-                            label="Местоположение"
-                            name="location"
-                            autoComplete="location"
-                            value={values.location}
-                            onChange={(e) => {
-                                changeHandler(e);
-                                handleClickLocation(e);
-                            }}
-                        />
+                        <FormControl fullWidth required>
+                            <InputLabel id="location-label" htmlFor="location">Местоположение</InputLabel>
+                            <Select
+                                id="location"
+                                name="location"
+                                label="Местоположение"
+                                value={values.location}
+                                MenuProps={{
+                                    style: {
+                                        maxHeight: 500,
+                                    },
+                                }}
+                                onChange={(e) => {
+                                    changeHandler(e);
+                                    handleClickLocation(e);
+                                }}
+                            >
+                                {cities?.map((option) => (
+                                    <MenuItem key={option.key} value={option.name}>
+                                        {option.name}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                         {error.location && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Mестоположението трябва да е поне 3 символа</Typography>}
 
                         <TextField

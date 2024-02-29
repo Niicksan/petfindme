@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Avatar, Container, Box, TextField, Typography, MenuItem, Button } from '@mui/material';
+import { CssBaseline, Avatar, Container, Box, Button, TextField, FormControl, MenuItem, InputLabel, Select, Typography } from '@mui/material';
 
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -18,7 +18,7 @@ const theme = createTheme();
 
 export const EditPet = () => {
     const { id } = useParams();
-    const { isOwner } = usePetContext();
+    const { isOwner, cities } = usePetContext();
     const [isLoading, setIsLoading] = useState(false);
 
     const {
@@ -152,21 +152,30 @@ export const EditPet = () => {
                             </TextField>
                             {error.status && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Изберете статус</Typography>}
 
-                            <TextField
-                                error={error.location}
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="location"
-                                label="Местоположение"
-                                name="location"
-                                autoComplete="location"
-                                value={values.location}
-                                onChange={(e) => {
-                                    changeHandler(e);
-                                    handleClickLocation(e);
-                                }}
-                            />
+                            <FormControl fullWidth required>
+                                <InputLabel id="location-label" htmlFor="location">Местоположение</InputLabel>
+                                <Select
+                                    id="location"
+                                    name="location"
+                                    label="Местоположение"
+                                    value={values.location}
+                                    MenuProps={{
+                                        style: {
+                                            maxHeight: 500,
+                                        },
+                                    }}
+                                    onChange={(e) => {
+                                        changeHandler(e);
+                                        handleClickLocation(e);
+                                    }}
+                                >
+                                    {cities?.map((option) => (
+                                        <MenuItem key={option.key} value={option.name}>
+                                            {option.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                             {error.location && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Mестоположението трябва да е поне 3 символа</Typography>}
 
                             <TextField
