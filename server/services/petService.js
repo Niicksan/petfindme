@@ -11,8 +11,8 @@ async function getAllPetsBySearch(search, location, status, page) {
         query.description = new RegExp(search, 'i');
     }
 
-    if (location) {
-        query.location = new RegExp(location, 'i');
+    if (location && location !== 'Всички') {
+        query.location = location;
     }
 
     if (status && status !== 'Всички') {
