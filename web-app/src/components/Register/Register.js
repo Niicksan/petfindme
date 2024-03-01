@@ -117,6 +117,7 @@ export const Register = () => {
                                 label="Парола"
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
+                                autoComplete='new-password'
                                 value={values.password}
                                 onChange={(e) => {
                                     changeHandler(e);
@@ -146,6 +147,7 @@ export const Register = () => {
                                 label="Повторете паролата"
                                 type={showConfirmPassword ? 'text' : 'password'}
                                 name="confirmPassword"
+                                autoComplete="new-password"
                                 value={values.confirmPassword}
                                 onChange={(e) => {
                                     changeHandler(e);
