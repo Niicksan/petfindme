@@ -13,12 +13,17 @@ import { useForm } from '../../../hooks/useForm';
 
 import { Loader } from '../../Loader/Loader'
 import { PetForm } from '../PetForm/PetForm';
+import { Map } from '../../Map/Map';
 
 const theme = createTheme();
 
 export const EditPet = () => {
     const { id } = useParams();
     const { isOwner, cities } = usePetContext();
+    const [coords, setCoords] = useState({});
+    const position = [coords?.latitude || 42.798165, coords?.longitude || 25.6275174];
+    const height = '300px';
+    const zoom = 17;
     const [isLoading, setIsLoading] = useState(false);
 
     const {
@@ -43,6 +48,7 @@ export const EditPet = () => {
         title: '',
         status: '',
         location: '',
+        geolocation: {},
         contactName: '',
         phone: '',
         imageUrl: '',
@@ -59,6 +65,7 @@ export const EditPet = () => {
                         title: result.title,
                         status: result.status,
                         location: result.location,
+                        geolocation: result.geolocation,
                         contactName: result.contactName,
                         phone: result.phone,
                         imageUrl: result.imageUrl,
@@ -69,19 +76,26 @@ export const EditPet = () => {
                         title: result.title,
                         status: result.status,
                         location: result.location,
+                        geolocation: result.geolocation,
                         contactName: result.contactName,
                         phone: result.phone,
                         imageUrl: result.imageUrl,
                         description: result.description
                     });
+                    setCoords(result.geolocation);
                     setIsLoading(false);
                 });
         };
     }, [id, isOwner]);
 
     useEffect(() => {
+        setValues({ ...values, geolocation: coords });
+        setPetForm({ ...values, geolocation: coords });
+    }, [coords]);
+
+    useEffect(() => {
         checkIsPetFormValid();
-    }, [form.title, form.status, form.location, form.contactName, form.phone, form.imageUrl, form.description]);
+    }, [form.title, form.status, form.location, form.geolocation, form.title, form.contactName, form.phone, form.imageUrl, form.description]);
 
     return (
         <>
@@ -91,7 +105,7 @@ export const EditPet = () => {
                     <CssBaseline />
                     <Box
                         sx={{
-                            marginTop: 8,
+                            mt: 3,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -113,7 +127,7 @@ export const EditPet = () => {
 
                             <TextField
                                 error={error.title}
-                                margin="normal"
+                                margin="dense"
                                 required
                                 fullWidth
                                 id="title"
@@ -130,15 +144,15 @@ export const EditPet = () => {
 
                             <TextField
                                 error={error.status}
-                                margin="normal"
+                                margin="dense"
                                 required
+                                fullWidth
                                 id="status"
                                 select={true}
                                 label="Статус"
                                 name="status"
                                 autoComplete="status"
                                 value={values.status}
-                                sx={{ width: "100%" }}
                                 onChange={(e) => {
                                     changeHandler(e);
                                     handleClickStatus(e);
@@ -152,7 +166,7 @@ export const EditPet = () => {
                             </TextField>
                             {error.status && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Изберете статус</Typography>}
 
-                            <FormControl fullWidth required>
+                            <FormControl fullWidth required sx={{ my: 1 }} >
                                 <InputLabel id="location-label" htmlFor="location">Местоположение</InputLabel>
                                 <Select
                                     id="location"
@@ -178,9 +192,14 @@ export const EditPet = () => {
                             </FormControl>
                             {error.location && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Mестоположението трябва да е поне 3 символа</Typography>}
 
+                            <FormControl fullWidth required >
+                                <Typography id="geo-location-label" sx={{ mb: 1 }}>Изберете локация на картата *</Typography>
+                                <Map id="geo-location" coords={coords || 0} setCoords={setCoords} mapPosition={position} mapHeight={height} mapZoom={zoom} editable={true} />
+                            </FormControl>
+
                             <TextField
                                 error={error.contactName}
-                                margin="normal"
+                                margin="dense"
                                 required
                                 fullWidth
                                 id="contactName"
@@ -188,6 +207,7 @@ export const EditPet = () => {
                                 name="contactName"
                                 autoComplete="contactName"
                                 value={values.contactName}
+                                sx={{ mt: 2 }}
                                 onChange={(e) => {
                                     changeHandler(e);
                                     handleClickContactName(e);
@@ -197,7 +217,7 @@ export const EditPet = () => {
 
                             <TextField
                                 error={error.phone}
-                                margin="normal"
+                                margin="dense"
                                 required
                                 fullWidth
                                 id="phone"
@@ -205,7 +225,6 @@ export const EditPet = () => {
                                 name="phone"
                                 autoComplete="phone"
                                 value={values.phone}
-                                sx={{ width: "100%" }}
                                 onChange={(e) => {
                                     changeHandler(e);
                                     handleClickPhone(e);
@@ -215,7 +234,7 @@ export const EditPet = () => {
 
                             <TextField
                                 error={error.imageUrl}
-                                margin="normal"
+                                margin="dense"
                                 required
                                 fullWidth
                                 id="imageUrl"
@@ -232,7 +251,7 @@ export const EditPet = () => {
 
                             <TextField
                                 error={error.description}
-                                margin="normal"
+                                margin="dense"
                                 required
                                 fullWidth
                                 id="description"
@@ -242,7 +261,6 @@ export const EditPet = () => {
                                 multiline
                                 rows={4}
                                 value={values.description}
-                                sx={{ width: "100%" }}
                                 onChange={(e) => {
                                     changeHandler(e);
                                     handleClickDescription(e);

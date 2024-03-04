@@ -26,6 +26,7 @@ export const usePetValidation = () => {
         title: '',
         status: '',
         location: '',
+        geolocation: {},
         contactName: '',
         phone: '',
         imageUrl: '',
@@ -107,6 +108,7 @@ export const usePetValidation = () => {
             (!error.title && form.title !== '') &&
             (!error.status && form.status !== '') &&
             (!error.location && form.location !== '') &&
+            (form.geolocation?.latitude && form.geolocation?.longitude) &&
             (!error.contactName && form.contactName !== '') &&
             (!error.phone && form.phone !== '') &&
             (!error.imageUrl && form.imageUrl !== '') &&

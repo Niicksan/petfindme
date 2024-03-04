@@ -1,18 +1,18 @@
 import './PetDetailsCard.scss';
 
-import { Icon } from 'leaflet'
-import { Card, Box, CardContent, Typography } from '@mui/material';
-import { MapContainer, TileLayer, Circle, Tooltip, Marker } from 'react-leaflet'
+import { useState } from 'react';
 
 import ReactImageGallery from 'react-image-gallery';
-import marker from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import { Card, Box, CardContent, Typography } from '@mui/material';
+
+import { Map } from '../../../Map/Map';
 
 export const PetDetailsCard = ({
     _id,
     title,
     status,
     location,
+    geolocation,
     contactName,
     phone,
     imageUrl,
@@ -57,21 +57,16 @@ export const PetDetailsCard = ({
             thumbnail: imageUrl,
         },
     ];
-
-    const markerIcon = new Icon({
-        iconUrl: marker,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41]
-    })
-
-    const markerShadowIcon = new Icon({
-        iconUrl: markerShadow,
-        iconSize: [41, 41],
-        iconAnchor: [12, 41]
-    })
-
-    const center = [42.8672352, 25.3166931]
-    const fillBlueOptions = { fillColor: 'blue' }
+    const position = [
+        geolocation?.latitude || 42.798165,
+        geolocation?.longitude || 25.6275174
+    ];
+    const coords = {
+        latitude: geolocation?.latitude,
+        longitude: geolocation?.longitude
+    };
+    const height = '400px';
+    const zoom = 17;
 
     return (
         <>
@@ -115,17 +110,7 @@ export const PetDetailsCard = ({
                     </CardContent>
 
                     <Box sx={{ width: '100%' }}>
-                        <MapContainer center={center} zoom={15} scrollWheelZoom={true} style={{ width: '100%', height: '400px' }}>
-                            <TileLayer
-                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                            <Marker position={center} icon={markerIcon} zIndexOffset={10} />
-                            <Marker position={center} icon={markerShadowIcon} />
-                            <Circle center={center} pathOptions={fillBlueOptions} radius={50} >
-                                <Tooltip>Радиус от 50 метра</Tooltip>
-                            </Circle>
-                        </MapContainer >
+                        <Map coords={coords} mapPosition={position} mapHeight={height} mapZoom={zoom} editable={false} />
                     </Box>
                 </Box>
             </Card >
