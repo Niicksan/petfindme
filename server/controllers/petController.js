@@ -1,7 +1,7 @@
 const petController = require('express').Router();
 
 const { check, validationResult } = require('express-validator');
-const { createPet, updatePetById, archiveById, activateById, deletePetById, isPetLikedFromUser, addPetToLikedList, removePetFromLikedList } = require('../services/petService');
+const { createPet, updatePetById, getPetById, archiveById, activateById, deletePetById, isPetLikedFromUser, addPetToLikedList, removePetFromLikedList } = require('../services/petService');
 const { parseError } = require('../utils/errorParser');
 const status = require('../enums/petStatus');
 const { hasUser, isOwner } = require('../middlewares/guards');
@@ -46,7 +46,8 @@ petController.post('/',
 
 petController.get('/:id', preloader(), async (req, res) => {
     try {
-        const item = res.locals.pet;
+        const item = await getPetById(req.params.id);
+
         return res.json(item);
     } catch (error) {
         const message = parseError(error);

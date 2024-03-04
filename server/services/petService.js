@@ -58,7 +58,7 @@ async function getAllPetsLikedByUser(userId) {
 }
 
 async function getPetById(id) {
-    return Pet.findById(id, { owner: 0, likedByUsers: 0, updatedAt: 0, __v: 0 });
+    return Pet.findById(id, { owner: 0, likedByUsers: 0, archivedAt: 0, updatedAt: 0, __v: 0 });
 }
 
 async function getPetByIdRaw(id) {
