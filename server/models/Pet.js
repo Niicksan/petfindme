@@ -5,6 +5,7 @@ const petSchema = new Schema({
     title: { type: String, required: true },
     status: { type: String, required: true },
     location: { type: String, required: true },
+    geolocation: { type: Object, required: true },
     contactName: { type: String, required: true },
     phone: { type: String, required: true },
     imageUrl: { type: String, required: true, default: 'default-pet.png' },

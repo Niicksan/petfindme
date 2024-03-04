@@ -73,6 +73,7 @@ async function updatePetById(pet, data) {
     pet.title = data.title;
     pet.status = data.status;
     pet.location = data.location;
+    pet.geolocation = data.geolocation;
     pet.contactName = data.contactName;
     pet.phone = data.phone;
     pet.description = data.description;

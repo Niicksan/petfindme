@@ -40,5 +40,5 @@ module.exports = (app) => {
     // Setup session
     app.use(session(sessionConfig));
 
-    app.use(trimBody('password'));
+    app.use(trimBody('password', 'geolocation'));
 };
