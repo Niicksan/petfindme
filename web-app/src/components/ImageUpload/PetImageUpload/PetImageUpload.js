@@ -34,7 +34,9 @@ export const PetImageUpload = () => {
             border: '2px dashed #550A21',
             borderRadius: '8px',
             padding: '1.2rem',
-            margin: '1rem 0'
+            margin: 0,
+            marginTop: '8px',
+            marginBottom: '4px',
         },
         '&.MuiBox-root:hover, &.MuiBox-root.dragover': {
             opacity: 0.6,
@@ -101,7 +103,7 @@ export const PetImageUpload = () => {
                     </CustomBox>
 
                     {imageList.length > 0 ? (
-                        <Box className="upload-image-wrapper" sx={{ mb: 1, width: '100%' }}>
+                        <Box className="upload-image-wrapper" sx={{ mb: 0.5, width: '100%' }}>
                             <>
                                 <Box sx={{ display: 'flex', justifyContent: 'end' }}>
                                     <Button
@@ -115,7 +117,7 @@ export const PetImageUpload = () => {
                                         Премахни всички снимки
                                     </Button>
                                 </Box>
-                                <Stack spacing={1} sx={{ mt: 1 }}>
+                                <Stack spacing={1} sx={{ mt: 0.5 }}>
                                     {imageList.map((image, index) =>
                                         <Box
                                             key={index}

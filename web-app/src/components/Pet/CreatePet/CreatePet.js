@@ -173,7 +173,7 @@ export const CreatePet = () => {
                             name="contactName"
                             autoComplete="contactName"
                             value={values.contactName}
-                            sx={{ mt: 2 }}
+                            sx={{ mt: '12px' }}
                             onChange={(e) => {
                                 changeHandler(e);
                                 handleClickContactName(e);
