@@ -9,7 +9,6 @@ import { usePetValidation } from '../../../hooks/usePetValidation';
 import { useForm } from '../../../hooks/useForm';
 import { PetForm } from '../PetForm/PetForm';
 import { Map } from '../../Map/Map';
-import { PetImageUpload } from '../../ImageUpload/PetImageUpload/PetImageUpload';
 
 const theme = createTheme();
 
@@ -124,10 +123,6 @@ export const CreatePet = () => {
                             ))}
                         </TextField>
                         {error.status && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Изберете статус</Typography>}
-
-                        <FormControl fullWidth required >
-                            <PetImageUpload />
-                        </FormControl>
 
                         <FormControl fullWidth required sx={{ my: 1 }} >
                             <InputLabel id="location-label" htmlFor="location">Местоположение</InputLabel>
