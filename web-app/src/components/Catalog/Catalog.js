@@ -3,22 +3,22 @@ import './Catalog.scss';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { Box, TextField, FormControl, InputLabel, InputAdornment, Select, MenuItem, Button, Grid, Stack, Pagination, PaginationItem } from "@mui/material";
+import { Box, TextField, InputAdornment, Button, Grid, Stack, Pagination, PaginationItem } from "@mui/material";
 
 import SearchIcon from '@mui/icons-material/Search';
 
 import { CatalogList } from "./CatalogList/CatalogList";
+import { StatusSelect } from '../Inputs/StatusSelect/StatusSelect';
 import { LocationAutocomplete } from '../Inputs/LocationAutocompleteInput/LocationAutocomplete';
 
-import { usePetValidation } from '../../hooks/usePetValidation';
 import { usePetContext } from '../../contexts/PetContext';
 import { catalogServiceFactory } from '../../services/catalogService';
 
 export const Catalog = () => {
     let queryString = decodeURIComponent(window.location.search);
+
     const catalogService = catalogServiceFactory();
-    const { statuses } = usePetValidation();
-    const { isLoading, setIsLoading, cities, catalogPets, setCatalogPets } = usePetContext();
+    const { isLoading, setIsLoading, catalogPets, setCatalogPets } = usePetContext();
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
     const [params, setParams] = useState({
@@ -32,6 +32,10 @@ export const Catalog = () => {
     };
     const changeAutocompleteValueHandler = (value) => {
         setParams(state => ({ ...state, location: value ? value.name : '' }));
+    };
+
+    const handleClickClear = () => {
+        setParams(state => ({ ...state, status: '' }));
     };
 
     const changePageHandler = (event, value) => {
@@ -123,27 +127,14 @@ export const Catalog = () => {
                                     styles={{ width: '33.33%', pr: 0.5 }}
                                 />
 
-                                <FormControl fullWidth sx={{ width: '33.33%', px: 0.5 }} >
-                                    <InputLabel id="status-label" htmlFor="status">Статус</InputLabel>
-                                    <Select
-                                        id="status"
-                                        name="status"
-                                        label="Статус"
-                                        value={params.status}
-                                        onChange={(e) => {
-                                            changeValueHandler(e);
-                                        }}
-                                    >
-                                        <MenuItem key="Всички" value="Всички">
-                                            Всички
-                                        </MenuItem>
-                                        {statuses.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
+                                <StatusSelect
+                                    changeValueHandler={changeValueHandler}
+                                    handleClickClear={handleClickClear}
+                                    required={false}
+                                    inputValue={params.status}
+                                    styles={{ width: '33.33%', px: 0.5 }}
+                                />
+
                                 <Button
                                     type="submit"
                                     variant="contained"
@@ -175,4 +166,4 @@ export const Catalog = () => {
             </Box >
         </>
     );
-}
+};

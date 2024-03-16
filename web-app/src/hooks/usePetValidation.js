@@ -120,6 +120,7 @@ export const usePetValidation = () => {
         statuses,
         form,
         error,
+        setError,
         setPetForm,
         isPetFormValid,
         handleClickTitle,

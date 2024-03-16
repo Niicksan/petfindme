@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Avatar, Container, Box, TextField, Typography, MenuItem, Button, FormControl } from '@mui/material';
+import { CssBaseline, Avatar, Container, Box, TextField, Typography, Button, FormControl } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 import { usePetValidation } from '../../../hooks/usePetValidation';
 import { useForm } from '../../../hooks/useForm';
 import { PetForm } from '../PetForm/PetForm';
 import { Map } from '../../Map/Map';
+import { StatusSelect } from '../../Inputs/StatusSelect/StatusSelect';
 import { PetImageUpload } from '../../ImageUpload/PetImageUpload/PetImageUpload';
 import { LocationAutocomplete } from '../../Inputs/LocationAutocompleteInput/LocationAutocomplete';
 
@@ -23,7 +24,7 @@ export const CreatePet = () => {
         form,
         setPetForm,
         error,
-        statuses,
+        setError,
         isPetFormValid,
         onCreatePetSubmit,
         handleClickTitle,
@@ -46,6 +47,12 @@ export const CreatePet = () => {
         imageUrl: '',
         description: ''
     }, onCreatePetSubmit);
+
+    const handleClickClear = () => {
+        setValues(state => ({ ...state, status: '' }));
+        setPetForm(state => ({ ...state, status: '' }));
+        setError(state => ({ ...state, status: true }));
+    };
 
     useEffect(() => {
         setValues({ ...values, geolocation: coords });
@@ -100,29 +107,15 @@ export const CreatePet = () => {
                         />
                         {error.title && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Заглавието трябва да е поне 3 символа</Typography>}
 
-                        <TextField
+                        <StatusSelect
+                            changeHandler={changeHandler}
+                            handleClickStatus={handleClickStatus}
+                            handleClickClear={handleClickClear}
+                            required={true}
+                            inputValue={values.status}
+                            styles={{ mt: 1, mb: 0.5 }}
                             error={error.status}
-                            margin="dense"
-                            required
-                            fullWidth
-                            id="status"
-                            select={true}
-                            label="Статус"
-                            name="status"
-                            autoComplete="status"
-                            value={values.status}
-                            onChange={(e) => {
-                                changeHandler(e);
-                                handleClickStatus(e);
-                            }}
-                        >
-                            {statuses.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        {error.status && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Изберете статус</Typography>}
+                        />
 
                         <FormControl fullWidth required >
                             <PetImageUpload />
@@ -131,7 +124,8 @@ export const CreatePet = () => {
                         <LocationAutocomplete
                             autocompleteChangeHandler={autocompleteChangeHandler}
                             handleClickLocation={handleClickLocation}
-                            required={true} label={'Местоположение'}
+                            required={true}
+                            label={'Местоположение'}
                             inputValue={values.location}
                             error={error.location}
                         />

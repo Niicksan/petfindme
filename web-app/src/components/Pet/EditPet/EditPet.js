@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Avatar, Container, Box, Button, TextField, FormControl, MenuItem, Typography } from '@mui/material';
+import { CssBaseline, Avatar, Container, Box, Button, TextField, FormControl, Typography } from '@mui/material';
 
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -14,6 +14,7 @@ import { useForm } from '../../../hooks/useForm';
 import { Loader } from '../../Loader/Loader'
 import { PetForm } from '../PetForm/PetForm';
 import { Map } from '../../Map/Map';
+import { StatusSelect } from '../../Inputs/StatusSelect/StatusSelect';
 import { LocationAutocomplete } from '../../Inputs/LocationAutocompleteInput/LocationAutocomplete';
 
 const theme = createTheme();
@@ -30,7 +31,7 @@ export const EditPet = () => {
     const {
         form,
         error,
-        statuses,
+        setError,
         setPetForm,
         getPetById,
         isPetFormValid,
@@ -55,6 +56,12 @@ export const EditPet = () => {
         imageUrl: '',
         description: ''
     }, onEditPetSubmit, id);
+
+    const handleClickClear = () => {
+        setValues(state => ({ ...state, status: '' }));
+        setPetForm(state => ({ ...state, status: '' }));
+        setError(state => ({ ...state, status: true }));
+    };
 
     useEffect(() => {
         setIsLoading(true);
@@ -143,29 +150,15 @@ export const EditPet = () => {
                             />
                             {error.title && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Заглавието трябва да е поне 3 символа</Typography>}
 
-                            <TextField
+                            <StatusSelect
+                                changeHandler={changeHandler}
+                                handleClickStatus={handleClickStatus}
+                                handleClickClear={handleClickClear}
+                                required={true}
+                                inputValue={values.status}
+                                styles={{ mt: 1, mb: 0.5 }}
                                 error={error.status}
-                                margin="dense"
-                                required
-                                fullWidth
-                                id="status"
-                                select={true}
-                                label="Статус"
-                                name="status"
-                                autoComplete="status"
-                                value={values.status}
-                                onChange={(e) => {
-                                    changeHandler(e);
-                                    handleClickStatus(e);
-                                }}
-                            >
-                                {statuses.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            {error.status && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Изберете статус</Typography>}
+                            />
 
                             <LocationAutocomplete
                                 autocompleteChangeHandler={autocompleteChangeHandler}
