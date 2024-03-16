@@ -3,8 +3,9 @@ import './Catalog.scss';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { Box, TextField, InputAdornment, Button, Grid, Stack, Pagination, PaginationItem } from "@mui/material";
+import { Box, TextField, InputAdornment, Button, Grid, Stack, Pagination, PaginationItem, IconButton } from "@mui/material";
 
+import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from '@mui/icons-material/Search';
 
 import { CatalogList } from "./CatalogList/CatalogList";
@@ -34,8 +35,12 @@ export const Catalog = () => {
         setParams(state => ({ ...state, location: value ? value.name : '' }));
     };
 
-    const handleClickClear = () => {
-        setParams(state => ({ ...state, status: '' }));
+    const handleClickClear = (param) => {
+        if (param === 'search') {
+            setParams(state => ({ ...state, search: '' }));
+        } else {
+            setParams(state => ({ ...state, status: '' }));
+        }
     };
 
     const changePageHandler = (event, value) => {
@@ -94,19 +99,35 @@ export const Catalog = () => {
                         mb: 4
                     }}
                 >
-                    <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 14, lg: 14 }} >
-                        <Grid item xs={4} sm={4} md={8} lg={8} sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12, lg: 14 }} >
+                        <Grid item xs={4} sm={4} md={6} lg={8} sx={{ display: 'flex', alignItems: 'center' }}>
                             <Box sx={{ width: '100%' }}>
                                 <TextField
                                     fullWidth
                                     id="search"
-                                    label="Цялата страна"
+                                    label="Какво търсиш?"
                                     name="search"
                                     type="search"
                                     value={params.search}
+                                    sx={{
+                                        '&:hover': {
+                                            '.clear-buuton': {
+                                                visibility: 'visible'
+                                            }
+                                        }
+                                    }}
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">
+                                                <IconButton
+                                                    className="clear-buuton"
+                                                    onClick={() => {
+                                                        handleClickClear('search');
+                                                    }}
+                                                    sx={{ visibility: "hidden", p: 0.5, mr: 0.5 }}
+                                                >
+                                                    <ClearIcon fontSize="small" />
+                                                </IconButton>
                                                 <SearchIcon />
                                             </InputAdornment>
                                         )
