@@ -1,6 +1,8 @@
-import { Autocomplete, FormControl, TextField, Typography } from "@mui/material";
+import { Autocomplete, FormControl, TextField } from "@mui/material";
 
 import { usePetContext } from '../../../contexts/PetContext';
+
+import { ErrorMessage } from "../../Errors/ErrorMessage/ErrorMessage";
 
 export const LocationAutocomplete = ({ changeValueHandler, autocompleteChangeHandler, handleClickLocation, required, label, inputValue, styles, error }) => {
     const { cities } = usePetContext();
@@ -25,6 +27,7 @@ export const LocationAutocomplete = ({ changeValueHandler, autocompleteChangeHan
                     }}
                     renderInput={(params) =>
                         <TextField
+                            error={error}
                             margin="dense"
                             required={required}
                             id="location"
@@ -35,7 +38,7 @@ export const LocationAutocomplete = ({ changeValueHandler, autocompleteChangeHan
                         />}
                 />
             </FormControl>
-            {error && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Моля изберете местоположение</Typography>}
+            {error && <ErrorMessage message={"Изберете местоположение"} />}
         </>
     );
 };

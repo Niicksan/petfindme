@@ -1,8 +1,10 @@
-import { MenuItem, Typography, IconButton, FormControl, Select, InputLabel } from "@mui/material";
+import { MenuItem, IconButton, FormControl, Select, InputLabel } from "@mui/material";
 
 import ClearIcon from "@mui/icons-material/Clear";
 
 import { usePetValidation } from "../../../hooks/usePetValidation";
+
+import { ErrorMessage } from "../../Errors/ErrorMessage/ErrorMessage";
 
 export const StatusSelect = ({
     changeValueHandler,
@@ -62,6 +64,7 @@ export const StatusSelect = ({
                     ))}
                 </Select>
             </FormControl>
-            {error && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Изберете статус</Typography>}</>
+            {error && <ErrorMessage message={"Изберете статус"} />}
+        </>
     );
 };

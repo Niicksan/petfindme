@@ -16,6 +16,7 @@ import { PetForm } from '../PetForm/PetForm';
 import { Map } from '../../Map/Map';
 import { StatusSelect } from '../../Inputs/StatusSelect/StatusSelect';
 import { LocationAutocomplete } from '../../Inputs/LocationAutocompleteInput/LocationAutocomplete';
+import { ErrorMessage } from '../../Errors/ErrorMessage/ErrorMessage';
 
 const theme = createTheme();
 
@@ -148,7 +149,7 @@ export const EditPet = () => {
                                     handleClickTitle(e);
                                 }}
                             />
-                            {error.title && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Заглавието трябва да е поне 3 символа</Typography>}
+                            {error.title && <ErrorMessage message={"Заглавието трябва да е поне 3 символа"} />}
 
                             <StatusSelect
                                 changeHandler={changeHandler}
@@ -190,7 +191,7 @@ export const EditPet = () => {
                                     handleClickContactName(e);
                                 }}
                             />
-                            {error.contactName && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Името трябва да в поне 3 символа</Typography>}
+                            {error.contactName && <ErrorMessage message={"Името трябва да е поне 3 символа"} />}
 
                             <TextField
                                 error={error.phone}
@@ -207,7 +208,7 @@ export const EditPet = () => {
                                     handleClickPhone(e);
                                 }}
                             />
-                            {error.phone && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Въведете валиден телефон</Typography>}
+                            {error.phone && <ErrorMessage message={"Въведете валиден телефон"} />}
 
                             <TextField
                                 error={error.imageUrl}
@@ -224,7 +225,7 @@ export const EditPet = () => {
                                     handleClickImageUrl(e);
                                 }}
                             />
-                            {error.imageUrl && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Въведете валиден URL</Typography>}
+                            {error.imageUrl && <ErrorMessage message={"Въведете валиден URL"} />}
 
                             <TextField
                                 error={error.description}
@@ -243,7 +244,7 @@ export const EditPet = () => {
                                     handleClickDescription(e);
                                 }}
                             />
-                            {error.description && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Описанието трябва да е поне 20 символа</Typography>}
+                            {error.description && <ErrorMessage message={"Описанието трябва да е поне 20 символа"} />}
 
                             <Button
                                 disabled={!isPetFormValid}
