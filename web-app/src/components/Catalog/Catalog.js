@@ -8,6 +8,7 @@ import { Box, TextField, FormControl, InputLabel, InputAdornment, Select, MenuIt
 import SearchIcon from '@mui/icons-material/Search';
 
 import { CatalogList } from "./CatalogList/CatalogList";
+import { LocationAutocomplete } from '../Inputs/LocationAutocompleteInput/LocationAutocomplete';
 
 import { usePetValidation } from '../../hooks/usePetValidation';
 import { usePetContext } from '../../contexts/PetContext';
@@ -28,6 +29,9 @@ export const Catalog = () => {
 
     const changeValueHandler = (e) => {
         setParams(state => ({ ...state, [e.target.name]: e.target.value }));
+    };
+    const changeAutocompleteValueHandler = (value) => {
+        setParams(state => ({ ...state, location: value ? value.name : '' }));
     };
 
     const changePageHandler = (event, value) => {
@@ -87,8 +91,8 @@ export const Catalog = () => {
                     }}
                 >
                     <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 14, lg: 14 }} >
-                        <Grid item xs={4} sm={4} md={8} lg={8}>
-                            <Box >
+                        <Grid item xs={4} sm={4} md={8} lg={8} sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Box sx={{ width: '100%' }}>
                                 <TextField
                                     fullWidth
                                     id="search"
@@ -111,32 +115,14 @@ export const Catalog = () => {
                         </Grid>
                         <Grid item xs={4} sm={4} md={6} lg={6}>
                             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
-                                <FormControl fullWidth sx={{ width: '33.33%', pr: 0.5 }} >
-                                    <InputLabel id="location-label" htmlFor="location">Град</InputLabel>
-                                    <Select
-                                        id="location"
-                                        name="location"
-                                        label="Град"
-                                        value={params.location}
-                                        MenuProps={{
-                                            style: {
-                                                maxHeight: 600,
-                                            },
-                                        }}
-                                        onChange={(e) => {
-                                            changeValueHandler(e);
-                                        }}
-                                    >
-                                        <MenuItem key="Всички градове" value="Всички">
-                                            Всички
-                                        </MenuItem>
-                                        {cities?.map((option) => (
-                                            <MenuItem key={option.key} value={option.name}>
-                                                {option.name}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
+                                <LocationAutocomplete
+                                    changeValueHandler={changeAutocompleteValueHandler}
+                                    inputValue={params.location}
+                                    required={false}
+                                    label={'Град'}
+                                    styles={{ width: '33.33%', pr: 0.5 }}
+                                />
+
                                 <FormControl fullWidth sx={{ width: '33.33%', px: 0.5 }} >
                                     <InputLabel id="status-label" htmlFor="status">Статус</InputLabel>
                                     <Select
@@ -186,7 +172,7 @@ export const Catalog = () => {
                             )} />
                     </Stack>
                 )}
-            </Box>
+            </Box >
         </>
     );
 }

@@ -1,20 +1,19 @@
 import { useState, useEffect } from 'react';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Avatar, Container, Box, TextField, Typography, MenuItem, Button, FormControl, InputLabel, Select } from '@mui/material';
+import { CssBaseline, Avatar, Container, Box, TextField, Typography, MenuItem, Button, FormControl } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-import { usePetContext } from '../../../contexts/PetContext';
 import { usePetValidation } from '../../../hooks/usePetValidation';
 import { useForm } from '../../../hooks/useForm';
 import { PetForm } from '../PetForm/PetForm';
 import { Map } from '../../Map/Map';
 import { PetImageUpload } from '../../ImageUpload/PetImageUpload/PetImageUpload';
+import { LocationAutocomplete } from '../../Inputs/LocationAutocompleteInput/LocationAutocomplete';
 
 const theme = createTheme();
 
 export const CreatePet = () => {
-    const { cities } = usePetContext();
     const [coords, setCoords] = useState({});
     const position = [42.798165, 25.6275174];
     const height = '300px';
@@ -37,7 +36,7 @@ export const CreatePet = () => {
         checkIsPetFormValid,
     } = usePetValidation();
 
-    const { values, setValues, changeHandler, onSubmit } = useForm({
+    const { values, setValues, changeHandler, autocompleteChangeHandler, onSubmit } = useForm({
         title: '',
         status: '',
         location: '',
@@ -129,36 +128,15 @@ export const CreatePet = () => {
                             <PetImageUpload />
                         </FormControl>
 
-                        <FormControl fullWidth required sx={{ my: 1 }} >
-                            <InputLabel id="location-label" htmlFor="location">Местоположение</InputLabel>
-                            <Select
-                                margin="dense"
-                                required
-                                fullWidth
-                                id="location"
-                                name="location"
-                                label="Местоположение"
-                                value={values.location}
-                                MenuProps={{
-                                    style: {
-                                        maxHeight: 500,
-                                    },
-                                }}
-                                onChange={(e) => {
-                                    changeHandler(e);
-                                    handleClickLocation(e);
-                                }}
-                            >
-                                {cities?.map((option) => (
-                                    <MenuItem key={option.key} value={option.name}>
-                                        {option.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        {error.location && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Mестоположението трябва да е поне 3 символа</Typography>}
+                        <LocationAutocomplete
+                            autocompleteChangeHandler={autocompleteChangeHandler}
+                            handleClickLocation={handleClickLocation}
+                            required={true} label={'Местоположение'}
+                            inputValue={values.location}
+                            error={error.location}
+                        />
 
-                        <FormControl fullWidth required  >
+                        <FormControl fullWidth required >
                             <Typography id="geo-location-label" sx={{ mb: 1 }}>Изберете локация на картата *</Typography>
                             <Map id="geo-location" coords={coords} setCoords={setCoords} mapPosition={position} mapHeight={height} mapZoom={zoom} editable={true} />
                         </FormControl>
@@ -241,7 +219,7 @@ export const CreatePet = () => {
                             variant="contained"
                             sx={{ mt: 3, mb: 2, bgcolor: '#550A21' }}
                         >
-                            Подай
+                            Подай Сигнал
                         </Button>
                     </Box>
                 </Box>

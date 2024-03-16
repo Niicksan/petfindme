@@ -53,14 +53,14 @@ export const usePetValidation = () => {
         setPetForm({ ...form, status: e.target.value });
     };
 
-    const handleClickLocation = (e) => {
-        if ((e.target.value).length < 3) {
+    const handleClickLocation = (value) => {
+        if (value === null) {
             setError({ ...error, location: true });
         } else {
             setError({ ...error, location: false });
         }
 
-        setPetForm({ ...form, location: e.target.value });
+        setPetForm({ ...form, location: value ? value.name : '' });
     };
 
     const handleClickContactName = (e) => {

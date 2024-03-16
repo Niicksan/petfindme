@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Avatar, Container, Box, Button, TextField, FormControl, MenuItem, InputLabel, Select, Typography } from '@mui/material';
+import { CssBaseline, Avatar, Container, Box, Button, TextField, FormControl, MenuItem, Typography } from '@mui/material';
 
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -14,12 +14,13 @@ import { useForm } from '../../../hooks/useForm';
 import { Loader } from '../../Loader/Loader'
 import { PetForm } from '../PetForm/PetForm';
 import { Map } from '../../Map/Map';
+import { LocationAutocomplete } from '../../Inputs/LocationAutocompleteInput/LocationAutocomplete';
 
 const theme = createTheme();
 
 export const EditPet = () => {
     const { id } = useParams();
-    const { isOwner, cities } = usePetContext();
+    const { isOwner } = usePetContext();
     const [coords, setCoords] = useState({});
     const position = [coords?.latitude || 42.798165, coords?.longitude || 25.6275174];
     const height = '300px';
@@ -44,7 +45,7 @@ export const EditPet = () => {
         checkIsPetFormValid,
     } = usePetValidation();
 
-    const { values, setValues, changeHandler, onSubmit } = useForm({
+    const { values, setValues, changeHandler, autocompleteChangeHandler, onSubmit } = useForm({
         title: '',
         status: '',
         location: '',
@@ -166,31 +167,14 @@ export const EditPet = () => {
                             </TextField>
                             {error.status && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Изберете статус</Typography>}
 
-                            <FormControl fullWidth required sx={{ my: 1 }} >
-                                <InputLabel id="location-label" htmlFor="location">Местоположение</InputLabel>
-                                <Select
-                                    id="location"
-                                    name="location"
-                                    label="Местоположение"
-                                    value={values.location}
-                                    MenuProps={{
-                                        style: {
-                                            maxHeight: 500,
-                                        },
-                                    }}
-                                    onChange={(e) => {
-                                        changeHandler(e);
-                                        handleClickLocation(e);
-                                    }}
-                                >
-                                    {cities?.map((option) => (
-                                        <MenuItem key={option.key} value={option.name}>
-                                            {option.name}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                            {error.location && <Typography component={"p"} sx={{ color: '#d32f2f', textAlign: 'left', paddingLeft: '15px' }}>Mестоположението трябва да е поне 3 символа</Typography>}
+                            <LocationAutocomplete
+                                autocompleteChangeHandler={autocompleteChangeHandler}
+                                handleClickLocation={handleClickLocation}
+                                required={true}
+                                label={'Местоположение'}
+                                inputValue={values.location}
+                                error={error.location}
+                            />
 
                             <FormControl fullWidth required >
                                 <Typography id="geo-location-label" sx={{ mb: 1 }}>Изберете локация на картата *</Typography>

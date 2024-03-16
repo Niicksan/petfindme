@@ -7,6 +7,10 @@ export const useForm = (initialValues, onSubmitHandler, petId) => {
         setValues(state => ({ ...state, [e.target.name]: e.target.value }));
     };
 
+    const autocompleteChangeHandler = (value) => {
+        setValues(state => ({ ...state, location: value ? value.name : '' }));
+    };
+
     const onSubmit = (e) => {
         e.preventDefault();
         onSubmitHandler(values, petId);
@@ -16,6 +20,7 @@ export const useForm = (initialValues, onSubmitHandler, petId) => {
         values,
         setValues,
         changeHandler,
+        autocompleteChangeHandler,
         onSubmit
     };
 };
