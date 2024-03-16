@@ -35,8 +35,8 @@ export const PetImageUpload = () => {
             borderRadius: '8px',
             padding: '1.2rem',
             margin: 0,
-            marginTop: '8px',
-            marginBottom: '4px',
+            marginTop: '12px',
+            marginBottom: '8px',
         },
         '&.MuiBox-root:hover, &.MuiBox-root.dragover': {
             opacity: 0.6,
