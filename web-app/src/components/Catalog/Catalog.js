@@ -100,7 +100,7 @@ export const Catalog = () => {
                     }}
                 >
                     <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12, lg: 14 }} >
-                        <Grid item xs={4} sm={4} md={6} lg={8} sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Grid item xs={4} sm={8} md={12} lg={8} sx={{ display: 'flex', alignItems: 'center' }}>
                             <Box sx={{ width: '100%' }}>
                                 <TextField
                                     fullWidth
@@ -138,33 +138,40 @@ export const Catalog = () => {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={4} sm={4} md={6} lg={6}>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
-                                <LocationAutocomplete
-                                    changeValueHandler={changeAutocompleteValueHandler}
-                                    inputValue={params.location}
-                                    required={false}
-                                    label={'Град'}
-                                    styles={{ width: '33.33%', pr: 0.5 }}
-                                />
+                        <Grid item xs={4} sm={8} md={12} lg={6}>
+                            <Grid container columns={{ xs: 6, sm: 6, md: 12, lg: 12 }} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
+                                <Grid item xs={6} sm={6} md={4} lg={4}>
+                                    <LocationAutocomplete
+                                        changeValueHandler={changeAutocompleteValueHandler}
+                                        inputValue={params.location}
+                                        required={false}
+                                        label={'Град'}
+                                        styles={{ pr: 0.5 }}
+                                    />
+                                </Grid>
 
-                                <StatusSelect
-                                    changeValueHandler={changeValueHandler}
-                                    handleClickClear={handleClickClear}
-                                    required={false}
-                                    inputValue={params.status}
-                                    styles={{ width: '33.33%', px: 0.5 }}
-                                />
+                                <Grid item xs={6} sm={6} md={4} lg={4}>
+                                    <StatusSelect
+                                        changeValueHandler={changeValueHandler}
+                                        handleClickClear={handleClickClear}
+                                        required={false}
+                                        inputValue={params.status}
+                                        styles={{ px: 0.5 }}
+                                    />
+                                </Grid>
 
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    onSubmit={onSubmit}
-                                    sx={{ width: '33.33%', bgcolor: '#550A21', py: '1rem', ml: 0.5 }}
-                                >
-                                    Търсене
-                                </Button>
-                            </Box>
+                                <Grid item xs={6} sm={6} md={4} lg={4}>
+                                    <Button
+                                        className='search-button'
+                                        type="submit"
+                                        variant="contained"
+                                        onSubmit={onSubmit}
+                                        sx={{ width: '100%', bgcolor: '#550A21', py: '1rem', ml: 0.5 }}
+                                    >
+                                        Търсене
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Box>

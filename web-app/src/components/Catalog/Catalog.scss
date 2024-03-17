@@ -16,6 +16,14 @@ $red: #550A21;
         background-color: #550A21;
         color: #fff;
     }
+
+    /* clears the ‘X’ from Chrome */
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 599px) {
@@ -24,6 +32,36 @@ $red: #550A21;
         .form,
         .main-grid-container {
             width: 90%;
+        }
+    }
+}
+
+@media only screen and (max-width: 899px) {
+    .main-catalog {
+        .form {
+            .location {
+                padding: 0;
+            }
+
+            .status {
+                padding: 8px 0 16px;
+            }
+
+            .status-label {
+                padding-top: 8px;
+            }
+
+            .search-button {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .main-catalog {
+        .link {
+            margin-bottom: 8rem;
         }
     }
 }

@@ -20,8 +20,8 @@ export const StatusSelect = ({
 
     return (
         <>
-            <FormControl required={required} fullWidth sx={{ ...styles }}>
-                <InputLabel id="status-label">Статус</InputLabel>
+            <FormControl className="status" required={required} fullWidth sx={{ ...styles }}>
+                <InputLabel className="status-label" id="status-label">Статус</InputLabel>
                 <Select
                     error={error}
                     labelId="status-label"

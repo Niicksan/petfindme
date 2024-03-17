@@ -9,7 +9,7 @@ export const LocationAutocomplete = ({ changeValueHandler, autocompleteChangeHan
 
     return (
         <>
-            <FormControl fullWidth sx={{ ...styles }}>
+            <FormControl className="location" fullWidth sx={{ ...styles }}>
                 <Autocomplete
                     disablePortal
                     id="location-аutocomplete"
