@@ -7,12 +7,10 @@ const locationController = require('../controllers/locationController');
 const notFoundController = require('../controllers/notFoundController');
 
 const { hasUser } = require('../middlewares/guards');
-const cityTableImport = require('../utils/cityTableImport');
 
 module.exports = (app) => {
     // Routes
     app.get('/', (req, res) => {
-        cityTableImport();
         res.json({ message: 'REST Service is running' });
     });
 
